@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
+
+.product_card {
+    height: 100px;
+    width: 80%;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+    padding: 10px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px;
+    background-color: rgb(255, 255, 255);
+    transition: box-shadow 0.3s ease-out 0s;
+    animation: 0.5s ease 0s 1 normal none running gkESFx;
+    font-family: 'Roboto Mono';
+    font-size: 15px;
+}
+
+.product_card:hover {
+    box-shadow: rgb(0 0 0 / 35%) 0px 15px 20px;
+}
+
+.product_card:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+
+
+.btn_add {
+    margin-top: 30px;
+    height: 50px;
+	box-shadow:inset 0px 1px 0px 0px #7c6bdb;
+	background:linear-gradient(to bottom, #3265fc 5%, #4235f2 100%);
+	background-color:#3265fc;
+	border-radius:6px;
+	border:1px solid #1818f5;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #0c4099;
+    outline: none;
+}

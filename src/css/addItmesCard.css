@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:ital,wght@1,300&display=swap');
+
+.add_item_wrapper {
+ text-align: center;
+ font-family: 'Roboto Mono', monospace;
+ display:flex;
+ width: 100%;
+ margin-top: 30px;
+}
+
+
+.add_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    text-align: left;
+    flex:1;
+}
+
+.input_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.input_wrapper label {
+    margin-bottom: 5px;
+}
+
+.input_wrapper input {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 30px;
+    outline: none;
+    border: 2px solid gray
+}
+
+.new_product_card {
+    display: flex;
+    flex-direction: column;
+}
+
+.form_container {
+    flex:1;
+    display: flex;
+    flex-direction: column;
+}
+
+.new_product_wrapper {
+    flex:1;
+    width: 80%;
+    margin-right: 30px;
+}
+
+.new_products_card {
+    width: 100%;
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.new_products_card::-webkit-scrollbar {
+    display: none;
+}
+
+.product_details h1 {
+    text-align: start;
+}
+
+.btn_container_add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn_submit {
+    margin-top: 30px;
+    width: 300px;
+    height: 50px;
+	box-shadow:inset 0px 1px 0px 0px #7c6bdb;
+	background:linear-gradient(to bottom, #3265fc 5%, #4235f2 100%);
+	background-color:#3265fc;
+	border-radius:6px;
+	border:1px solid #1818f5;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #0c4099;
+    outline: none;
+
+}
