@@ -36,11 +36,27 @@ function Calculator() {
         })
     }
 
+    const hendleClientEmail = (e) => {
+        setOrder({
+            ...order,
+            client_email: e.target.value
+        })
+    }
+
+    const hendleClientInvestmentPlace = (e) => {
+        setOrder({
+            ...order,
+            client_Investment_Place: e.target.value
+        })
+    }
+
     return (
         <div className="calculator">
             <div className="client_details">
                 <input defaultValue={order.client == null ? '' : order.client} type="text" placeholder="Imię i nazwisko" className="input" onChange={handleClientData}></input>
                 <input defaultValue={order.client_number == null ? '' : order.client_number}type="text" placeholder="Numer Telefonu" className="input" onChange={handleClientNumber}></input>
+                <input defaultValue={order.client_email == null ? '' : order.client_email} type="text" placeholder="Adres e-mail" onChange={hendleClientEmail}></input>
+                <input defaultValue={order.client_Investment_Place == null ? '' : order.Investment_Place} type="text" placeholder="Adres inwestycji" onChange={hendleClientInvestmentPlace}></input>
                 {choseItems.length === 0 && <h2>Nie dodałeś żadnych produktów</h2>}
             </div>
             <div className="product_wrapper">

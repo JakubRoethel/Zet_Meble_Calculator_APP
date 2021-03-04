@@ -14,6 +14,8 @@ function Summary() {
             <div className="summary_details"> 
                 <h3>Zamówienie dla : {order.client}</h3>
                 <h3>Numer telefonu: {order.client_number}</h3>
+                <h3>Adres e-mail: {order.client_email}</h3>
+                <h3>Adres inwestycji: {order.client_Investment_Place}</h3>
                 <h3>{date.toLocaleDateString('en-GB')}</h3>
             </div>
             <div className="table_container">
