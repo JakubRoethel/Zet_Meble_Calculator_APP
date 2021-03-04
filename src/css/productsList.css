@@ -1,4 +1,4 @@
-.list_container {
+.list-container {
     margin-top: 20px;
     width: 90%;
     display: flex;
@@ -25,14 +25,4 @@
   
 .list h2 {
     text-align: center;
-}
-
-.search, .input {
-    margin: 15px;
-    font-size: 20px;
-    text-align: center;
-    outline: none;
-    border-radius: 5px;
-    border: 2px solid black;
-    font-family: 'Roboto Mono';
 }

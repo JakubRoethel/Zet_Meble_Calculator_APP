@@ -13,12 +13,14 @@ function Product({product}) {
 
 
     return (
-    <div className="product_card">
+    <div className="product-card">
         <div className="details">
             <h1>{product.name}</h1>
             <p>{product.color} | {product.company}</p>
         </div>
-        <button className="btn_add" onClick = {()=>addItemToList(product)}>Add</button>
+        <div className="button-container">
+            <button className="btn btn-primary" onClick = {()=>addItemToList(product)}>Add</button>
+        </div>
     </div>
     )
 }

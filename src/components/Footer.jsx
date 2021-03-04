@@ -1,9 +1,8 @@
-import React from 'react'
-import '../css/footer.css'
+import React from 'react';
 
 function Footer() {
     return (
-        <div className="footer">
+        <div className="d-flex justify-content-center">
             Made by Jakub Roethel
         </div>
     )

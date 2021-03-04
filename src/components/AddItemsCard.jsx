@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import '../css/addItmesCard.css'
 import {ChosenProductContext} from './ChosenProductContext';
 import uuid from 'react-uuid';
 
@@ -11,7 +10,7 @@ function AddItemsCard() {
     // tablicę allProd.. za pomoca setAll..
     const [itemObj, setItemObj] = useState([]);
 
-    const hendleAdd = (e) => {
+    const handleAdd = (e) => {
         e.preventDefault()
         // console.log(itemObj)
         setAllProductList([...allProductList, itemObj])
@@ -27,67 +26,66 @@ function AddItemsCard() {
 
     // funkcje na inputach dodawanie poszczególnych właściwości do obiektów 
 
-    const hendleName = (e) => {
+    const handleName = (e) => {
         console.log(e)
         setItemObj({...itemObj, name:e.target.value, id:uuid()})
     }
 
-    const hendlePrice = (e) => {
+    const handlePrice = (e) => {
         setItemObj({...itemObj, price:e.target.value})
     }
 
-    const hendleColor = (e) => {
+    const handleColor = (e) => {
         setItemObj({...itemObj, color:e.target.value})
     }
 
-    const hendleCompany = (e) => {
+    const handleCompany = (e) => {
         setItemObj({...itemObj, company:e.target.value})
     }
 
 
     return (
-        <div className="add_item_wrapper">
-            <div className="form_container">
-            <h1 className="title">Dodaj nowy Produkt</h1>
-            <form onSubmit={hendleAdd} className= "add_form">
-                <div className="input_wrapper">
-                    <label>Nazwa Produktu</label>
-                    <input onBlur={hendleName} type="text"></input>
+        <div className='container-fluid d-flex'>
+        <div className='col-lg-6 d-flex flex-column align-items-center'>
+            <h1 className='my-5 text-center'>Dodaj nowy produkt </h1>
+            <form onSubmit={handleAdd} className='col-lg-6 d-flex flex-column'>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Nazwa produktu</label>
+                    <input onBlur={handleName} type="text" class="form-control" name='nazwa'></input>
                 </div>
-                <div className="input_wrapper">
-                    <label>Cena</label>
-                    <input onBlur={hendlePrice} type="text"></input>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Cena</label>
+                    <input onBlur={handlePrice} type="text" class="form-control"></input>
                 </div>
-                <div className="input_wrapper">
-                    <label>Kolor</label>
-                    <input onBlur={hendleColor} type="text"></input>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Kolor</label>
+                    <input onBlur={handleColor} type="text" class="form-control" ></input>
                 </div>
-                <div className="input_wrapper">
-                    <label>Producent</label>
-                    <input onBlur={hendleCompany} type="text"></input>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Producent</label>
+                    <input onBlur={handleCompany} type="text" class="form-control" ></input>
                 </div>
-                <button type="submit" className="btn_submit">Dodaj</button>
+                
+                <button type="submit" class="btn btn-primary mt-3">Dodaj</button>
             </form>
-            </div>
-            <div className="new_product_wrapper">
-            <h1>Lista Produktów</h1>
-            <div className="new_products_card">
-                {allProductList.map(product => {
-                    return (
-                        <div className="product_card">
-                            <div className="product_details">
-                                <h1>{product.name}</h1>
-                                <p>{product.price} | {product.color} | {product.company} | {product.productGroup}</p>
+        </div>
+        <div className='col-lg-6'>
+            <h1 className='my-5 text-center'>Lista dostepnych produktów</h1>
+            <div className='list'>
+                {allProductList.length == 0 ? <h2 className='text-center'>Nie dodałeś żadnych produktów</h2> : allProductList.map(product => {
+                    return <div className='product-card'>
+                                <div className='details'>
+                                    <h1>{product.name}</h1>
+                                    <p>{product.price} | {product.color} | {product.company} | {product.productGroup}</p>
+                                </div>
+                                <div className='button-container'>
+                                    <button onClick={() => removeItemFromDataBase(product)} className='btn btn-danger'>Remove</button>
+                                </div>
                             </div>
-                            <div className="btn_container_add">
-                                <button className="btn_remove" onClick={() => removeItemFromDataBase(product)}>Remove</button>
-                            </div>
-                        </div>
-                    )
                 })}
             </div>
-            </div>
         </div>
+    </div>
     )
 }
 

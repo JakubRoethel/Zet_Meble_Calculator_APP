@@ -52,33 +52,35 @@ function Calculator() {
 
     return (
         <div className="calculator">
-            <div className="client_details">
-                <input defaultValue={order.client == null ? '' : order.client} type="text" placeholder="Imię i nazwisko" className="input" onChange={handleClientData}></input>
-                <input defaultValue={order.client_number == null ? '' : order.client_number}type="text" placeholder="Numer Telefonu" className="input" onChange={handleClientNumber}></input>
-                <input defaultValue={order.client_email == null ? '' : order.client_email} type="text" placeholder="Adres e-mail" onChange={hendleClientEmail}></input>
-                <input defaultValue={order.client_Investment_Place == null ? '' : order.Investment_Place} type="text" placeholder="Adres inwestycji" onChange={hendleClientInvestmentPlace}></input>
-                {choseItems.length === 0 && <h2>Nie dodałeś żadnych produktów</h2>}
-            </div>
-            <div className="product_wrapper">
+            <form className="form-inline">
+                <div className="d-flex flex-row form-group">
+                    <input className="form-control form-control-lg mx-2" defaultValue={order.client == null ? '' : order.client} type="text" placeholder="Imię i nazwisko"  onChange={handleClientData}></input>
+                    <input className="form-control form-control-lg mx-2" defaultValue={order.client_number == null ? '' : order.client_number}type="text" placeholder="Numer Telefonu" onChange={handleClientNumber}></input>
+                    <input className="form-control form-control-lg mx-2" defaultValue={order.client_email == null ? '' : order.client_email} type="text" placeholder="Adres e-mail" onChange={hendleClientEmail}></input>
+                    <input className="form-control form-control-lg mx-2" defaultValue={order.client_Investment_Place == null ? '' : order.Investment_Place} type="text" placeholder="Adres inwestycji" onChange={hendleClientInvestmentPlace}></input>
+                </div>
+            </form>
+            {choseItems.length === 0 && <h2 className="mt-5">Nie dodałeś żadnych produktów</h2>}
+            <div className="product-wrapper">
             {choseItems.map(item => (
-            <div key={item.id} className='product_card calculator_card'>
+            <div key={item.id} className='product-calculator-card'>
                 <div className ="details">
                     <h1>{item.name}</h1>
                     <p> {item.color} | {item.company} | {item.qty}</p>
                     </div>
-                <div className="btn_container">
-                    <button className='btn_add btn_qty' onClick={()=>addItemToList(item)}>Add</button>
-                     <button className = 'btn_remove' onClick={()=>removeItemsFromList(item)}>Remove</button>
+                <div className="btn-container">
+                    <button className='btn btn-primary' onClick={()=>addItemToList(item)}>Add</button>
+                     <button className = 'btn btn-danger' onClick={()=>removeItemsFromList(item)}>Remove</button>
                  </div>
                 
             </div>
             
             ))}
-                <div className="total_price">
+                <div className="total-price">
                     <h1>{choseItems.length === 0 ? '' : `Total: ${itemsPrice}`}</h1>
                 </div>
-                <div className="summary_container">
-                    {order.client.length == "" ? null :<Link to="/podsumowanie" className="summary_link" onClick={handleSummary}>{`Podsumowanie >`}</Link>}
+                <div className="summary-container">
+                    {order.client.length == "" ? null :<Link to="/podsumowanie" className="summary-link" onClick={handleSummary}>{`Podsumowanie >`}</Link>}
                 </div>
             </div>
 

@@ -11,38 +11,37 @@ function Summary() {
 
     return (
         <div className="summary_wrapper">
-            <div className="summary_details"> 
+            <div className="d-flex justify-content-between"> 
                 <h3>Zamówienie dla : {order.client}</h3>
                 <h3>Numer telefonu: {order.client_number}</h3>
                 <h3>Adres e-mail: {order.client_email}</h3>
                 <h3>Adres inwestycji: {order.client_Investment_Place}</h3>
                 <h3>{date.toLocaleDateString('en-GB')}</h3>
             </div>
-            <div className="table_container">
-            <table className="items_table">
-                <thead>
+            <div className="container-fluid my-3 w-75">
+            <table className="table my-4 text-center">
+            <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nazwa Produktu</th>
-                        <th>Ilość</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nazwa produktu</th>
+                    <th scope="col">Ilość</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {choseItems.map((el,i) => {
-                        return <tr>
-                            <th>{el.id}</th>
-                            <td>{el.name}</td>
-                            <td>{el.qty}</td>
-                        </tr>
-                        })} 
+                {choseItems.map(el => {
+                                return <tr>
+                                <th scope="row">{el.id}</th>
+                                <td>{el.name}</td>
+                                <td>{el.qty}</td>
+                            </tr>  
+                        })}
                 </tbody>
             </table>
-            
             </div>
-            <div className="summation">
-            <h2 className="summary_total">Total: {order.total}</h2>
-            <div>
-            <button className = "save_btn">Save</button>
+            <div className="d-flex justify-content-between">
+            <h2>Total: {order.total}</h2>
+            <div className="button-container">
+            <button>Save</button>
             <button>Print</button>
             </div>
             </div>

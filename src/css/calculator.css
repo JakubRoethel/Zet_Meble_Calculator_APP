@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:ital,wght@1,300&display=swap');
 
 .calculator {
     margin-top: 20px;
@@ -8,9 +7,9 @@
     align-items: center;
 }
 
-.product_wrapper {
+.product-wrapper{
     padding-top: 35px;
-    width: 90%;
+    width: 100%;
     height: 70vh;
     flex-direction: column;
     align-items: center;
@@ -21,63 +20,48 @@
     mask-image: linear-gradient(to bottom, transparent 25%, black 75%);
 }
 
-.product_wrapper::-webkit-scrollbar {
+.product-calculator-card {
+    height: 100px;
+    width: 80%;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+    padding: 10px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px;
+    background-color: rgb(255, 255, 255);
+    transition: box-shadow 0.3s ease-out 0s;
+    animation: 0.5s ease 0s 1 normal none running gkESFx;
+    font-size: 15px;
+    cursor:pointer;
+}
+
+.product-wrapper::-webkit-scrollbar {
     display: none;
   }
 
-.information {
-    text-align: center;
-    margin: 0px 0px 20px 0px;
-    font-family: 'Roboto Mono', monospace;
+button {
+    margin-right: 10px;
 }
 
-.client_details h2 {
-    margin-top: 15px;
-    text-align: center;
-}
-.calculator_card {
-    width: 90%;
-}
-
-.total_price {
+.total-price {
     text-align: center;
     font-family: 'Roboto Mono', monospace;
 }
 
-.btn_remove {
-    height: 30px;
-    margin-left: 10px;
-    box-shadow:inset 0px 1px 0px 0px #f5978e;
-	background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
-	background-color:#f24537;
-	border-radius:6px;
-	border:1px solid #d02718;
-	cursor:pointer;
-	color:#ffffff;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 15px;
-	text-decoration:none;
-    outline: none;
-}
-
-.btn_qty {
-    font-size: 15px;
-    padding:6px 15px;
-    height: 30px;
-}
-.summary_container {
+.summary-container {
     text-align: center;
     margin-top: 10px
 }
 
-.summary_link {
+.summary-link {
     text-decoration: none;
     color: inherit;
 }
 
-.summary_link:hover{
+.summary-link:hover, .summary-link:active, .summary-link:visited{
     text-decoration: underline;
+    color: black;
 }
 
 

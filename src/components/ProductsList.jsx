@@ -28,9 +28,9 @@ function ProductsList() {
     }
 
     return (
-        <div className = "list_container">
-            <div>
-                <input type="text" placeholder="Szukaj produkt" className="search" onChange={filter}/>
+        <div className = "list-container">
+            <div className="className='form-control form-control-lg mx-2">
+                <input  type="text" placeholder="Szukaj produkt" className="form-control form-control-lg mx-2" onChange={filter}/>
             </div>
 
             <div className="list">
