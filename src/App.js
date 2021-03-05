@@ -10,7 +10,7 @@ import Summary from './components/Summary';
 function App() {
 
   return (
-    <div className="app_wrapper">
+    <div className="app-wrapper">
     {/*Router wszystko w środku pozwala nam uzwać Route w którym podajem sciezki do komponentów randeruje jako url */}
     <Router>
       <Header />

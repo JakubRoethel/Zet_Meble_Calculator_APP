@@ -54,16 +54,16 @@ function Calculator() {
         <div className="calculator">
             <form className="form-inline">
                 <div className="d-flex flex-row form-group">
-                    <input className="form-control form-control-lg mx-2" defaultValue={order.client == null ? '' : order.client} type="text" placeholder="Imię i nazwisko"  onChange={handleClientData}></input>
-                    <input className="form-control form-control-lg mx-2" defaultValue={order.client_number == null ? '' : order.client_number}type="text" placeholder="Numer Telefonu" onChange={handleClientNumber}></input>
-                    <input className="form-control form-control-lg mx-2" defaultValue={order.client_email == null ? '' : order.client_email} type="text" placeholder="Adres e-mail" onChange={hendleClientEmail}></input>
-                    <input className="form-control form-control-lg mx-2" defaultValue={order.client_Investment_Place == null ? '' : order.Investment_Place} type="text" placeholder="Adres inwestycji" onChange={hendleClientInvestmentPlace}></input>
+                    <input className="form-control form-control-lg mx-4" defaultValue={order.client == null ? '' : order.client} type="text" placeholder="Imię i nazwisko"  onChange={handleClientData}></input>
+                    <input className="form-control form-control-lg mx-4" defaultValue={order.client_number == null ? '' : order.client_number}type="text" placeholder="Numer Telefonu" onChange={handleClientNumber}></input>
+                    <input className="form-control form-control-lg mx-4" defaultValue={order.client_email == null ? '' : order.client_email} type="text" placeholder="Adres e-mail" onChange={hendleClientEmail}></input>
+                    <input className="form-control form-control-lg mx-4" defaultValue={order.client_Investment_Place == null ? '' : order.Investment_Place} type="text" placeholder="Adres inwestycji" onChange={hendleClientInvestmentPlace}></input>
                 </div>
             </form>
             {choseItems.length === 0 && <h2 className="mt-5">Nie dodałeś żadnych produktów</h2>}
             <div className="product-wrapper">
             {choseItems.map(item => (
-            <div key={item.id} className='product-calculator-card'>
+            <div key={item.id} className='product-card'>
                 <div className ="details">
                     <h1>{item.name}</h1>
                     <p> {item.color} | {item.company} | {item.qty}</p>
