@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import '../css/product.css'
 // import productArr from '../dataBase/Products';
 import {ChosenProductContext} from './ChosenProductContext'
@@ -9,23 +9,17 @@ import {ChosenProductContext} from './ChosenProductContext'
 
 function Product({product}) {
 
-    const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,color, setColor] = useContext(ChosenProductContext);
-
-    const getItemColor = (e) =>{
-        let itemColor = e.target.value
-        console.log(itemColor)
-        setColor(itemColor)
-        console.log(color)
-    }
+    const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase] = useContext(ChosenProductContext);
+    const [color, setColor] = useState()
 
     return (
     <div className="product-card">
         <div className="details">
             <h1>{product.name}</h1>
-            <p>{product.defaultColor} | {product.company} | <input onChange={getItemColor} className="color" type="text" placeholder="Kolor"></input></p>
+            <p>{product.defaultColor} | {product.company} | <input onBlur={(e) => setColor(e.target.value) } className="color" type="text" placeholder="Kolor"></input></p>
         </div>
         <div className="button-container">
-            <button className="btn btn-primary" onClick = {()=>addItemToList(product)}>Add</button>
+            <button className="btn btn-primary" onClick = {()=>addItemToList({...product, color: color})}>Add</button>
         </div>
     </div>
     )
