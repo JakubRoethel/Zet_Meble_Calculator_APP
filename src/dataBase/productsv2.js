@@ -12,7 +12,7 @@ const productArrayv2 = [
                         price: 300,
                         productGroup: "szuflada",
                         productGroup2: "niska lub wysoka",
-                        color: "szary",
+                        defaultColor: "szary",
                         model:"antaro"
                     },
                     {
@@ -23,7 +23,7 @@ const productArrayv2 = [
                         price: 1800,
                         productGroup: "Front",
                         productGroup2:"front lakier gładki",
-                        color: "biały"//edytowalny wpisywany z ręki
+                        defaultColor: "biały"//edytowalny wpisywany z ręki
                     },
 
                 ]
@@ -38,7 +38,7 @@ const productArrayv2 = [
                         price: 300,
                         productGroup: "szuflada",
                         productGroup2: "niska lub wysoka",
-                        color: "szary",
+                        defaultColor: "szary",
                         model:"antaro"
                     },
                     {
@@ -49,7 +49,7 @@ const productArrayv2 = [
                         price: 1800,
                         productGroup: "Front",
                         productGroup2:"front lakier gładki",
-                        color: "biały"//edytowalny wpisywany z ręki
+                        defaultColor: "biały"//edytowalny wpisywany z ręki
                     },
                 ]
             }
@@ -68,7 +68,7 @@ const productArrayv2 = [
                         price: 300,
                         productGroup: "szuflada",
                         productGroup2: "niska lub wysoka",
-                        color: "szary",
+                        defaultColor: "szary",
                         model:"antaro"
                     },
                     {
@@ -79,7 +79,7 @@ const productArrayv2 = [
                         price: 1800,
                         productGroup: "Front",
                         productGroup2:"front lakier gładki",
-                        color: "biały"//edytowalny wpisywany z ręki
+                        defaultColor: "biały"//edytowalny wpisywany z ręki
                     },
 
                 ]
@@ -94,7 +94,7 @@ const productArrayv2 = [
                         price: 300,
                         productGroup: "szuflada",
                         productGroup2: "niska lub wysoka",
-                        color: "szary",
+                        defaultColorr: "szary",
                         model:"antaro"
                     },
                     {
@@ -105,7 +105,7 @@ const productArrayv2 = [
                         price: 1800,
                         productGroup: "Front",
                         productGroup2:"front lakier gładki",
-                        color: "biały"//edytowalny wpisywany z ręki
+                        defaultColor: "biały"//edytowalny wpisywany z ręki
                     },
                 ]
             }

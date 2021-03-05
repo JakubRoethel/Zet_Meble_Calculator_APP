@@ -14,19 +14,22 @@ export const ChosenProductProvider = (props) => {
     // funkcje do przycisków w kalkulatorze pozwalają po ideksach sprawdzać który item juz jest na liscie i dodaja tylko qty
 
     const [choseItems, setItems] = useState([])
+    const [color, setColor ] = useState()
 
     const addItemToList = (el) => {
+
         const exist = choseItems.find(x => x.id === el.id);
         // console.log(exist)
         if(exist) {
             setItems(choseItems.map((x) => x.id === el.id ? {...exist, qty: exist.qty +1 }: x ))
         }
         else {
-            setItems([...choseItems, {... el, qty: 1}])
+            setItems([...choseItems, {... el, qty: 1, color: color}])
         }
-    
+
+        console.log(exist)
     }
-    
+
     const removeItemsFromList = (el) => {
       const exist = choseItems.find((x) => x.id === el.id);
       if(exist.qty === 1){
@@ -34,7 +37,6 @@ export const ChosenProductProvider = (props) => {
       } else {
         setItems(choseItems.map((x) => x.id === el.id ? {...exist, qty: exist.qty -1 }: x ))
       }
-      
     }
 
     const removeItemFromDataBase = (el) => {
@@ -62,7 +64,7 @@ export const ChosenProductProvider = (props) => {
   })
 
     return (
-        <ChosenProductContext.Provider value = {[choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase]}>
+        <ChosenProductContext.Provider value = {[choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,color, setColor]}>
             {props.children}
         </ChosenProductContext.Provider>
 

@@ -72,9 +72,7 @@ function Calculator() {
                     <button className='btn btn-primary' onClick={()=>addItemToList(item)}>Add</button>
                      <button className = 'btn btn-danger' onClick={()=>removeItemsFromList(item)}>Remove</button>
                  </div>
-                
             </div>
-            
             ))}
                 <div className="total-price">
                     <h1>{choseItems.length === 0 ? '' : `Total: ${itemsPrice}`}</h1>
