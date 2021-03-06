@@ -25,6 +25,8 @@ function Summary() {
                     <th scope="col">ID</th>
                     <th scope="col">Nazwa produktu</th>
                     <th scope="col">Ilość</th>
+                    <th scope="col">Kolor</th>
+                    <th scope="col">Producent</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +35,9 @@ function Summary() {
                                 <th scope="row">{el.id}</th>
                                 <td>{el.name}</td>
                                 <td>{el.qty}</td>
+                                <td>{el.color}</td>
+                                <td>{el.company}</td>
+                                <td>{el.productGroup2}</td>
                             </tr>  
                         })}
                 </tbody>
