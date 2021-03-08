@@ -50,6 +50,17 @@ function Calculator() {
         })
     }
 
+    const handleQuantity = (event,el) => {
+        const exist = choseItems.find(x => x.id === el.id && x.color == el.color);
+        // console.log(exist)
+        if(exist) {
+            if(event.target.value.toString().length <=6) {
+                setItems(choseItems.map((x) => x.id === el.id && x.color === el.color  ? {...exist, qty: event.target.value}: x ))
+            }
+        }
+        // console.log(event.target.value)
+    }
+
     return (
         <div className="calculator">
             <form className="form-inline">
