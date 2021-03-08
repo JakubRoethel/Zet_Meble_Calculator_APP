@@ -20,22 +20,6 @@
     mask-image: linear-gradient(to bottom, transparent 25%, black 75%);
 }
 
-.product-calculator-card {
-    height: 100px;
-    width: 80%;
-    border-radius: 3px;
-    display: flex;
-    justify-content: space-between;
-    margin: 15px;
-    padding: 10px;
-    box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px;
-    background-color: rgb(255, 255, 255);
-    transition: box-shadow 0.3s ease-out 0s;
-    animation: 0.5s ease 0s 1 normal none running gkESFx;
-    font-size: 15px;
-    cursor:pointer;
-}
-
 .product-wrapper::-webkit-scrollbar {
     display: none;
   }
@@ -62,6 +46,10 @@ button {
 .summary-link:hover, .summary-link:active, .summary-link:visited{
     text-decoration: underline;
     color: black;
+}
+
+.form-control-lg{
+    font-size: 13px;
 }
 
 

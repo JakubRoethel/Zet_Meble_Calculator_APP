@@ -1,6 +1,7 @@
 import React, {useState, createContext} from 'react';
 import productArr from '../dataBase/Products'
 
+
 export const ChosenProductContext = createContext();
 
 // createContext słuzy do uzywania tablicy productów globalnie 
@@ -16,25 +17,37 @@ export const ChosenProductProvider = (props) => {
     const [choseItems, setItems] = useState([])
 
     const addItemToList = (el) => {
-        const exist = choseItems.find(x => x.id === el.id);
-        // console.log(exist)
+      console.log(el.color)
+
+        const exist = choseItems.find(x => x.id === el.id && x.color == el.color);
+        console.log(exist)
         if(exist) {
-            setItems(choseItems.map((x) => x.id === el.id ? {...exist, qty: exist.qty +1 }: x ))
+             setItems(choseItems.map((x) => x.id === el.id && x.color === el.color  ? {...exist, qty: exist.qty +1 }: x ))
         }
         else {
             setItems([...choseItems, {... el, qty: 1}])
         }
-    
     }
-    
+
     const removeItemsFromList = (el) => {
-      const exist = choseItems.find((x) => x.id === el.id);
-      if(exist.qty === 1){
-        setItems(choseItems.filter((x)=> x.id !== el.id))
-      } else {
-        setItems(choseItems.map((x) => x.id === el.id ? {...exist, qty: exist.qty -1 }: x ))
-      }
+      const exist = choseItems.find((x) => x.id === el.id && x.color === el.color);
+      console.log(exist);
       
+      if(exist.qty === 1){
+        setItems(choseItems.filter((x)=> {
+          if (x.id == el.id ) {
+            if(x.color != el.color) {
+              return x
+            } 
+          } else {
+            return x
+          }
+        }
+        ))
+      } else {
+        setItems(choseItems.map((x) => x.id === el.id && x.color === el.color ? {...exist, qty: exist.qty -1 }: x ))
+      }
+
     }
 
     const removeItemFromDataBase = (el) => {

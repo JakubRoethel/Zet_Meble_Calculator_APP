@@ -5,12 +5,13 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import AddItemsCard from './components/AddItemsCard';
 import Compose from './components/Compose';
 import Footer from './components/Footer';
-import Summary from './components/Summary';
+// import Summary from './components/Summary';
+import PdfPrint from './components/PdfPrint';
 
 function App() {
 
   return (
-    <div className="app_wrapper">
+    <div className="app-wrapper">
     {/*Router wszystko w środku pozwala nam uzwać Route w którym podajem sciezki do komponentów randeruje jako url */}
     <Router>
       <Header />
@@ -22,7 +23,7 @@ function App() {
         <Switch>
           <Route path= "/" exact component = {Compose}/>
           <Route path = "/dodaj" component={AddItemsCard}/>
-          <Route path ="/podsumowanie" component={Summary}/>
+          <Route path ="/podsumowanie" component={PdfPrint}/>
         </Switch>
       </ChosenProductProvider>
       </div>

@@ -12,6 +12,7 @@ function Calculator() {
     
     const itemsPrice = choseItems.reduce((a,c) => a + c.price * c.qty, 0)
 
+    // funkcje te przejmuja value z inputów i pozwalają wrzucić ja do order co pozwala wyswietlać dane o kliencie w podsumowaniu plus wrzucamy do tablicy zamówione produkty
 
     const handleSummary = () => {
         setOrder({
@@ -36,51 +37,73 @@ function Calculator() {
         })
     }
 
-    const hendleClientEmail = (e) => {
+    const handleClientEmail = (e) => {
         setOrder({
             ...order,
             client_email: e.target.value
         })
     }
 
-    const hendleClientInvestmentPlace = (e) => {
+    const handleClientInvestmentPlace = (e) => {
         setOrder({
             ...order,
             client_Investment_Place: e.target.value
         })
     }
 
+    const handleQuantity = (event,el) => {
+        const exist = choseItems.find(x => x.id === el.id && x.color == el.color);
+        // console.log(exist)
+        if(exist) {
+            if(event.target.value.toString().length <=6) {
+                setItems(choseItems.map((x) => x.id === el.id && x.color === el.color  ? {...exist, qty: event.target.value}: x ))
+            }
+        }
+        // console.log(event.target.value)
+    }
+
     return (
         <div className="calculator">
             <form className="form-inline">
                 <div className="d-flex flex-row form-group">
-                    <input className="form-control form-control-lg mx-2" defaultValue={order.client == null ? '' : order.client} type="text" placeholder="Imię i nazwisko"  onChange={handleClientData}></input>
-                    <input className="form-control form-control-lg mx-2" defaultValue={order.client_number == null ? '' : order.client_number}type="text" placeholder="Numer Telefonu" onChange={handleClientNumber}></input>
-                    <input className="form-control form-control-lg mx-2" defaultValue={order.client_email == null ? '' : order.client_email} type="text" placeholder="Adres e-mail" onChange={hendleClientEmail}></input>
-                    <input className="form-control form-control-lg mx-2" defaultValue={order.client_Investment_Place == null ? '' : order.Investment_Place} type="text" placeholder="Adres inwestycji" onChange={hendleClientInvestmentPlace}></input>
+                    <input className="form-control form-control-lg mx-4" defaultValue={order.client == null ? '' : order.client} type="text" placeholder="Imię i nazwisko"  onChange={handleClientData}></input>
+                    <input className="form-control form-control-lg mx-4" defaultValue={order.client_number == null ? '' : order.client_number}type="text" placeholder="Numer Telefonu" onChange={handleClientNumber}></input>
+                    <input className="form-control form-control-lg mx-4" defaultValue={order.client_email == null ? '' : order.client_email} type="text" placeholder="Adres e-mail" onChange={handleClientEmail}></input>
+                    <input className="form-control form-control-lg mx-4" defaultValue={order.client_Investment_Place == null ? '' : order.Investment_Place} type="text" placeholder="Adres inwestycji" onChange={handleClientInvestmentPlace}></input>
                 </div>
             </form>
             {choseItems.length === 0 && <h2 className="mt-5">Nie dodałeś żadnych produktów</h2>}
             <div className="product-wrapper">
-            {choseItems.map(item => (
-            <div key={item.id} className='product-calculator-card'>
+            {choseItems.map(item => {
+               return <>
+            {item.subGroupName == 'Płyta' ?
+                <div key={item.id} className='product-card'>
                 <div className ="details">
                     <h1>{item.name}</h1>
-                    <p> {item.color} | {item.company} | {item.qty}</p>
+                    <p> {item.color} | <input onChange={ e => handleQuantity(e,item)} type="number" step="0.01" value={item.qty}></input> | {item.company} </p>
                     </div>
                 <div className="btn-container">
-                    <button className='btn btn-primary' onClick={()=>addItemToList(item)}>Add</button>
                      <button className = 'btn btn-danger' onClick={()=>removeItemsFromList(item)}>Remove</button>
                  </div>
-                
-            </div>
-            
-            ))}
+            </div> :            
+         <div key={item.id} className='product-card'>
+            <div className ="details">
+                <h1>{item.name}</h1>
+                <p> {item.color} | {item.company} | {item.qty}</p>
+                </div>
+            <div className="btn-container">
+                <button className='btn btn-primary' onClick={()=>addItemToList(item)}>Add</button>
+                 <button className = 'btn btn-danger' onClick={()=>removeItemsFromList(item)}>Remove</button>
+             </div>
+        </div>
+            }
+            </>
+        })}
                 <div className="total-price">
                     <h1>{choseItems.length === 0 ? '' : `Total: ${itemsPrice}`}</h1>
                 </div>
                 <div className="summary-container">
-                    {order.client.length == "" ? null :<Link to="/podsumowanie" className="summary-link" onClick={handleSummary}>{`Podsumowanie >`}</Link>}
+                    {order.client.length == "" ? null :<Link to="/podsumowanie" className="summary-link" onClick={handleSummary} >{`Podsumowanie >`}</Link>}
                 </div>
             </div>
 

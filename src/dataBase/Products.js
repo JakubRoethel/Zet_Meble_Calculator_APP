@@ -6,7 +6,7 @@ const productArr = [
         price: 300,
         productGroup: "szuflada",
         productGroup2: "niska lub wysoka",
-        color: "szary",
+        defaultColor: "szary",
         model:"antaro"
     },
     {
@@ -17,7 +17,7 @@ const productArr = [
         price: 1800,
         productGroup: "Front",
         productGroup2:"front lakier gładki",
-        color: "biały"//edytowalny wpisywany z ręki
+        defaultColor: "biały"//edytowalny wpisywany z ręki
     },
     {
         id: 3,
@@ -26,7 +26,7 @@ const productArr = [
         company: "Blum",
         price: 900,
         productGroup: "antaro",
-        color: "czarny"
+        defaultColor: "czarny"
     },
     {
         id: 4,
@@ -35,7 +35,7 @@ const productArr = [
         company: "Blum",
         price: 100,
         productGroup: "antaro",
-        color: "biały mat"
+        defaultColor: "biały mat"
     },
     {
         id: 5,
@@ -44,7 +44,7 @@ const productArr = [
         company: "Blum",
         price: 999,
         productGroup: "antaro",
-        color: "biały"
+        defaultColor: "biały"
     },
     {
         id: 6,
@@ -53,7 +53,7 @@ const productArr = [
         company: "Blum",
         price: 2500,
         productGroup: "antaro",
-        color: "czarny mat"
+        defaultColor: "czarny mat"
     },
     {
         id: 7,
@@ -62,7 +62,7 @@ const productArr = [
         company: "Samsung",
         price: 2700,
         productGroup: "antaro",
-        color: "czarny mat"
+        defaultColor: "czarny mat"
     },
 
 ];

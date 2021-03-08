@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 function Header() {
     return (
-    <div className= "header-wrapper">
+    <div className= "header_wrapper">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
          <a className="navbar-brand ms-5" href="#">Meble</a>
          <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
