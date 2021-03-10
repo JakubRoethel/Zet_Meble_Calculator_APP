@@ -6,7 +6,7 @@ import AddItemsCard from './components/AddItemsCard';
 import Compose from './components/Compose';
 import Footer from './components/Footer';
 // import Summary from './components/Summary';
-import PdfPrint from './components/PdfPrint';
+import SummaryPdfPrint from './components/SummaryPdfPrint';
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
         <Switch>
           <Route path= "/" exact component = {Compose}/>
           <Route path = "/dodaj" component={AddItemsCard}/>
-          <Route path ="/podsumowanie" component={PdfPrint}/>
+          <Route path ="/podsumowanie" component={SummaryPdfPrint}/>
         </Switch>
       </ChosenProductProvider>
       </div>

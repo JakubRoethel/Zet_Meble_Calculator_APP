@@ -10,13 +10,14 @@ import {ChosenProductContext} from './ChosenProductContext'
 function Product({product,subGroupName}) {
 
     const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase] = useContext(ChosenProductContext);
+
     const [color, setColor] = useState()
 
     return (
     <div className="product-card">
         <div className="details">
             <h1>{product.name}</h1>
-            <p>{product.defaultColor} | {product.company} | <input onBlur={(e) => setColor(e.target.value) } className="color" type="text" placeholder="Kolor"></input></p>
+            <p>{product.productGroup} | {product.company} | <input onBlur={(e) => setColor(e.target.value) } className="color" type="text" placeholder="Kolor"></input>|{product.defaultColor}</p>
         </div>
         <div className="button-container">
             <button className="btn btn-primary" onClick = {()=>addItemToList({...product, color: color, subGroupName:subGroupName})}>Add</button>

@@ -1,5 +1,5 @@
 import React, {useState, createContext} from 'react';
-import productArr from '../dataBase/Products'
+import productArrayv2 from '../dataBase/productsv2';
 
 
 export const ChosenProductContext = createContext();
@@ -50,20 +50,42 @@ export const ChosenProductProvider = (props) => {
 
     }
 
-    const removeItemFromDataBase = (el) => {
-      const exist = allProductList.find(x => x.id === el.id);
-      console.log('działa');
+    const removeItemFromDataBase = (item) => {
+      let exist;
+      allProductList.forEach(group => {
+         group.array.forEach(subGroup => {
+          subGroup.subArray.forEach(el => {
+            console.log(el)
+            console.log(el.id)
+            if (el.id === item.id) {
+              console.log("działa")
+              exist = el
+            }
+          })
+        })
+      })
+      console.log(exist);
+    //   if (exist) {
+    //     setAllProductList(allProductList.filter((x) => x.id !== el.id))
+    //   } else {
+    //     console.log('no product')
+    //   }
       if (exist) {
-        setAllProductList(allProductList.filter((x) => x.id !== el.id))
-      } else {
-        console.log('no product')
+        setAllProductList(allProductList.map(group => {
+          return {...group, array: group.array.map(subGroup => {
+            return {...subGroup, subArray: subGroup.subArray.filter((x) => x.id !== item.id)}
+        })}
+        }))
+
+      }else {
+        console.log("no product")
       }
     }
 
 
 
     // ustawienie tablicy do której będzę puszował się nowy item z addItemsCard
-    const [allProductList, setAllProductList] = useState(productArr);
+    const [allProductList, setAllProductList] = useState(productArrayv2);
 
 
     // dane których potrzebuje w kalkulatorze i w podsumowaniu(narazie pusta tablica moze warto przypisac na stałe produkty ??? )

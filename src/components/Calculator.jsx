@@ -55,7 +55,7 @@ function Calculator() {
         const exist = choseItems.find(x => x.id === el.id && x.color == el.color);
         // console.log(exist)
         if(exist) {
-            if(event.target.value.toString().length <=6) {
+            if(event.target.value.toString().length <=4) {
                 setItems(choseItems.map((x) => x.id === el.id && x.color === el.color  ? {...exist, qty: event.target.value}: x ))
             }
         }
@@ -80,7 +80,7 @@ function Calculator() {
                 <div key={item.id} className='product-card'>
                 <div className ="details">
                     <h1>{item.name}</h1>
-                    <p> {item.color} | <input onChange={ e => handleQuantity(e,item)} type="number" step="0.01" value={item.qty}></input> | {item.company} </p>
+                    <p> {item.color} | <input placeholder={"m2"}onChange={ e => handleQuantity(e,item)} type="number" step="0.01" value={item.qty}></input> | {item.company} </p>
                     </div>
                 <div className="btn-container">
                      <button className = 'btn btn-danger' onClick={()=>removeItemsFromList(item)}>Remove</button>
@@ -100,7 +100,7 @@ function Calculator() {
             </>
         })}
                 <div className="total-price">
-                    <h1>{choseItems.length === 0 ? '' : `Total: ${itemsPrice}`}</h1>
+                    <h1>{choseItems.length === 0 ? '' : `Total: ${itemsPrice.toFixed(2)}`}</h1>
                 </div>
                 <div className="summary-container">
                     {order.client.length == "" ? null :<Link to="/podsumowanie" className="summary-link" onClick={handleSummary} >{`Podsumowanie >`}</Link>}

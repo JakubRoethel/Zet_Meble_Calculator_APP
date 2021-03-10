@@ -112,7 +112,7 @@ const productArrayv2 = [
                         name: "Hamulec 1",
                         company: "Blum",
                         price: 300,
-                        productGroup: "szuflada",
+                        productGroup: "zawiasy",
                         productGroup2: "niska lub wysoka",
                         defaultColor: "szary",
                         model:"antaro"
@@ -337,7 +337,7 @@ const productArrayv2 = [
                 subGroupName: 'Listwowe',
                 subArray: [
                     {
-                        id: 19,
+                        id: 27,
                         name: "Listwowe 1",
                         company: "Peka",
                         price: 300,
@@ -347,7 +347,7 @@ const productArrayv2 = [
                         model:"antaro"
                     },
                     {
-                        id: 20,
+                        id: 28,
                         name: "Listwowe 2",
                         company: "Peka",//nie potrzebne
                         price: 1800,
@@ -366,7 +366,7 @@ const productArrayv2 = [
                 subGroupName: 'Płyta',
                 subArray:  [
                     {
-                        id: 21,
+                        id: 29,
                         name: "Płyta biała",
                         company: "Blum",
                         price: 100,
@@ -376,9 +376,8 @@ const productArrayv2 = [
                         model:"antaro"
                     },
                     {
-                        id: 22,
+                        id: 30,
                         name: "Płyta Popiel",
-                        image: "https://www.belmeb.pl/media/catalog/product/cache/1/small_image/1000x1000/9df78eab33525d08d6e5fb8d27136e95/B/l/Blum_box0863_1_BI.jpg",
                         company: "Blum",//nie potrzebne
                         price: 1800,
                         productGroup: "Front",
@@ -396,7 +395,7 @@ const productArrayv2 = [
                 subGroupName: 'Servo-drive UNO',
                 subArray: [
                     {
-                        id: 23,
+                        id: 31,
                         name: "Servo-drive 1",
                         company: "xyz",
                         price: 300,
@@ -406,7 +405,7 @@ const productArrayv2 = [
                         model:"antaro"
                     },
                     {
-                        id: 24,
+                        id: 32,
                         name: "Servo-drive 2",
                         company: "Blum",//nie potrzebne
                         price: 1800,
@@ -421,7 +420,7 @@ const productArrayv2 = [
                 subGroupName: 'Servo-drive ??',
                 subArray: [
                     {
-                        id: 25,
+                        id: 33,
                         name: "Servo-drive ?? 1",
                         company: "Blum",
                         price: 300,
@@ -431,7 +430,7 @@ const productArrayv2 = [
                         model:"antaro"
                     },
                     {
-                        id: 26,
+                        id: 34,
                         name: "Servo-drive ??",
                         company: "Blum",//nie potrzebne
                         price: 1800,
@@ -445,7 +444,7 @@ const productArrayv2 = [
                 subGroupName: 'Servo drive-elektryczne',
                 subArray: [
                     {
-                        id: 27,
+                        id: 35,
                         name: "elektryczne 1",
                         company: "Blum",
                         price: 300,
@@ -455,7 +454,7 @@ const productArrayv2 = [
                         model:"antaro"
                     },
                     {
-                        id: 28,
+                        id: 36,
                         name: "elektryczne 2",
                         company: "Blum",//nie potrzebne
                         price: 1800,
@@ -469,7 +468,7 @@ const productArrayv2 = [
                 subGroupName: 'Tip-on',
                 subArray: [
                     {
-                        id: 29,
+                        id: 38,
                         name: "Tip-on 1",
                         company: "Blum",
                         price: 300,
@@ -479,7 +478,7 @@ const productArrayv2 = [
                         model:"antaro"
                     },
                     {
-                        id: 30,
+                        id: 39,
                         name: "Tip-on 2",
                         company: "Blum",//nie potrzebne
                         price: 1800,
@@ -498,109 +497,9 @@ const productArrayv2 = [
                 subGroupName: 'Nerka',
                 subArray: [
                     {
-                        id: 31,
+                        id: 40,
                         name: "Lemans",
                         company: "xyz",
-                        price: 300,
-                        productGroup: "szuflada",
-                        productGroup2: "niska lub wysoka",
-                        defaultColor: "szary",
-                        model:"antaro"
-                    },
-                    {
-                        id: 32,
-                        name: "Inne",
-                        company: "Blum",//nie potrzebne
-                        price: 1800,
-                        productGroup: "Front",
-                        productGroup2:"front lakier gładki",
-                        defaultColor: "biały"//edytowalny wpisywany z ręki
-                    },
-
-                ]
-            },
-            {
-                subGroupName: 'Space Tower',
-                subArray: [
-                    {
-                        id: 33,
-                        name: "Blum Antaro",
-                        company: "Blum",
-                        price: 300,
-                        productGroup: "szuflada",
-                        productGroup2: "Wysoka",
-                        defaultColor: "szary",
-                        model:"antaro"
-                    },
-                    {
-                        id: 34,
-                        name: "Blum Antaro",
-                        company: "Blum",//nie potrzebne
-                        price: 1800,
-                        productGroup: "Front",
-                        productGroup2:"Niska",
-                        defaultColor: "biały"//edytowalny wpisywany z ręki
-                    },
-                    {
-                        id: 35,
-                        name: "Blum Antaro",
-                        company: "Blum",//nie potrzebne
-                        price: 1800,
-                        productGroup: "Front",
-                        productGroup2:"Niska",
-                        defaultColor: "biały"//edytowalny wpisywany z ręki
-                    },
-                    {
-                        id: 36,
-                        name: "Blum LegraBox",
-                        company: "Blum",//nie potrzebne
-                        price: 1800,
-                        productGroup: "Front",
-                        productGroup2:"Niska",
-                        defaultColor: "biały"//edytowalny wpisywany z ręki
-                    },
-                    {
-                        id: 37,
-                        name: "Blum LegraBox",
-                        company: "Blum",//nie potrzebne
-                        price: 1800,
-                        productGroup: "Front",
-                        productGroup2:"Wysoka",
-                        defaultColor: "biały"//edytowalny wpisywany z ręki
-                    },
-                ]
-            },
-            {
-                subGroupName: 'MC Magic-corner',
-                subArray: [
-                    {
-                        id: 38,
-                        name: "Peka",
-                        company: "Blum",
-                        price: 300,
-                        productGroup: "szuflada",
-                        productGroup2: "niska lub wysoka",
-                        defaultColor: "szary",
-                        model:"antaro"
-                    },
-                    {
-                        id: 39,
-                        name: "Inne",
-                        company: "Blum",//nie potrzebne
-                        price: 1800,
-                        productGroup: "Front",
-                        productGroup2:"front lakier gładki",
-                        defaultColor: "biały"//edytowalny wpisywany z ręki
-                    },
-                ]
-            },
-            {
-                subGroupName: 'Crebo',
-                subArray: [
-                    {
-                        id: 40,
-                        name: "Peka",
-                        company: "Blum",
                         price: 300,
                         productGroup: "szuflada",
                         productGroup2: "niska lub wysoka",
@@ -616,13 +515,65 @@ const productArrayv2 = [
                         productGroup2:"front lakier gładki",
                         defaultColor: "biały"//edytowalny wpisywany z ręki
                     },
+
                 ]
             },
             {
-                subGroupName: 'Systemy Wysokie',
+                subGroupName: 'Space Tower',
                 subArray: [
                     {
                         id: 42,
+                        name: "Blum Antaro",
+                        company: "Blum",
+                        price: 300,
+                        productGroup: "szuflada",
+                        productGroup2: "Wysoka",
+                        defaultColor: "szary",
+                        model:"antaro"
+                    },
+                    {
+                        id: 43,
+                        name: "Blum Antaro",
+                        company: "Blum",//nie potrzebne
+                        price: 1800,
+                        productGroup: "Front",
+                        productGroup2:"Niska",
+                        defaultColor: "biały"//edytowalny wpisywany z ręki
+                    },
+                    {
+                        id: 44,
+                        name: "Blum Antaro",
+                        company: "Blum",//nie potrzebne
+                        price: 1800,
+                        productGroup: "Front",
+                        productGroup2:"Niska",
+                        defaultColor: "biały"//edytowalny wpisywany z ręki
+                    },
+                    {
+                        id: 45,
+                        name: "Blum LegraBox",
+                        company: "Blum",//nie potrzebne
+                        price: 1800,
+                        productGroup: "Front",
+                        productGroup2:"Niska",
+                        defaultColor: "biały"//edytowalny wpisywany z ręki
+                    },
+                    {
+                        id: 46,
+                        name: "Blum LegraBox",
+                        company: "Blum",//nie potrzebne
+                        price: 1800,
+                        productGroup: "Front",
+                        productGroup2:"Wysoka",
+                        defaultColor: "biały"//edytowalny wpisywany z ręki
+                    },
+                ]
+            },
+            {
+                subGroupName: 'MC Magic-corner',
+                subArray: [
+                    {
+                        id: 47,
                         name: "Peka",
                         company: "Blum",
                         price: 300,
@@ -632,7 +583,55 @@ const productArrayv2 = [
                         model:"antaro"
                     },
                     {
-                        id: 43,
+                        id: 48,
+                        name: "Inne",
+                        company: "Blum",//nie potrzebne
+                        price: 1800,
+                        productGroup: "Front",
+                        productGroup2:"front lakier gładki",
+                        defaultColor: "biały"//edytowalny wpisywany z ręki
+                    },
+                ]
+            },
+            {
+                subGroupName: 'Crebo',
+                subArray: [
+                    {
+                        id: 49,
+                        name: "Peka",
+                        company: "Blum",
+                        price: 300,
+                        productGroup: "szuflada",
+                        productGroup2: "niska lub wysoka",
+                        defaultColor: "szary",
+                        model:"antaro"
+                    },
+                    {
+                        id: 50,
+                        name: "Inne",
+                        company: "Blum",//nie potrzebne
+                        price: 1800,
+                        productGroup: "Front",
+                        productGroup2:"front lakier gładki",
+                        defaultColor: "biały"//edytowalny wpisywany z ręki
+                    },
+                ]
+            },
+            {
+                subGroupName: 'Systemy Wysokie',
+                subArray: [
+                    {
+                        id: 51,
+                        name: "Peka",
+                        company: "Blum",
+                        price: 300,
+                        productGroup: "szuflada",
+                        productGroup2: "niska lub wysoka",
+                        defaultColor: "szary",
+                        model:"antaro"
+                    },
+                    {
+                        id: 52,
                         name: "Inne",
                         company: "Blum",//nie potrzebne
                         price: 1800,
@@ -651,7 +650,7 @@ const productArrayv2 = [
                 subGroupName: 'Szuflady Antaro',
                 subArray: [
                     {
-                        id: 44,
+                        id: 53,
                         name: "Antaro 1",
                         company: "xyz",
                         price: 300,
@@ -661,7 +660,7 @@ const productArrayv2 = [
                         model:"antaro"
                     },
                     {
-                        id: 24,
+                        id: 54,
                         name: "Antaro 2",
                         company: "Blum",//nie potrzebne
                         price: 1800,
@@ -676,7 +675,7 @@ const productArrayv2 = [
                 subGroupName: 'Legrabox (BLUME)',
                 subArray: [
                     {
-                        id: 25,
+                        id: 55,
                         name: "Legrabox 1",
                         company: "Blum",
                         price: 300,
@@ -686,7 +685,7 @@ const productArrayv2 = [
                         model:"antaro"
                     },
                     {
-                        id: 26,
+                        id: 56,
                         name: "Legrabox 2",
                         company: "Blum",//nie potrzebne
                         price: 1800,
@@ -700,7 +699,7 @@ const productArrayv2 = [
                 subGroupName: 'GTV',
                 subArray: [
                     {
-                        id: 19,
+                        id: 57,
                         name: "GTV 1",
                         company: "Peka",
                         price: 300,
@@ -710,7 +709,7 @@ const productArrayv2 = [
                         model:"antaro"
                     },
                     {
-                        id: 20,
+                        id: 58,
                         name: "GTV 2",
                         company: "Peka",//nie potrzebne
                         price: 1800,

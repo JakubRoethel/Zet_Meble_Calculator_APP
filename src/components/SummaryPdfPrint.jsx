@@ -1,7 +1,7 @@
 import React, { useRef,useContext } from 'react';
 import { PDFViewer } from '@react-pdf/renderer';
 import PrintPDFTest2 from './PrintPDFTest2';
-import ComponentToPrint from './ComponentToPrint';
+import Summary from './Summary';
 import {useReactToPrint} from "react-to-print";
 import {ChosenProductContext} from './ChosenProductContext';
 
@@ -20,7 +20,7 @@ import {ChosenProductContext} from './ChosenProductContext';
 
 
 
-function PdfPrint () {
+function SummaryPdfPrint () {
   const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder]= useContext(ChosenProductContext);
 
   const date = new Date();
@@ -31,7 +31,7 @@ function PdfPrint () {
   })
   return (
     <div className= "container-fluid my-3 w-100">
-      <ComponentToPrint ref ={componentRef} order={order} date={date} choseItems={choseItems}/>
+      <Summary ref ={componentRef} order={order} date={date} choseItems={choseItems}/>
       <div className="button-container d-flex justify-content-end">
         <button onClick={hendlePrint} className="btn btn-dark">Drukuj
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16" className="m-1">
@@ -45,4 +45,4 @@ function PdfPrint () {
     
 }
 
-export default PdfPrint
+export default SummaryPdfPrint
