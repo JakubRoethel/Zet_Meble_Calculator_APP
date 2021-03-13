@@ -7,7 +7,7 @@ import {ChosenProductContext} from './ChosenProductContext'
 //  z useContext funkcja addItmestolist dodaje element do nowej tablicy (product)
 // uzyta na buttonie
 
-function Product({product,subGroupName}) {
+function Product({product,groupName}) {
 
     const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase] = useContext(ChosenProductContext);
 
@@ -20,7 +20,7 @@ function Product({product,subGroupName}) {
             <p>{product.productGroup} | {product.company} | <input onBlur={(e) => setColor(e.target.value) } className="color" type="text" placeholder="Kolor"></input>|{product.defaultColor}</p>
         </div>
         <div className="button-container">
-            <button className="btn btn-primary" onClick = {()=>addItemToList({...product, color: color, subGroupName:subGroupName})}>Add</button>
+            <button className="btn btn-primary" onClick = {()=>addItemToList({...product, color: color, groupName:groupName})}>Add</button>
         </div>
     </div>
     )

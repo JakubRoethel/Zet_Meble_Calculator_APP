@@ -75,12 +75,13 @@ function Calculator() {
             {choseItems.length === 0 && <h2 className="mt-5">Nie dodałeś żadnych produktów</h2>}
             <div className="product-wrapper">
             {choseItems.map(item => {
+                console.log(item);
                return <>
-            {item.subGroupName == 'Płyta' ?
+            {item.groupName == 'Materiały' || item.groupName == 'Fronty' ?
                 <div key={item.id} className='product-card'>
                 <div className ="details">
                     <h1>{item.name}</h1>
-                    <p> {item.color} | <input placeholder={"m2"}onChange={ e => handleQuantity(e,item)} type="number" step="0.01" value={item.qty}></input> | {item.company} </p>
+                    <p> {item.color} | <input placeholder={"m2"} onChange={ e => handleQuantity(e,item)} type="number" value={item.qty}></input> m2| {item.company} </p>
                     </div>
                 <div className="btn-container">
                      <button className = 'btn btn-danger' onClick={()=>removeItemsFromList(item)}>Remove</button>

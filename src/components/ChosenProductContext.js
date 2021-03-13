@@ -33,7 +33,7 @@ export const ChosenProductProvider = (props) => {
       const exist = choseItems.find((x) => x.id === el.id && x.color === el.color);
       console.log(exist);
       
-      if(exist.qty === 1){
+      if(exist.qty <= 1){
         setItems(choseItems.filter((x)=> {
           if (x.id == el.id ) {
             if(x.color != el.color) {

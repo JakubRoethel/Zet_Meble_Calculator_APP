@@ -1,6 +1,5 @@
 import React, {useContext,useState}  from 'react'
 import Product from './Product'
-import productArr from '../dataBase/Products'
 import productArrayv2 from '../dataBase/productsv2'
 import '../css/productsList.css'
 import {ChosenProductContext, ChosenProductProvider} from './ChosenProductContext'
@@ -33,19 +32,20 @@ function ProductsList() {
     
 
     const [group,setGroup] = useState([]);
+    console.log(group);
 
     const handleGroupSelect = (e) => {
-        const searchGroupArray = productArrayv2.find(x => {
+        const searchGroupArray = allProductList.find(x => {
             return x.groupName === e.target.value})
 
-        setGroup(searchGroupArray.array)
+        setGroup(searchGroupArray)
         setSubGroup([])
     }
 
     const [subGroup, setSubGroup] = useState([])
 
     const handleSubGroupSelect = (e) => {
-        const searchSubGroup = group.find(x => {
+        const searchSubGroup = group.array.find(x => {
             return x.subGroupName === e.target.value
         })
         console.log(searchSubGroup.subGroupName);
@@ -68,7 +68,7 @@ function ProductsList() {
                 </select>
                 <select value = {typeof subGroup.subGroupName == "undefined" ? "default" : subGroup.subGroupName} onChange = {handleSubGroupSelect} className="form-select mx-2" aria-label="Default select example">
                     <option  value="default" selected disabled="disabled">Wybierz podgrupę</option>
-                    {typeof group !== "undefined" ? group.map(el => {
+                    {typeof group.array !== "undefined" ? group.array.map(el => {
                         return <option value={el.subGroupName}>{el.subGroupName}</option>
                     }) : "" }
                 </select>
@@ -77,7 +77,7 @@ function ProductsList() {
 
             <div className="list">
             { typeof subGroup.subArray === "undefined" ? <h2>Nie wybrałeś podkategorii</h2> : (filtredItems.length == 0 ? <h2>Nie znaleźiono szukanego produktu</h2> : filtredItems.map(product => {
-               return <Product product = {product} key = {product.id} subGroupName= {subGroup.subGroupName} /> 
+               return <Product product = {product} key = {product.id} groupName= {group.groupName} /> 
             }))}
             </div>
         </div>

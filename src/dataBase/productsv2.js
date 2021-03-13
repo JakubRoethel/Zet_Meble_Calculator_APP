@@ -7,6 +7,8 @@ const productArrayv2 = [
                 subArray: [
                     {
                         id: 1,
+                        group:"Fronty",
+                        subGroup:"Lakier Gładki",
                         name: "Front 1",
                         company: "xyz",
                         price: 300,
@@ -17,6 +19,8 @@ const productArrayv2 = [
                     },
                     {
                         id: 2,
+                        group:"Fronty",
+                        subGroup:"Lakier Gładki",
                         name: "Front 2",
                         company: "Blum",//nie potrzebne
                         price: 1800,
@@ -32,6 +36,8 @@ const productArrayv2 = [
                 subArray: [
                     {
                         id: 3,
+                        group:"Fronty",
+                        subGroup:"Lakier Gładki",
                         name: "Front 3",
                         company: "Blum",
                         price: 300,
@@ -42,6 +48,8 @@ const productArrayv2 = [
                     },
                     {
                         id: 4,
+                        group:"Fronty",
+                        subGroup:"Lakier Gładki",
                         name: "Front 4",
                         company: "Blum",//nie potrzebne
                         price: 1800,
@@ -56,6 +64,8 @@ const productArrayv2 = [
                 subArray: [
                     {
                         id: 5,
+                        group:"Fronty",
+                        subGroup:"Lakier Gładki",
                         name: "Front 5",
                         company: "Blum",
                         price: 300,
@@ -66,6 +76,8 @@ const productArrayv2 = [
                     },
                     {
                         id: 6,
+                        group:"Fronty",
+                        subGroup:"Lakier Gładki",
                         name: "Front 6",
                         company: "Blum",//nie potrzebne
                         price: 1800,
@@ -80,6 +92,8 @@ const productArrayv2 = [
                 subArray: [
                     {
                         id: 7,
+                        group:"Fronty",
+                        subGroup:"Lakier Gładki",
                         name: "Front 7",
                         company: "Blum",
                         price: 300,
@@ -90,6 +104,8 @@ const productArrayv2 = [
                     },
                     {
                         id: 8,
+                        group:"Fronty",
+                        subGroup:"Lakier Gładki",
                         name: "Front 8",
                         company: "Blum",//nie potrzebne
                         price: 1800,
@@ -109,6 +125,8 @@ const productArrayv2 = [
                 subArray:  [
                     {
                         id: 9,
+                        group:"Fronty",
+                        subGroup:"Lakier Gładki",
                         name: "Hamulec 1",
                         company: "Blum",
                         price: 300,
@@ -119,6 +137,8 @@ const productArrayv2 = [
                     },
                     {
                         id: 10,
+                        group:"Fronty",
+                        subGroup:"Lakier Gładki",
                         name: "Hamulec 2",
                         company: "Blum",//nie potrzebne
                         price: 1800,
@@ -134,6 +154,8 @@ const productArrayv2 = [
                 subArray:  [
                     {
                         id: 11,
+                        group:"Fronty",
+                        subGroup:"Lakier Gładki",
                         name: "Tip-on 1",
                         company: "Blum",
                         price: 300,
@@ -144,6 +166,8 @@ const productArrayv2 = [
                     },
                     {
                         id: 12,
+                        group:"Fronty",
+                        subGroup:"Lakier Gładki",
                         name: "Tip-on 2",
                         company: "Blum",//nie potrzebne
                         price: 1800,
