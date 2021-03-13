@@ -10,7 +10,6 @@ import {ChosenProductContext} from './ChosenProductContext'
 function Product({product,groupName}) {
 
     const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase] = useContext(ChosenProductContext);
-
     const [color, setColor] = useState()
 
     return (

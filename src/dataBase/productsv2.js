@@ -131,6 +131,10 @@ const productArrayv2 = [
                         company: "Blum",
                         price: 300,
                         productGroup: "zawiasy",
+                        name: "Hamulec 1",
+                        company: "Blum",
+                        price: 300,
+                        productGroup: "szuflada",
                         productGroup2: "niska lub wysoka",
                         defaultColor: "szary",
                         model:"antaro"
@@ -445,6 +449,7 @@ const productArrayv2 = [
                 subArray: [
                     {
                         id: 33,
+                        id: 25,
                         name: "Servo-drive ?? 1",
                         company: "Blum",
                         price: 300,

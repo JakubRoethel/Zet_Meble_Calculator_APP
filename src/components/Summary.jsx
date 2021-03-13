@@ -45,6 +45,10 @@ class Summary extends React.PureComponent {
             </div>
             <div className="d-flex justify-content-between m-4">
             <h5>Total: {this.props.order.total} </h5>
+            <div className="button-container">
+            <button>Save</button>
+            <button>Print</button>
+            </div>
             </div>
         </div>
       );

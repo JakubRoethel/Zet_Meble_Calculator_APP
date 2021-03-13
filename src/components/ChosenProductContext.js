@@ -2,6 +2,7 @@ import React, {useState, createContext} from 'react';
 import productArrayv2 from '../dataBase/productsv2';
 
 
+
 export const ChosenProductContext = createContext();
 
 // createContext słuzy do uzywania tablicy productów globalnie 

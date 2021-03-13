@@ -52,6 +52,7 @@ button {
     font-size: 13px;
 }
 
+<<<<<<< HEAD
 /* ukrywanie strzałek w inpucie type number dla rónych przeglądarek */
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -65,5 +66,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+=======
+>>>>>>> master
 
 

@@ -1,0 +1,19 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.app_wrapper {
+    height: 90vh;
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+    background-color: #f2f2f2;
+}
+
+.main_container {
+    display: flex;
+    width: 100%;
+}
