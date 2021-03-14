@@ -8,7 +8,12 @@ function AddItemsCard() {
 
     // moja pusta jeszcze tablica obiektów do której dodamy obiekt prodykty a później ustawie
     // tablicę allProd.. za pomoca setAll..
-    const [itemObj, setItemObj] = useState([]);
+    const [itemObj, setItemObj] = useState({
+        name: "",
+        price: "",
+        color: "",
+        company: ""
+    });
     const [group,setGroup] = useState([allProductList.map(x=>x.groupName)]);
 
     const [subGroup, setSubGroup] = useState([])
@@ -17,10 +22,21 @@ function AddItemsCard() {
         e.preventDefault()
         // console.log(itemObj)
         if(itemObj.id) {
-            console.log(itemObj)
+            console.log("jestem")
+            setAllProductList(
+                allProductList.map(groupEl => {
+                    return {...groupEl, array: groupEl.array.map(subGroupEl => {
+                        return subGroup.subGroupName === subGroupEl.subGroupName ? {...subGroupEl,subArray: subGroupEl.subArray.map(item => {
+                        return itemObj.id === item.id ? itemObj: item
+                        })} : subGroupEl
+                    })}
+                })
+            )
+            setTitle("Dodaj nowy Produkt")
         } else {
             setAllProductList(
                 allProductList.map(groupEl => {
+                    console.log("jestem w else ");
                     // console.log(groupEl)
                     return {...groupEl, array: groupEl.array.map(subGroupEl => {
                         console.log(subGroupEl)
@@ -36,7 +52,6 @@ function AddItemsCard() {
         Array.from(document.querySelectorAll("input")).forEach(
             input => (input.value = ""))
 
-        alert("Dodano Produkt")
 
         setButtonText("Dodaj")
     }
@@ -46,20 +61,36 @@ function AddItemsCard() {
 
     const handleName = (e) => {
         // console.log(e)
-        setItemObj({...itemObj, name:e.target.value})
-        console.log(itemObj)
+        if (e.target.value != "") {
+            setItemObj({...itemObj, name:e.target.value})
+        } else {
+            setItemObj({...itemObj, name: ""})
+        }
+        
     }
 
     const handlePrice = (e) => {
-        setItemObj({...itemObj, price:e.target.value})
+        if (e.target.value != "") {
+            setItemObj({...itemObj, price:e.target.value})
+        } else {
+            setItemObj({...itemObj, price: ""})
+        }
     }
 
     const handleColor = (e) => {
-        setItemObj({...itemObj, color:e.target.value})
+        if (e.target.value != "") {
+            setItemObj({...itemObj, color:e.target.value})
+        } else {
+            setItemObj({...itemObj, color: ""})
+        }
     }
 
     const handleCompany = (e) => {
-        setItemObj({...itemObj, company:e.target.value})
+        if (e.target.value != "") {
+            setItemObj({...itemObj, company:e.target.value})
+        } else {
+            setItemObj({...itemObj, company: ""})
+        }
     }
 
 
@@ -71,12 +102,12 @@ function AddItemsCard() {
             return x.groupName === e.target.value})
 
             // console.log(searchGroupArray)
-            setGroup(searchGroupArray.array)
+            setGroup(searchGroupArray)
             setSubGroup([])
     }
 
     const handleSubGroupSelect = (e) => {
-        const searchSubGroup = group.find(x => {
+        const searchSubGroup = group.array.find(x => {
             return x.subGroupName === e.target.value
         })
         // console.log(searchSubGroup.subGroupName);
@@ -85,20 +116,28 @@ function AddItemsCard() {
         // console.log(subGroup)
     }
 
-    const handleUpdata = (product) => {
+    const handleUpdata = (product,group) => {
+        console.log(group)
         setItemObj(product)
         setButtonText("Zakończ Edycję")
+        setTitle("Edytuj produkt")
         console.log(product)
     }
 
-    const  [buttonText,setButtonText] = useState("Dodaj")
+    const [buttonText,setButtonText] = useState("Dodaj")
+    const [title,setTitle] = useState("Dodaj nowy produkt")
+
+    const [error,setError] = useState({
+        nameError: "",
+        priceError: ""
+    })
 
 
 
     return (
         <div className='container-fluid d-flex'>
         <div className='col-lg-6 d-flex flex-column align-items-center'>
-            <h1 className='my-5 text-center'>Dodaj nowy produkt </h1>
+            <h1 className='my-5 text-center'>{title} </h1>
             <form onSubmit={handleAdd} className='col-lg-6 d-flex flex-column'>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" className="form-label">Nazwa produktu</label>
@@ -110,22 +149,22 @@ function AddItemsCard() {
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" className="form-label">Kolor</label>
-                    <input onBlur={handleColor} type="text" className="form-control" ></input>
+                    <input onChange={handleColor} type="text" className="form-control" ></input>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" className="form-label">Producent</label>
-                    <input onBlur={handleCompany} type="text" className="form-control" ></input>
+                    <input onChange={handleCompany} type="text" className="form-control" value={itemObj.company} ></input>
                 </div>
                 <div className="filters d-flex">
-                 <select  className="form-select mx-2" aria-label="Default select example" onChange={handleGroupSelect}>
-                    <option selected disabled="disabled">Wybierz grupę </option>
+                 <select value = {typeof group.groupName == "undefined" ? "default" : group.groupName} className="form-select mx-2" aria-label="Default select example" onChange={handleGroupSelect}>
+                    <option  value= "default" selected disabled="disabled">Wybierz grupę </option>
                     {allProductList.map(el => {
                          return <option value={el.groupName}>{el.groupName}</option>
                     })}
                 </select>
                 <select value = {typeof subGroup.subGroupName == "undefined" ? "default" : subGroup.subGroupName} className="form-select mx-2" aria-label="Default select example" onChange={handleSubGroupSelect}>
                     <option  value="default" selected disabled="disabled">Wybierz podgrupę</option>
-                    {typeof group !== "undefined" ? group.map(el => {
+                    {typeof group.array !== "undefined" ? group.array.map(el => {
                         return <option value={el.subGroupName}>{el.subGroupName}</option>
                     }) : "" }
                 </select>
@@ -156,7 +195,7 @@ function AddItemsCard() {
                                     </div>
                                 <div className='button-container'>
                                     <button onClick={() => removeItemFromDataBase(product)} className='btn btn-danger'>Remove</button>
-                                    <button onClick={() => handleUpdata(product)} className='btn btn-danger'>Edytuj</button>
+                                    <button onClick={() => handleUpdata(product)} className='btn btn-warning'>Edytuj</button>
                                 </div>
                             </div>
                     })

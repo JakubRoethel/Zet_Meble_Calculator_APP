@@ -1,23 +1,8 @@
 import React, { useRef,useContext } from 'react';
 import { PDFViewer } from '@react-pdf/renderer';
-import PrintPDFTest2 from './PrintPDFTest2';
 import Summary from './Summary';
 import {useReactToPrint} from "react-to-print";
 import {ChosenProductContext} from './ChosenProductContext';
-
-// const PdfPrint = () => {
-
-//   return (
-//     <PDFViewer style={{width:"100%"}}>
-//     <PrintPDFTest2/>
-//   </PDFViewer>
-//   )
-    
-// }
-
-// export default PdfPrint
-
-
 
 
 function SummaryPdfPrint () {
