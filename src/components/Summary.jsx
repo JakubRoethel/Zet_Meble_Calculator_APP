@@ -4,10 +4,8 @@ import { useReactToPrint } from 'react-to-print';
 //Component klasowy na potrzeby druku do PDF w propsach przekazałem w komponencie ordzica propsy (order,data,choseItems) Dokładnie to samo co w Summary wczśniej
 
 class Summary extends React.PureComponent {
-  
     render() {
       console.log(this.props.order.client)
-      
       return (
        <div className= "container-fluid my-3 w-100">
             <div className="d-flex justify-content-between"> 
@@ -45,10 +43,6 @@ class Summary extends React.PureComponent {
             </div>
             <div className="d-flex justify-content-between m-4">
             <h5>Total: {this.props.order.total} </h5>
-            <div className="button-container">
-            <button>Save</button>
-            <button>Print</button>
-            </div>
             </div>
         </div>
       );

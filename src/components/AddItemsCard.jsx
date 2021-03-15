@@ -12,7 +12,8 @@ function AddItemsCard() {
         name: "",
         price: "",
         color: "",
-        company: ""
+        company: "",
+        id: ""
     });
     const [group,setGroup] = useState([allProductList.map(x=>x.groupName)]);
 
@@ -21,30 +22,53 @@ function AddItemsCard() {
     const handleAdd = (e) => {
         e.preventDefault()
         // console.log(itemObj)
-        if(itemObj.id) {
-            console.log("jestem")
-            setAllProductList(
-                allProductList.map(groupEl => {
-                    return {...groupEl, array: groupEl.array.map(subGroupEl => {
-                        return subGroup.subGroupName === subGroupEl.subGroupName ? {...subGroupEl,subArray: subGroupEl.subArray.map(item => {
-                        return itemObj.id === item.id ? itemObj: item
-                        })} : subGroupEl
-                    })}
-                })
-            )
-            setTitle("Dodaj nowy Produkt")
-        } else {
-            setAllProductList(
-                allProductList.map(groupEl => {
-                    console.log("jestem w else ");
-                    // console.log(groupEl)
-                    return {...groupEl, array: groupEl.array.map(subGroupEl => {
-                        console.log(subGroupEl)
-                        return subGroup.subGroupName === subGroupEl.subGroupName ? {...subGroupEl,subArray:[...subGroupEl.subArray, {...itemObj, id:uuid()}]}
-                        : subGroupEl
-                    })}
-                })
-            )
+
+        if(itemObj.name == '') {
+            setError({
+                ...error,
+                nameError: {
+                    nameErrMessage: 'Wypełnij obowiązkowe pole',
+                    isError: true
+                }
+            })
+        } else if(itemObj.price == '') {
+            setError({
+                ...error,
+                priceError: {
+                    priceErrMessage: 'Wypełnij obowiązkowe pole',
+                    isError: true
+                }
+            })
+        }
+
+        if(!error.nameError.isError && !error.priceError.isError){
+            console.log(itemObj)
+            if(itemObj.id != '') {
+                console.log("jestem")
+                // console.log(itemObj.id)
+                setAllProductList(
+                    allProductList.map(groupEl => {
+                        return {...groupEl, array: groupEl.array.map(subGroupEl => {
+                            return subGroup.subGroupName === subGroupEl.subGroupName ? {...subGroupEl,subArray: subGroupEl.subArray.map(item => {
+                            return itemObj.id === item.id ? itemObj: item
+                            })} : subGroupEl
+                        })}
+                    })
+                )
+                setTitle("Dodaj nowy Produkt")
+            } else {
+                setAllProductList(
+                    allProductList.map(groupEl => {
+                        console.log("jestem w else ");
+                        // console.log(groupEl)
+                        return {...groupEl, array: groupEl.array.map(subGroupEl => {
+                            console.log(subGroupEl)
+                            return subGroup.subGroupName === subGroupEl.subGroupName ? {...subGroupEl,subArray:[...subGroupEl.subArray, {...itemObj, id:uuid()}]}
+                            : subGroupEl
+                        })}
+                    })
+                )
+            }
         }
         // console.log(allProductList)
 
@@ -60,20 +84,52 @@ function AddItemsCard() {
     // funkcje na inputach dodawanie poszczególnych właściwości do obiektów 
 
     const handleName = (e) => {
+        setError({
+            ...error,
+            nameError: {
+                nameErrMessage: "",
+                isError: false
+            }
+        })
         // console.log(e)
+        
         if (e.target.value != "") {
             setItemObj({...itemObj, name:e.target.value})
         } else {
-            setItemObj({...itemObj, name: ""})
+            setItemObj({...itemObj, name: ""});
+            setError({
+                ...error,
+                nameError: {
+                    nameErrMessage: "Wypełni obowiązkowe pole",
+                    isError: true
+                }
+            })
         }
+
+        console.log(error.nameError)
+        console.log(error.nameError.isError)
         
     }
 
     const handlePrice = (e) => {
+        setError({
+            ...error,
+            priceError: {
+                priceErrMessage: "",
+                isError: false
+            }
+        })
         if (e.target.value != "") {
             setItemObj({...itemObj, price:e.target.value})
         } else {
-            setItemObj({...itemObj, price: ""})
+            setItemObj({...itemObj, price: ""});
+            setError({
+                ...error,
+                priceError: {
+                    priceErrMessage: "Wypełni obowiązkowe pole",
+                    isError: true
+                }
+            })
         }
     }
 
@@ -103,7 +159,7 @@ function AddItemsCard() {
 
             // console.log(searchGroupArray)
             setGroup(searchGroupArray)
-            setSubGroup([])
+            
     }
 
     const handleSubGroupSelect = (e) => {
@@ -116,8 +172,9 @@ function AddItemsCard() {
         // console.log(subGroup)
     }
 
-    const handleUpdata = (product,group) => {
-        console.log(group)
+    const handleUpdata = (product,group,subGroup) => {
+        setGroup(group)
+        setSubGroup(subGroup)
         setItemObj(product)
         setButtonText("Zakończ Edycję")
         setTitle("Edytuj produkt")
@@ -132,6 +189,8 @@ function AddItemsCard() {
         priceError: ""
     })
 
+   
+
 
 
     return (
@@ -142,10 +201,12 @@ function AddItemsCard() {
                 <div class="mb-3">
                     <label for="exampleInputEmail1" className="form-label">Nazwa produktu</label>
                     <input onChange={handleName} type="text" className="form-control" name='nazwa' value={itemObj.name}></input>
+                    {error.nameError.isError ? <p style={{color:"red"}}>{error.nameError.nameErrMessage}</p> : null}
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" className="form-label">Cena</label>
                     <input onChange={handlePrice} type="text" className="form-control" value={itemObj.price}></input>
+                    {error.priceError.isError ? <p style={{color:"red"}}>{error.priceError.priceErrMessage}</p> : null}
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" className="form-label">Kolor</label>
@@ -156,13 +217,13 @@ function AddItemsCard() {
                     <input onChange={handleCompany} type="text" className="form-control" value={itemObj.company} ></input>
                 </div>
                 <div className="filters d-flex">
-                 <select value = {typeof group.groupName == "undefined" ? "default" : group.groupName} className="form-select mx-2" aria-label="Default select example" onChange={handleGroupSelect}>
+                 <select  value = {typeof group.groupName == "undefined" ? "default" : group.groupName} className="form-select mx-2" aria-label="Default select example" onChange={handleGroupSelect}>
                     <option  value= "default" selected disabled="disabled">Wybierz grupę </option>
                     {allProductList.map(el => {
                          return <option value={el.groupName}>{el.groupName}</option>
                     })}
                 </select>
-                <select value = {typeof subGroup.subGroupName == "undefined" ? "default" : subGroup.subGroupName} className="form-select mx-2" aria-label="Default select example" onChange={handleSubGroupSelect}>
+                <select  value = {typeof subGroup.subGroupName == "undefined" ? "default" : subGroup.subGroupName} className="form-select mx-2" aria-label="Default select example" onChange={handleSubGroupSelect}>
                     <option  value="default" selected disabled="disabled">Wybierz podgrupę</option>
                     {typeof group.array !== "undefined" ? group.array.map(el => {
                         return <option value={el.subGroupName}>{el.subGroupName}</option>
@@ -195,7 +256,7 @@ function AddItemsCard() {
                                     </div>
                                 <div className='button-container'>
                                     <button onClick={() => removeItemFromDataBase(product)} className='btn btn-danger'>Remove</button>
-                                    <button onClick={() => handleUpdata(product)} className='btn btn-warning'>Edytuj</button>
+                                    <button onClick={() => handleUpdata(product,group,subGroup)} className='btn btn-warning'>Edytuj</button>
                                 </div>
                             </div>
                     })
