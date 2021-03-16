@@ -29,7 +29,6 @@ function ProductsList() {
         }
     }
 
-    
 
     const [group,setGroup] = useState([]);
     console.log(group);

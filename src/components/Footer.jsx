@@ -2,8 +2,10 @@ import React from 'react';
 
 function Footer() {
     return (
-        <div className="d-flex justify-content-center">
-            Made by Jakub Roethel
+        <div id="footer" class="footer-1">
+            <div class="col-md-12">
+            <p>Made by Jakub Roethel</p>
+            </div>
         </div>
     )
 }

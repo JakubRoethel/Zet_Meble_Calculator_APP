@@ -15,11 +15,10 @@ class Summary extends React.PureComponent {
                 <h5 className="m-3">Adres inwestycji: {this.props.order.client_Investment_Place}</h5>
                 <h5 className="m-3">{this.props.date.toLocaleDateString('en-GB')}</h5>
             </div>
-            <div className="container-fluid my-3 w-75">
+            <div className="container-fluid my-3 w-85">
             <table className="table my-4 text-center">
             <thead>
                     <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Nazwa produktu</th>
                     <th scope="col">Ilość</th>
                     <th scope="col">Kolor</th>
@@ -30,7 +29,6 @@ class Summary extends React.PureComponent {
                 <tbody>
                 {this.props.choseItems.map(el => {
                                 return <tr>
-                                <th scope="row">{el.id}</th>
                                 <td>{el.name}</td>
                                 <td>{el.qty}</td>
                                 <td>{el.color}</td>
@@ -41,8 +39,12 @@ class Summary extends React.PureComponent {
                 </tbody>
             </table>
             </div>
+            <div class="container-fluid my-3 w-75">
+              <label for="exampleFormControlTextarea1">Dodatkowe informacje</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
             <div className="d-flex justify-content-between m-4">
-            <h5>Total: {this.props.order.total} </h5>
+              <h5>Total: {this.props.order.total} </h5>
             </div>
         </div>
       );
