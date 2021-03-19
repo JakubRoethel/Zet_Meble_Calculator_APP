@@ -17,7 +17,7 @@ class Summary extends React.PureComponent {
             </div>
             <div className="container-fluid my-3 w-85">
             <table className="table my-4 text-center">
-            <thead>
+                <thead>
                     <tr>
                     <th scope="col">Nazwa produktu</th>
                     <th scope="col">Ilość</th>

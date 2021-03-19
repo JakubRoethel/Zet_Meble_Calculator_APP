@@ -19,7 +19,7 @@ function App() {
         {/*ChosenProductProvider daje nam dostęp do wszystkiego z useContextu*/}
       <ChosenProductProvider>
         {/*Switch zatrzymuje proces routowania zawsze moesz zajrzeć do DEV Ed
-          exact uswua błąd z "/" i pozwala nie zaijąc wszystkiego w switcha*/}
+          exact usuwa błąd z "/" i pozwala nie zaijąc wszystkiego w switcha*/}
         <Switch>
           <Route path= "/" exact component = {Compose}/>
           <Route path = "/dodaj" component={AddItemsCard}/>

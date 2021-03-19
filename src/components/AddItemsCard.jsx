@@ -1,10 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState,useEffect } from 'react'
 import {ChosenProductContext} from './ChosenProductContext';
 import uuid from 'react-uuid';
+import firebase from "../firebase/firebase"
 
 function AddItemsCard() {
 
     const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase] = useContext(ChosenProductContext);
+
+    console.log(allProductList)
 
     // moja pusta jeszcze tablica obiektów do której dodamy obiekt prodykty a później ustawie
     // tablicę allProd.. za pomoca setAll..
@@ -15,7 +18,7 @@ function AddItemsCard() {
         company: "",
         id: ""
     });
-    const [group,setGroup] = useState([allProductList.map(x=>x.groupName)]);
+    const [group,setGroup] = useState(allProductList.map(x=>x.groupName));
 
     const [subGroup, setSubGroup] = useState([])
 
@@ -159,7 +162,6 @@ function AddItemsCard() {
 
             // console.log(searchGroupArray)
             setGroup(searchGroupArray)
-            
     }
 
     const handleSubGroupSelect = (e) => {
@@ -189,7 +191,14 @@ function AddItemsCard() {
         priceError: ""
     })
 
-   
+    useEffect(() => {
+        const productRef = firebase.database().ref('products');
+             console.log(allProductList);
+             if(allProductList != 0) {
+                productRef.set([...allProductList]);
+             }
+            
+    }, [allProductList])
 
 
 
@@ -217,13 +226,13 @@ function AddItemsCard() {
                     <input onChange={handleCompany} type="text" className="form-control" value={itemObj.company} ></input>
                 </div>
                 <div className="filters d-flex">
-                 <select  value = {typeof group.groupName == "undefined" ? "default" : group.groupName} className="form-select mx-2" aria-label="Default select example" onChange={handleGroupSelect}>
+                 <select disabled={itemObj.id != ""}  value = {typeof group.groupName == "undefined" ? "default" : group.groupName} className="form-select mx-2" aria-label="Default select example" onChange={handleGroupSelect}>
                     <option  value= "default" selected disabled="disabled">Wybierz grupę </option>
                     {allProductList.map(el => {
                          return <option value={el.groupName}>{el.groupName}</option>
                     })}
                 </select>
-                <select  value = {typeof subGroup.subGroupName == "undefined" ? "default" : subGroup.subGroupName} className="form-select mx-2" aria-label="Default select example" onChange={handleSubGroupSelect}>
+                <select disabled={itemObj.id != ""} value = {typeof subGroup.subGroupName == "undefined" ? "default" : subGroup.subGroupName} className="form-select mx-2" aria-label="Default select example" onChange={handleSubGroupSelect}>
                     <option  value="default" selected disabled="disabled">Wybierz podgrupę</option>
                     {typeof group.array !== "undefined" ? group.array.map(el => {
                         return <option value={el.subGroupName}>{el.subGroupName}</option>
@@ -239,12 +248,9 @@ function AddItemsCard() {
             <h1 className='my-5 text-center'>Lista dostepnych produktów</h1>
             <div className='list'>
                 {allProductList.length == 0 ? <h2 className='text-center'>Nie dodałeś żadnych produktów</h2> : allProductList.map(group => {
-                    // console.log(product)
-                    // console.log(subGroup)
 
                     return group.array.map(subGroup => {
-                        // console.log(subGroup)
-
+                        console.log(subGroup.subArray)
                         return  subGroup.subArray.map(product => {
 
                             return <div className='product-card'>

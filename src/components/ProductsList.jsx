@@ -61,7 +61,7 @@ function ProductsList() {
             <div className="filters d-flex">
                  <select onChange = {handleGroupSelect} className="form-select mx-2" aria-label="Default select example">
                     <option selected disabled="disabled">Wybierz grupę </option>
-                    {productArrayv2.map(el => {
+                    {allProductList.map(el => {
                          return <option value={el.groupName}>{el.groupName}</option>
                     })}
                 </select>

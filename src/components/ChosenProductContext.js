@@ -1,5 +1,6 @@
-import React, {useState, createContext} from 'react';
+import React, {useState, createContext, useEffect} from 'react';
 import productArrayv2 from '../dataBase/productsv2';
+import firebase from "../firebase/firebase"
 
 
 
@@ -10,6 +11,8 @@ export const ChosenProductContext = createContext();
 // funkcje sprawdzają id danych produktów nie dodaje jak wczesniej kazdego elementu osobno
 
 export const ChosenProductProvider = (props) => {
+
+
 
 
 
@@ -86,7 +89,7 @@ export const ChosenProductProvider = (props) => {
 
 
     // ustawienie tablicy do której będzę puszował się nowy item z addItemsCard
-    const [allProductList, setAllProductList] = useState(productArrayv2);
+    const [allProductList, setAllProductList] = useState([]);
 
 
     // dane których potrzebuje w kalkulatorze i w podsumowaniu(narazie pusta tablica moze warto przypisac na stałe produkty ??? )
@@ -96,6 +99,17 @@ export const ChosenProductProvider = (props) => {
       client:"",
       client_number:""
   })
+
+
+  useEffect(() => {
+    console.log("jestem")
+    const productRef = firebase.database().ref('products');
+    console.log(productRef.toString())
+    console.log(firebase.database())
+    productRef.on('value', (snapshot) => {
+        console.log(snapshot.val());
+        setAllProductList(snapshot.val());
+  })},[])
 
     return (
         <ChosenProductContext.Provider value = {[choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase]}>
