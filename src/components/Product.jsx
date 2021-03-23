@@ -14,9 +14,18 @@ function Product({product,groupName}) {
 
     return (
     <div className="product-card">
-        <div className="details">
-            <h1>{product.name}</h1>
-            <p>{product.productGroup} | {product.company} | <input onBlur={(e) => setColor(e.target.value) } className="color" type="text" placeholder="Kolor"></input>|{product.defaultColor}</p>
+        <div className="details w-100">
+            <h5>{product.group}</h5>
+            <h6>{product.name}</h6>
+            <div className="d-flex ">
+                {product.group === "Materiały" ? <p>{product.productGroup}</p>: null}
+                {product.group === "Fronty" ? <p>{product.subGroup}</p>: null}
+                {product.group === "Uchwyty" ? <p>{product.subGroup} | {product.productGroup}</p>: null}
+                {product.group === "Szuflady" || product.group === "Systemy przechowywania" ? <p>{product.company} | {product.productGroup}</p>: null}
+                {product.group === "Zawias" || product.group === "Podnośniki KPL" || product.group === "Technologia ruchu" ? <p>{product.company} |</p>: null}
+                {product.subGroup === "Servo-drive Uno" ? <p> {product.productGroup}</p>: null }
+                <input onBlur={(e) => setColor(e.target.value) } className="color ms-2" type="text" placeholder="Dodatkowe informacje"></input>
+            </div>
         </div>
         <div className="button-container">
             <button className="btn btn-primary" onClick = {()=>addItemToList({...product, color: color, groupName:groupName})}>Add</button>

@@ -53,6 +53,15 @@ table.items_table thead th {
   justify-content: space-between;
   margin: 0px 30px 0px 30px
 }
-  
+
+.order-details {
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.small-logo{
+  height:50px;
+
+}
 
 

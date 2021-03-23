@@ -152,7 +152,7 @@ const deleteData = () => {
 
   return (
     <div className= "container-fluid my-3 w-100">
-      <Summary ref ={componentRef} order={order} date={date} choseItems={choseItems}/>
+      <Summary ref ={componentRef} order={order} date={date} choseItems={choseItems} />
       <div className="button-container d-flex justify-content-end">
         <button onClick={handlePrint} className="btn btn-primary" >Drukuj
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16" className="m-1">

@@ -226,7 +226,7 @@ function AddItemsCard() {
                     <input onChange={handleCompany} type="text" className="form-control" value={itemObj.company} ></input>
                 </div>
                 <div className="filters d-flex">
-                 <select disabled={itemObj.id != ""}  value = {typeof group.groupName == "undefined" ? "default" : group.groupName} className="form-select mx-2" aria-label="Default select example" onChange={handleGroupSelect}>
+                 <select disabled={itemObj.id != ""}  value= {typeof group.groupName == "undefined" ? "default" : group.groupName} className="form-select mx-2" aria-label="Default select example" onChange={handleGroupSelect}>
                     <option  value= "default" selected disabled="disabled">Wybierz grupę </option>
                     {allProductList.map(el => {
                          return <option value={el.groupName}>{el.groupName}</option>

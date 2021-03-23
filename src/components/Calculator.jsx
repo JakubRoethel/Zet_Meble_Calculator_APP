@@ -75,22 +75,24 @@ function Calculator() {
             {choseItems.length === 0 && <h2 className="mt-5">Nie dodałeś żadnych produktów</h2>}
             <div className="product-wrapper">
             {choseItems.map(item => {
-                console.log(item);
+                console.log(item.color);
                return <>
-            {item.groupName == 'Materiały' || item.groupName == 'Fronty' ?
+            {item.groupName == 'Materiały' || item.groupName == 'Fronty' || item.groupName == "Uchwyty" ?
                 <div key={item.id} className='product-card'>
                 <div className ="details">
-                    <h1>{item.name}</h1>
-                    <p> {item.color} | <input placeholder={"m2"} onChange={ e => handleQuantity(e,item)} type="number" value={item.qty}></input> m2| {item.company} </p>
+                    <h5>{item.group}</h5>
+                    <h6>{item.name}</h6>
+                    <p> {item.subGroup} |{item.color} | <input placeholder={"m2"} onChange={ e => handleQuantity(e,item)} type="number" value={item.qty}></input> m2/mb </p>
                     </div>
                 <div className="btn-container">
                      <button className = 'btn btn-danger' onClick={()=>removeItemsFromList(item)}>Remove</button>
                  </div>
-            </div> :            
+            </div> :
          <div key={item.id} className='product-card'>
             <div className ="details">
-                <h1>{item.name}</h1>
-                <p> {item.color} | {item.company} | {item.qty}</p>
+                <h5>{item.group}</h5>
+                <h6>{item.name}</h6>
+                <p> {item.productGroup} | {item.company} | {item.color} | {item.qty}</p>
                 </div>
             <div className="btn-container">
                 <button className='btn btn-primary' onClick={()=>addItemToList(item)}>Add</button>
@@ -100,9 +102,6 @@ function Calculator() {
             }
             </>
         })}
-                <div className="total-price">
-                    <h1>{choseItems.length === 0 ? '' : `Total: ${itemsPrice.toFixed(2)}`}</h1>
-                </div>
                 <div className="summary-container">
                     {order.client.length == "" ? null :<Link to="/podsumowanie" className="summary-link" onClick={handleSummary} >{`Podsumowanie >`}</Link>}
                 </div>
