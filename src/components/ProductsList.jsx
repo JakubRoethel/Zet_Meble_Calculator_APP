@@ -28,10 +28,10 @@ function ProductsList() {
             }))
         }
     }
-
+    console.log(filtredItems);
 
     const [group,setGroup] = useState([]);
-    console.log(group);
+    // console.log(group);
 
     const handleGroupSelect = (e) => {
         const searchGroupArray = allProductList.find(x => {

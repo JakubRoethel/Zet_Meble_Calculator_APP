@@ -22,6 +22,7 @@ function AddItemsCard() {
 
     const [subGroup, setSubGroup] = useState([])
 
+
     const handleAdd = (e) => {
         e.preventDefault()
         // console.log(itemObj)
@@ -59,6 +60,15 @@ function AddItemsCard() {
                     })
                 )
                 setTitle("Dodaj nowy Produkt")
+                setItemObj({
+                    name: "",
+                    price: "",
+                    color: "",
+                    company: "",
+                    id: ""
+                })
+                setGroup([])
+                setSubGroup([])
             } else {
                 setAllProductList(
                     allProductList.map(groupEl => {
@@ -109,8 +119,8 @@ function AddItemsCard() {
             })
         }
 
-        console.log(error.nameError)
-        console.log(error.nameError.isError)
+        // console.log(error.nameError)
+        // console.log(error.nameError.isError)
         
     }
 
@@ -136,13 +146,6 @@ function AddItemsCard() {
         }
     }
 
-    const handleColor = (e) => {
-        if (e.target.value != "") {
-            setItemObj({...itemObj, color:e.target.value})
-        } else {
-            setItemObj({...itemObj, color: ""})
-        }
-    }
 
     const handleCompany = (e) => {
         if (e.target.value != "") {
@@ -151,6 +154,15 @@ function AddItemsCard() {
             setItemObj({...itemObj, company: ""})
         }
     }
+
+    const handleProductDetails = (e) => {
+        if(e.target.value != "") {
+            setItemObj({...itemObj, productGroup: e.target.value})
+        } else {
+            setItemObj({...itemObj, productGroup: ""})
+        }
+    }
+    // console.log(itemObj.productGroup)
 
 
     // console.log(allProductList);
@@ -171,8 +183,10 @@ function AddItemsCard() {
         // console.log(searchSubGroup.subGroupName);
         // console.log(searchSubGroup.subArray);
         setSubGroup(searchSubGroup);
-        // console.log(subGroup)
+        // console.log(searchSubGroup)
     }
+
+  
 
     const handleUpdata = (product,group,subGroup) => {
         setGroup(group)
@@ -180,7 +194,7 @@ function AddItemsCard() {
         setItemObj(product)
         setButtonText("Zakończ Edycję")
         setTitle("Edytuj produkt")
-        console.log(product)
+        // console.log(product)
     }
 
     const [buttonText,setButtonText] = useState("Dodaj")
@@ -193,13 +207,19 @@ function AddItemsCard() {
 
     useEffect(() => {
         const productRef = firebase.database().ref('products');
-             console.log(allProductList);
+            //  console.log(allProductList);
              if(allProductList != 0) {
                 productRef.set([...allProductList]);
              }
             
     }, [allProductList])
 
+    const handleDisplayOption = (e) => {
+        console.log(e.target.value)
+        if(e.target.value == "Meble" || e.target.value == "Opcje dodatkowe") {
+            setItemObj({...itemObj, displayGroup: e.target.value})
+        }
+    }
 
 
     return (
@@ -218,12 +238,19 @@ function AddItemsCard() {
                     {error.priceError.isError ? <p style={{color:"red"}}>{error.priceError.priceErrMessage}</p> : null}
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" className="form-label">Kolor</label>
-                    <input onChange={handleColor} type="text" className="form-control" ></input>
-                </div>
-                <div class="mb-3">
                     <label for="exampleInputPassword1" className="form-label">Producent</label>
                     <input onChange={handleCompany} type="text" className="form-control" value={itemObj.company} ></input>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" className="form-label">Szcegóły produktu (np.korpus,rodzaj frezu itp)</label>
+                    <input onChange={handleProductDetails}  type="text" className="form-control" value={itemObj.productGroup} ></input>
+                </div>
+                <div className="filters d-flex">
+                    <select onChange={handleDisplayOption} className="form-select mx-2">
+                        <option value= "default" selected disabled="disabled">Wybierz opcje wyświetlania</option>
+                        <option value= "Meble"> Meble</option>
+                        <option value= "Opcje dodatkowe">Opcje dodatkowe</option>
+                    </select>
                 </div>
                 <div className="filters d-flex">
                  <select disabled={itemObj.id != ""}  value= {typeof group.groupName == "undefined" ? "default" : group.groupName} className="form-select mx-2" aria-label="Default select example" onChange={handleGroupSelect}>
@@ -238,7 +265,6 @@ function AddItemsCard() {
                         return <option value={el.subGroupName}>{el.subGroupName}</option>
                     }) : "" }
                 </select>
-
             </div>
                 
                 <button type="submit" className="btn btn-primary mt-3">{buttonText}</button>
@@ -250,7 +276,7 @@ function AddItemsCard() {
                 {allProductList.length == 0 ? <h2 className='text-center'>Nie dodałeś żadnych produktów</h2> : allProductList.map(group => {
 
                     return group.array.map(subGroup => {
-                        console.log(subGroup.subArray)
+                        // console.log(subGroup.subArray)
                         return  subGroup.subArray.map(product => {
 
                             return <div className='product-card'>
@@ -258,7 +284,7 @@ function AddItemsCard() {
                                         <h5>{group.groupName}</h5>
                                         <h5>{subGroup.subGroupName}</h5>
                                         <h5>{product.name}</h5>
-                                         <p>{product.price} | {product.color} | {product.company} | {product.productGroup}</p>
+                                         <p>{product.price} | {product.productGroup} | {product.displayGroup} | {product.company}</p>
                                     </div>
                                 <div className='button-container'>
                                     <button onClick={() => removeItemFromDataBase(product)} className='btn btn-danger'>Remove</button>

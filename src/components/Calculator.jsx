@@ -12,6 +12,8 @@ function Calculator() {
     
     const itemsPrice = choseItems.reduce((a,c) => a + c.price * c.qty, 0)
 
+    
+
     // funkcje te przejmuja value z inputów i pozwalają wrzucić ja do order co pozwala wyswietlać dane o kliencie w podsumowaniu plus wrzucamy do tablicy zamówione produkty
 
     const handleSummary = () => {

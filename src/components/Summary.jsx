@@ -6,14 +6,27 @@ import logo from "../image/logo.jpg"
 //Component klasowy na potrzeby druku do PDF w propsach przekazałem w komponencie ordzica propsy (order,data,choseItems) Dokładnie to samo co w Summary wczśniej
 
 class Summary extends React.PureComponent {
-    constructor(props) {
-      super(props);
-      this.state =[...this.props.choseItems]
-    }
+    
+
+
     render() {
       console.log(this.props.order.client)
       console.log(this.props.choseItems)
       console.log(this.state)
+      console.log(this.props.displayQty);
+
+      const totalMeble = this.props.choseItems.filter(el => {
+        return el.displayGroup == "Meble"
+      }).reduce((a,b) => a + b.price * b.qty,0)
+
+      console.log(totalMeble);
+
+      const totalOpcjeDodatkowe = this.props.choseItems.filter(el => {
+        return el.displayGroup == "Opcje dodatkowe"
+      }).reduce((a,b) => a + b.price * b.qty,0)
+  
+      console.log(totalOpcjeDodatkowe);
+
       return (
        <div className= "container-fluid my-3 w-100">
             <div className="d-flex justify-content-between"> 
@@ -29,11 +42,14 @@ class Summary extends React.PureComponent {
               </div>
             </div>
               <div className="logo-wrapper">
-                <img src={logo} alt="Logo"></img>
+                <img className="small-logo" src={logo} alt="Logo"></img>
               </div>
             </div>
+            {/* {this.props.choseItems.filter(el => {
+              return el.displayGroup == "Meble" 
+            }).length > 0 ? tabelke  : null}  */}
+
               <div className="container-fluid my-3 w-85">
-                
               <h4>Meble :</h4>
               <table className="table my-4 text-center">
                   <thead>
@@ -41,6 +57,8 @@ class Summary extends React.PureComponent {
                       <th scope="col">Grupa produktu</th>
                       <th scope="col">Nazwa produktu</th>
                       <th scope="col">Dodatkowe informacje</th>
+                      {this.props.displayQty == false ? null : 
+                      <th> Ilość</th>}
                       <th scope="col">Producent</th>
                       <th scope="col">Szczegóły</th>
                       </tr>
@@ -54,6 +72,7 @@ class Summary extends React.PureComponent {
                                   <td>{el.group}</td>
                                   <td>{el.name}</td>
                                   <td>{el.color}</td>
+                                  {this.props.displayQty == false ? null : <td>{el.qty}</td>}
                                   <td>{el.company}</td>
                                   <td>{el.productGroup}</td>
                               </tr> : null
@@ -63,7 +82,7 @@ class Summary extends React.PureComponent {
                   </tbody>
               </table>
               <div className="d-flex justify-content-between m-4">
-                <h5>Total: {this.props.order.total} </h5>
+                <h5>Total: {totalMeble} </h5>
               </div>
               </div>
                 <div className="container-fluid my-3 w-85">
@@ -97,7 +116,7 @@ class Summary extends React.PureComponent {
                     </tbody>
               </table>
             <div className="d-flex justify-content-between m-4">
-              <h5>Total: {this.props.order.total} </h5>
+              <h5>Total: {totalOpcjeDodatkowe} </h5>
              </div>
              </div>
             <div class="container-fluid my-3 w-75">

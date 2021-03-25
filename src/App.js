@@ -7,6 +7,8 @@ import Compose from './components/Compose';
 import SummaryPdfPrint from './components/SummaryPdfPrint';
 import LoginPage from './components/LoginPage';
 import {UserContextProvider} from "./components/UserContext"
+import SaveSummary from "./components/SaveSummary"
+
 
 
 function App() {
@@ -26,7 +28,8 @@ function App() {
               <Route path= "/" exact component = {Compose}/>
               <Route path = "/dodaj" component={AddItemsCard}/>
               <Route path ="/podsumowanie" component={SummaryPdfPrint}/>
-              <Route path='/zaloguj' exact component={LoginPage}/>
+              <Route path='/zaloguj' component={LoginPage}/>
+              <Route path='/save' component={SaveSummary}/>
             </Switch>
           </ChosenProductProvider>
           </div>

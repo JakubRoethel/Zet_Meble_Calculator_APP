@@ -15,10 +15,10 @@ function LoginPage() {
     const handleInputs = (e) => {
         if(e.target.id == "inputEmail"){
             setEmail(e.target.value)
-            console.log(e.target.value)
+            // console.log(e.target.value)
         } else if (e.target.id == "inputPassword"){
             setPassword(e.target.value)
-            console.log(e.target.value)
+            // console.log(e.target.value)
         }
     }
 

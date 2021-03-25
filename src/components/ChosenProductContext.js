@@ -109,10 +109,27 @@ export const ChosenProductProvider = (props) => {
     productRef.on('value', (snapshot) => {
         console.log(snapshot.val());
         setAllProductList(snapshot.val());
-  })},[])
+
+  })
+  const saveValuationRef = firebase.database().ref('saveValuation');
+  console.log(firebase.database())
+  console.log(saveValuationRef)
+  saveValuationRef.on('value', (snapshot) => {
+       console.log(snapshot.val());
+       setSaveValuation(snapshot.val());
+ })
+},[])
+
+
+
+
+  const [saveValuation, setSaveValuation] = useState([])
+
+  console.log(saveValuation)
+
 
     return (
-        <ChosenProductContext.Provider value = {[choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase]}>
+        <ChosenProductContext.Provider value = {[choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation]}>
             {props.children}
         </ChosenProductContext.Provider>
 

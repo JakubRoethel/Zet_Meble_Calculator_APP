@@ -1,16 +1,28 @@
 import React,{useContext} from 'react';
 import {Link} from 'react-router-dom';
 import { UserContext } from './UserContext';
-import logo from "../image/logo.jpg";
+import firebase from '../firebase/firebase'
 
 //Linki potrzebne do Routera w App
 
 function Header() {
 
   const [user,setUser] = useContext(UserContext)
-  console.log(user)
 
-  
+
+  const userLogOut = () => {
+
+    firebase.auth().signOut().then(() => {
+      // Sign-out successful.
+      console.log("sign-out")
+    }).catch((error) => {
+      // An error happened.
+    });
+    setUser(undefined)
+  }
+
+    // console.log(user)
+
     return (
     <div className= "header-wrapper">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -28,11 +40,14 @@ function Header() {
                 <li className="nav-item">
                   <Link className="nav-link" to={'/dodaj'}>Dodaj produkt</Link>
                 </li>
+                <li>
+                  <Link className="nav-link"  to={'/save'}>Zapisane wyceny</Link>
+                </li>
                 </>
               }
            </ul>
            {user != undefined ?
-              <Link className="nav-link" to={'/zaloguj'} >Wyloguj</Link>:null
+              <Link onClick={userLogOut} className="nav-link" to={'/zaloguj'} >Wyloguj</Link>:null
           }
          </div>
        </nav>

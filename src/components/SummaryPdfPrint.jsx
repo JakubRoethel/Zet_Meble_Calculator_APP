@@ -4,10 +4,12 @@ import Summary from './Summary';
 import {useReactToPrint} from "react-to-print";
 import {ChosenProductContext} from './ChosenProductContext';
 import uuid from 'react-uuid';
+import SaveSummary from "./SaveSummary"
+import firebase from "../firebase/firebase"
 
 
 function SummaryPdfPrint () {
-  const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder]= useContext(ChosenProductContext);
+  const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation]= useContext(ChosenProductContext);
 
   const date = new Date();
 
@@ -148,11 +150,36 @@ const deleteData = () => {
     company:""
    })
 }
+   const [displayQty, setDisplayQty] = useState(false)
+
+   const changeDisplayQty = () => {
+     setDisplayQty(!displayQty)
+   }
+
+   
+
+
+
+   const btnSave = () => {
+     setOrder({...order, array:choseItems})
+
+     const saveValuationRef = firebase.database().ref('saveValuation');
+          console.log("jestem");
+          saveValuationRef.set([...saveValuation,{...order}]);
+          console.log(saveValuation);
+   }
+
+   console.log(choseItems)
+   console.log(order)
+
+  
+
+
 
 
   return (
     <div className= "container-fluid my-3 w-100">
-      <Summary ref ={componentRef} order={order} date={date} choseItems={choseItems} />
+      <Summary ref ={componentRef} order={order} date={date} choseItems={choseItems} displayQty={displayQty} />
       <div className="button-container d-flex justify-content-end">
         <button onClick={handlePrint} className="btn btn-primary" >Drukuj
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16" className="m-1">
@@ -161,6 +188,8 @@ const deleteData = () => {
           </svg>
         </button>
         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Dodaj produkt ręcznie</button>
+        <button onClick={changeDisplayQty} className="btn btn-primary">Szczegóły</button>
+        <button onClick={btnSave} className="btn btn-primary">Zapisz</button>
       </div>
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog">
