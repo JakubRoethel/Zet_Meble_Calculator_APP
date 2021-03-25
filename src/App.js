@@ -8,6 +8,7 @@ import SummaryPdfPrint from './components/SummaryPdfPrint';
 import LoginPage from './components/LoginPage';
 import {UserContextProvider} from "./components/UserContext"
 import SaveSummary from "./components/SaveSummary"
+import Home from './components/Home';
 
 
 
@@ -25,11 +26,12 @@ function App() {
             {/*Switch zatrzymuje proces routowania zawsze moesz zajrzeć do DEV Ed
               exact usuwa błąd z "/" i pozwala nie zaijąc wszystkiego w switcha*/}
             <Switch>
-              <Route path= "/" exact component = {Compose}/>
+              <Route path= "/" exact component ={Home}/>
+              <Route path= "/wyceń"  component = {Compose}/>
               <Route path = "/dodaj" component={AddItemsCard}/>
               <Route path ="/podsumowanie" component={SummaryPdfPrint}/>
               <Route path='/zaloguj' component={LoginPage}/>
-              <Route path='/save' component={SaveSummary}/>
+              <Route path='/zapisane wyceny' component={SaveSummary}/>
             </Switch>
           </ChosenProductProvider>
           </div>

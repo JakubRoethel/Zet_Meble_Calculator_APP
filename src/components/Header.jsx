@@ -26,7 +26,6 @@ function Header() {
     return (
     <div className= "header-wrapper">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-         <a className="navbar-brand ms-5" href="#">Meble</a>
          <div className="collapse navbar-collapse d-flex justify-content-md-between" id="navbarTogglerDemo03">
            <ul className="navbar-nav ms-2 mb-2 mb-lg-0">
               {user === undefined ?
@@ -34,14 +33,17 @@ function Header() {
                   <Link className="nav-link" to={'/zaloguj'}>Zaloguj</Link>
                 </li> :
                  <>
+                 <li className="nav-item active">
+                 <Link className="nav-link" to='/'>Home</Link>
+                 </li>
                 <li className="nav-item active">
-                  <Link className="nav-link" to='/'>Wyceń</Link>
+                  <Link className="nav-link" to='/wyceń'>Wyceń</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to={'/dodaj'}>Dodaj produkt</Link>
                 </li>
                 <li>
-                  <Link className="nav-link"  to={'/save'}>Zapisane wyceny</Link>
+                  <Link className="nav-link"  to={'/zapisane wyceny'}>Zapisane wyceny</Link>
                 </li>
                 </>
               }

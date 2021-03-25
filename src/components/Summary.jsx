@@ -10,22 +10,26 @@ class Summary extends React.PureComponent {
 
 
     render() {
-      console.log(this.props.order.client)
-      console.log(this.props.choseItems)
-      console.log(this.state)
-      console.log(this.props.displayQty);
+      // console.log(this.props.order.client)
+      // console.log(this.props.choseItems)
+      // console.log(this.state)
+      // console.log(this.props.displayQty);
 
       const totalMeble = this.props.choseItems.filter(el => {
         return el.displayGroup == "Meble"
-      }).reduce((a,b) => a + b.price * b.qty,0)
+      }).reduce((a,b) => a + b.price * b.qty,0).toFixed(2)
 
-      console.log(totalMeble);
+      // console.log(totalMeble);
 
       const totalOpcjeDodatkowe = this.props.choseItems.filter(el => {
         return el.displayGroup == "Opcje dodatkowe"
-      }).reduce((a,b) => a + b.price * b.qty,0)
+      }).reduce((a,b) => a + b.price * b.qty,0).toFixed(2)
+
+      const totalBlaty = this.props.choseItems.filter(el => {
+        return el.displayGroup == "Blaty"
+      }).reduce((a,b) => a + b.price * b.qty,0).toFixed(2)
   
-      console.log(totalOpcjeDodatkowe);
+      // console.log(totalOpcjeDodatkowe);
 
       return (
        <div className= "container-fluid my-3 w-100">
@@ -45,27 +49,27 @@ class Summary extends React.PureComponent {
                 <img className="small-logo" src={logo} alt="Logo"></img>
               </div>
             </div>
-            {/* {this.props.choseItems.filter(el => {
-              return el.displayGroup == "Meble" 
-            }).length > 0 ? tabelke  : null}  */}
-
-              <div className="container-fluid my-3 w-85">
+            {this.props.choseItems.filter(el => {
+              return el.displayGroup == "Meble"
+            }).length > 0 ? 
+              <div className="container-fluid my-3 w-100">
               <h4>Meble :</h4>
               <table className="table my-4 text-center">
                   <thead>
                       <tr>
                       <th scope="col">Grupa produktu</th>
                       <th scope="col">Nazwa produktu</th>
-                      <th scope="col">Dodatkowe informacje</th>
+                      <th scope="col">Dodatkowe informacje o produkcie</th>
                       {this.props.displayQty == false ? null : 
                       <th> Ilość</th>}
                       <th scope="col">Producent</th>
                       <th scope="col">Szczegóły</th>
+                      <th scope="col">Dodatkowa specyfikacja</th>
                       </tr>
                   </thead>
                   <tbody>
                   {this.props.choseItems.map(el => {
-                            console.log(el)
+                            // console.log(el)
                             return <>
                             {el.displayGroup === "Meble" ?
                           <tr>
@@ -75,6 +79,9 @@ class Summary extends React.PureComponent {
                                   {this.props.displayQty == false ? null : <td>{el.qty}</td>}
                                   <td>{el.company}</td>
                                   <td>{el.productGroup}</td>
+                                  <td>
+                                    <input></input>
+                                  </td>
                               </tr> : null
                           }
                           </>
@@ -84,7 +91,11 @@ class Summary extends React.PureComponent {
               <div className="d-flex justify-content-between m-4">
                 <h5>Total: {totalMeble} </h5>
               </div>
-              </div>
+              </div> : null
+          }
+                { this.props.choseItems.filter(el => {
+                  return el.displayGroup == "Opcje dodatkowe"
+                }).length > 0 ?
                 <div className="container-fluid my-3 w-85">
                   <h4>Opcje dodatkowe :</h4>
                 <table className="table my-4 text-center">
@@ -94,8 +105,10 @@ class Summary extends React.PureComponent {
                         <th scope="col">Nazwa produktu</th>
                         <th scope="col">Ilość</th>
                         <th scope="col">Cena</th>
+                        <th scope="col">Dodatkowe informacje o produkcie</th>
+                        <th scope="col">Producent</th>
                         <th scope="col">Szczegóły</th>
-                        <th scope="col">Dodatkowe informacje</th>
+                        <th scope="col">Dodatkowa specyfikacja</th>
                         </tr>
                     </thead>
                      <tbody>
@@ -108,7 +121,11 @@ class Summary extends React.PureComponent {
                               <td>{el.qty}</td>
                               <td>{el.price}</td>
                               <td>{el.productGroup}</td>
+                              <td>{el.company}</td>
                               <td>{el.color}</td>
+                              <td>
+                                <input></input>
+                              </td>
                             </tr> : null
                           }
                           </>
@@ -118,7 +135,52 @@ class Summary extends React.PureComponent {
             <div className="d-flex justify-content-between m-4">
               <h5>Total: {totalOpcjeDodatkowe} </h5>
              </div>
-             </div>
+             </div> : null
+              }
+              {this.props.choseItems.filter(el => {
+              return el.displayGroup == "Blaty"
+            }).length > 0 ? 
+              <div className="container-fluid my-3 w-100">
+              <h4>Blaty:</h4>
+              <table className="table my-4 text-center">
+                  <thead>
+                      <tr>
+                      <th scope="col">Grupa produktu</th>
+                      <th scope="col">Nazwa produktu</th>
+                      <th scope="col">Dodatkowe informacje o produkcie</th>
+                      {this.props.displayQty == false ? null : 
+                      <th> Ilość</th>}
+                      <th scope="col">Producent</th>
+                      <th scope="col">Szczegóły</th>
+                      <th scope="col">Dodatkowa specyfikacja</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  {this.props.choseItems.map(el => {
+                            // console.log(el)
+                            return <>
+                            {el.displayGroup === "Blaty" ?
+                          <tr>
+                                  <td>{el.group}</td>
+                                  <td>{el.name}</td>
+                                  <td>{el.color}</td>
+                                  {this.props.displayQty == false ? null : <td>{el.qty}</td>}
+                                  <td>{el.company}</td>
+                                  <td>{el.productGroup}</td>
+                                  <td>
+                                    <input></input>
+                                  </td>
+                              </tr> : null
+                          }
+                          </>
+                          })}
+                  </tbody>
+              </table>
+              <div className="d-flex justify-content-between m-4">
+                <h5>Total: {totalBlaty} </h5>
+              </div>
+              </div> : null
+          }
             <div class="container-fluid my-3 w-75">
               <label for="exampleFormControlTextarea1">Dodatkowe informacje</label>
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>

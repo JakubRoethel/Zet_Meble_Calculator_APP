@@ -2,10 +2,13 @@ import React, { useContext, useState,useEffect } from 'react'
 import {ChosenProductContext} from './ChosenProductContext';
 import uuid from 'react-uuid';
 import firebase from "../firebase/firebase"
+import { UserContext } from './UserContext';
 
 function AddItemsCard() {
 
     const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase] = useContext(ChosenProductContext);
+
+    const [user,setUSer] = useContext(UserContext)
 
     console.log(allProductList)
 
@@ -223,79 +226,85 @@ function AddItemsCard() {
 
 
     return (
-        <div className='container-fluid d-flex'>
-        <div className='col-lg-6 d-flex flex-column align-items-center'>
-            <h1 className='my-5 text-center'>{title} </h1>
-            <form onSubmit={handleAdd} className='col-lg-6 d-flex flex-column'>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" className="form-label">Nazwa produktu</label>
-                    <input onChange={handleName} type="text" className="form-control" name='nazwa' value={itemObj.name}></input>
-                    {error.nameError.isError ? <p style={{color:"red"}}>{error.nameError.nameErrMessage}</p> : null}
+        <>
+            {user != undefined ?
+                <div className='container-fluid d-flex'>
+                <div className='col-lg-6 d-flex flex-column align-items-center'>
+                    <h1 className='my-5 text-center'>{title} </h1>
+                    <form onSubmit={handleAdd} className='col-lg-6 d-flex flex-column'>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" className="form-label">Nazwa produktu</label>
+                            <input onChange={handleName} type="text" className="form-control" name='nazwa' value={itemObj.name}></input>
+                            {error.nameError.isError ? <p style={{color:"red"}}>{error.nameError.nameErrMessage}</p> : null}
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" className="form-label">Cena</label>
+                            <input onChange={handlePrice} type="text" className="form-control" value={itemObj.price}></input>
+                            {error.priceError.isError ? <p style={{color:"red"}}>{error.priceError.priceErrMessage}</p> : null}
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" className="form-label">Producent</label>
+                            <input onChange={handleCompany} type="text" className="form-control" value={itemObj.company} ></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" className="form-label">Szcegóły produktu (np.korpus,rodzaj frezu itp)</label>
+                            <input onChange={handleProductDetails}  type="text" className="form-control" value={itemObj.productGroup} ></input>
+                        </div>
+                        <div className="filters d-flex">
+                            <select onChange={handleDisplayOption} className="form-select mx-2">
+                                <option value= "default" selected disabled="disabled">Wybierz opcje wyświetlania</option>
+                                <option value= "Meble"> Meble</option>
+                                <option value= "Opcje dodatkowe">Opcje dodatkowe</option>
+                            </select>
+                        </div>
+                        <div className="filters d-flex">
+                        <select disabled={itemObj.id != ""}  value= {typeof group.groupName == "undefined" ? "default" : group.groupName} className="form-select mx-2" aria-label="Default select example" onChange={handleGroupSelect}>
+                            <option  value= "default" selected disabled="disabled">Wybierz grupę </option>
+                            {allProductList.map(el => {
+                                return <option value={el.groupName}>{el.groupName}</option>
+                            })}
+                        </select>
+                        <select disabled={itemObj.id != ""} value = {typeof subGroup.subGroupName == "undefined" ? "default" : subGroup.subGroupName} className="form-select mx-2" aria-label="Default select example" onChange={handleSubGroupSelect}>
+                            <option  value="default" selected disabled="disabled">Wybierz podgrupę</option>
+                            {typeof group.array !== "undefined" ? group.array.map(el => {
+                                return <option value={el.subGroupName}>{el.subGroupName}</option>
+                            }) : "" }
+                        </select>
+                    </div>
+                        
+                        <button type="submit" className="btn btn-primary mt-3">{buttonText}</button>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" className="form-label">Cena</label>
-                    <input onChange={handlePrice} type="text" className="form-control" value={itemObj.price}></input>
-                    {error.priceError.isError ? <p style={{color:"red"}}>{error.priceError.priceErrMessage}</p> : null}
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" className="form-label">Producent</label>
-                    <input onChange={handleCompany} type="text" className="form-control" value={itemObj.company} ></input>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" className="form-label">Szcegóły produktu (np.korpus,rodzaj frezu itp)</label>
-                    <input onChange={handleProductDetails}  type="text" className="form-control" value={itemObj.productGroup} ></input>
-                </div>
-                <div className="filters d-flex">
-                    <select onChange={handleDisplayOption} className="form-select mx-2">
-                        <option value= "default" selected disabled="disabled">Wybierz opcje wyświetlania</option>
-                        <option value= "Meble"> Meble</option>
-                        <option value= "Opcje dodatkowe">Opcje dodatkowe</option>
-                    </select>
-                </div>
-                <div className="filters d-flex">
-                 <select disabled={itemObj.id != ""}  value= {typeof group.groupName == "undefined" ? "default" : group.groupName} className="form-select mx-2" aria-label="Default select example" onChange={handleGroupSelect}>
-                    <option  value= "default" selected disabled="disabled">Wybierz grupę </option>
-                    {allProductList.map(el => {
-                         return <option value={el.groupName}>{el.groupName}</option>
-                    })}
-                </select>
-                <select disabled={itemObj.id != ""} value = {typeof subGroup.subGroupName == "undefined" ? "default" : subGroup.subGroupName} className="form-select mx-2" aria-label="Default select example" onChange={handleSubGroupSelect}>
-                    <option  value="default" selected disabled="disabled">Wybierz podgrupę</option>
-                    {typeof group.array !== "undefined" ? group.array.map(el => {
-                        return <option value={el.subGroupName}>{el.subGroupName}</option>
-                    }) : "" }
-                </select>
-            </div>
-                
-                <button type="submit" className="btn btn-primary mt-3">{buttonText}</button>
-            </form>
-        </div>
-        <div className='col-lg-6'>
-            <h1 className='my-5 text-center'>Lista dostepnych produktów</h1>
-            <div className='list'>
-                {allProductList.length == 0 ? <h2 className='text-center'>Nie dodałeś żadnych produktów</h2> : allProductList.map(group => {
+                <div className='col-lg-6'>
+                    <h1 className='my-5 text-center'>Lista dostepnych produktów</h1>
+                    <div className='list'>
+                        {allProductList.length == 0 ? <h2 className='text-center'>Nie dodałeś żadnych produktów</h2> : allProductList.map(group => {
 
-                    return group.array.map(subGroup => {
-                        // console.log(subGroup.subArray)
-                        return  subGroup.subArray.map(product => {
+                            return group.array.map(subGroup => {
+                                // console.log(subGroup.subArray)
+                                return  subGroup.subArray.map(product => {
 
-                            return <div className='product-card'>
-                                    <div className='details'>
-                                        <h5>{group.groupName}</h5>
-                                        <h5>{subGroup.subGroupName}</h5>
-                                        <h5>{product.name}</h5>
-                                         <p>{product.price} | {product.productGroup} | {product.displayGroup} | {product.company}</p>
+                                    return <div className='product-card'>
+                                            <div className='details'>
+                                                <h5>{group.groupName}</h5>
+                                                <h5>{subGroup.subGroupName}</h5>
+                                                <h5>{product.name}</h5>
+                                                <p>{product.price} | {product.productGroup} | {product.displayGroup} | {product.company}</p>
+                                            </div>
+                                        <div className='button-container'>
+                                            <button onClick={() => removeItemFromDataBase(product)} className='btn btn-danger'>Remove</button>
+                                            <button onClick={() => handleUpdata(product,group,subGroup)} className='btn btn-warning'>Edytuj</button>
+                                        </div>
                                     </div>
-                                <div className='button-container'>
-                                    <button onClick={() => removeItemFromDataBase(product)} className='btn btn-danger'>Remove</button>
-                                    <button onClick={() => handleUpdata(product,group,subGroup)} className='btn btn-warning'>Edytuj</button>
-                                </div>
-                            </div>
-                    })
-                })})}
-            </div>
-        </div>
-    </div>
+                            })
+                        })})}
+                        </div>
+                    </div>
+                </div>
+                :
+                <h3 className='container-fluid mt-5 text-center'>Zaloguj się</h3>
+            }
+    </>
     )
 }
 

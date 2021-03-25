@@ -2,8 +2,8 @@ import React, {useContext,useState} from 'react'
 import firebase from '../firebase/firebase'
 import "firebase/auth";
 import {UserContext} from "./UserContext"
-import logo from "../image/logo.jpg"
 import "../css/loginPage.css"
+import Home from "./Home"
 
 function LoginPage() {
 
@@ -77,12 +77,7 @@ function LoginPage() {
             </form>
         </main>
         </> :
-                <div className="w-100">
-                    <div className="d-flex align-items-center justify-content-center w-100 wrapper-logo ">
-                        <img src={logo} alt="Logo"></img>
-                    </div>
-
-                </div>
+            <Home/>
         }
         </>
     )

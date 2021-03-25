@@ -102,20 +102,20 @@ export const ChosenProductProvider = (props) => {
 
 
   useEffect(() => {
-    console.log("jestem")
+    // console.log("jestem")
     const productRef = firebase.database().ref('products');
-    console.log(productRef.toString())
-    console.log(firebase.database())
+    // console.log(productRef.toString())
+    // console.log(firebase.database())
     productRef.on('value', (snapshot) => {
-        console.log(snapshot.val());
+        // console.log(snapshot.val());
         setAllProductList(snapshot.val());
 
   })
   const saveValuationRef = firebase.database().ref('saveValuation');
-  console.log(firebase.database())
-  console.log(saveValuationRef)
+  // console.log(firebase.database())
+  // console.log(saveValuationRef)
   saveValuationRef.on('value', (snapshot) => {
-       console.log(snapshot.val());
+      //  console.log(snapshot.val());
        setSaveValuation(snapshot.val());
  })
 },[])
@@ -125,7 +125,7 @@ export const ChosenProductProvider = (props) => {
 
   const [saveValuation, setSaveValuation] = useState([])
 
-  console.log(saveValuation)
+  // console.log(saveValuation)
 
 
     return (
