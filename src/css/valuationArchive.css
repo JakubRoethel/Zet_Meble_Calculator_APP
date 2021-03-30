@@ -1,26 +1,21 @@
-.product-card {
-    width: 80%;
+.valuation-card {
+    width: 30%;
+    height: 70px;
     border-radius: 3px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     margin: 15px;
     padding: 10px;
     box-shadow: rgb(0 0 0 / 15%) 0px 2px 4px;
     background-color: rgb(255, 255, 255);
     transition: box-shadow 0.3s ease-out 0s;
     animation: 0.5s ease 0s 1 normal none running gkESFx;
-    font-size: 15px;
+    font-size: 18px;
+    font-weight: bold;
     cursor:pointer;
 }
 
-.product-card:hover {
+.valuation-card:hover {
     box-shadow: rgb(0 0 0 / 35%) 0px 15px 20px;
 }
-
-.button-container {
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-}
-
-

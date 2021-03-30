@@ -64,4 +64,30 @@ table.items_table thead th {
 
 }
 
+.textarea-summary {
+  resize: none;
+  width: 280px;
+  height: 60px;
+  border: none;
+}
+
+.textarea-summary:focus {
+  outline: none;
+
+}
+
+
+.more-information {
+  resize: none;
+  height: 90%;
+}
+
+.form-control:focus {
+  outline: none;
+  border: 1px solid black;
+  box-shadow: none;
+  resize: none;
+  
+}
+
 

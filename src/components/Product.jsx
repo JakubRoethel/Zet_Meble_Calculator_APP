@@ -10,7 +10,13 @@ import {ChosenProductContext} from './ChosenProductContext'
 function Product({product,groupName}) {
 
     const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase] = useContext(ChosenProductContext);
-    const [color, setColor] = useState()
+    const [additionalInformation, setAdditionalInformation] = useState(null)
+    
+
+    const handleAdditionalInformation = (e) => {
+        console.log(e.target.value)
+        setAdditionalInformation(e.target.value)
+    }
 
     return (
     <div className="product-card">
@@ -24,11 +30,11 @@ function Product({product,groupName}) {
                 {product.group === "Szuflady" || product.group === "Systemy przechowywania" ? <p>{product.company} | {product.productGroup}</p>: null}
                 {product.group === "Zawias" || product.group === "Podnośniki KPL" || product.group === "Technologia ruchu" ? <p>{product.company} |</p>: null}
                 {product.subGroup === "Servo-drive Uno" ? <p> {product.productGroup}</p>: null }
-                <input onBlur={(e) => setColor(e.target.value) } className="color ms-2" type="text" placeholder="Dodatkowe informacje"></input>
+                <input onBlur={handleAdditionalInformation} className="color ms-2" type="text" placeholder="Dodatkowe informacje"></input>
             </div>
         </div>
         <div className="button-container">
-            <button className="btn btn-primary" onClick = {()=>addItemToList({...product, color: color, groupName:groupName})}>Add</button>
+            <button className="btn btn-primary" onClick = {()=>addItemToList({...product, additionalInformation: additionalInformation, groupName:groupName})}>Add</button>
         </div>
     </div>
     )

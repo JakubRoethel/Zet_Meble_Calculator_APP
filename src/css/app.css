@@ -17,3 +17,7 @@
     display: flex;
     width: 100%;
 }
+
+.footer {
+    height: 4vh;
+  }

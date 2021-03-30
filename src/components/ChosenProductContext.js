@@ -14,19 +14,17 @@ export const ChosenProductProvider = (props) => {
 
 
 
-
-
     // funkcje do przycisków w kalkulatorze pozwalają po ideksach sprawdzać który item juz jest na liscie i dodaja tylko qty
 
     const [choseItems, setItems] = useState([])
 
     const addItemToList = (el) => {
-      console.log(el.color)
+      console.log(el.additionalInformation)
 
-        const exist = choseItems.find(x => x.id === el.id && x.color == el.color);
-        console.log(exist)
+        const exist = choseItems.find(x => x.id === el.id && x.additionalInformation == el.additionalInformation);
+        // console.log(exist)
         if(exist) {
-             setItems(choseItems.map((x) => x.id === el.id && x.color === el.color  ? {...exist, qty: exist.qty +1 }: x ))
+             setItems(choseItems.map((x) => x.id === el.id && x.additionalInformation === el.additionalInformation ? {...exist, qty: exist.qty +1 }: x ))
         }
         else {
             setItems([...choseItems, {... el, qty: 1}])
@@ -34,13 +32,13 @@ export const ChosenProductProvider = (props) => {
     }
 
     const removeItemsFromList = (el) => {
-      const exist = choseItems.find((x) => x.id === el.id && x.color === el.color);
+      const exist = choseItems.find((x) => x.id === el.id && x.additionalInformation === el.additionalInformation);
       console.log(exist);
       
       if(exist.qty <= 1){
         setItems(choseItems.filter((x)=> {
           if (x.id == el.id ) {
-            if(x.color != el.color) {
+            if(x.additionalInformation != el.additionalInformation) {
               return x
             } 
           } else {
@@ -49,7 +47,7 @@ export const ChosenProductProvider = (props) => {
         }
         ))
       } else {
-        setItems(choseItems.map((x) => x.id === el.id && x.color === el.color ? {...exist, qty: exist.qty -1 }: x ))
+        setItems(choseItems.map((x) => x.id === el.id && x.additionalInformation === el.additionalInformation ? {...exist, qty: exist.qty -1 }: x ))
       }
 
     }
@@ -93,6 +91,7 @@ export const ChosenProductProvider = (props) => {
 
 
     // dane których potrzebuje w kalkulatorze i w podsumowaniu(narazie pusta tablica moze warto przypisac na stałe produkty ??? )
+    
     const[order,setOrder] = useState({
       array:[],
       total:0,
@@ -100,7 +99,8 @@ export const ChosenProductProvider = (props) => {
       client_number:""
   })
 
-
+  const [saveValuation, setSaveValuation] = useState([])
+  
   useEffect(() => {
     // console.log("jestem")
     const productRef = firebase.database().ref('products');
@@ -109,21 +109,21 @@ export const ChosenProductProvider = (props) => {
     productRef.on('value', (snapshot) => {
         // console.log(snapshot.val());
         setAllProductList(snapshot.val());
-
   })
   const saveValuationRef = firebase.database().ref('saveValuation');
   // console.log(firebase.database())
-  // console.log(saveValuationRef)
+  console.log(saveValuationRef)
   saveValuationRef.on('value', (snapshot) => {
-      //  console.log(snapshot.val());
+       console.log(snapshot.val());
        setSaveValuation(snapshot.val());
  })
 },[])
 
+console.log(saveValuation)
 
 
 
-  const [saveValuation, setSaveValuation] = useState([])
+
 
   // console.log(saveValuation)
 

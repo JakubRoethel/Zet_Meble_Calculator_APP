@@ -8,11 +8,9 @@ import {Link} from 'react-router-dom';
 
 function Calculator() {
 
-    const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder]= useContext(ChosenProductContext);
-    
-    const itemsPrice = choseItems.reduce((a,c) => a + c.price * c.qty, 0)
+    const [choseItems, setItems, addItemToList, removeItemsFromList,,, order,setOrder]= useContext(ChosenProductContext);
 
-    
+    const itemsPrice = choseItems.reduce((a,c) => a + c.price * c.qty, 0)
 
     // funkcje te przejmuja value z inputów i pozwalają wrzucić ja do order co pozwala wyswietlać dane o kliencie w podsumowaniu plus wrzucamy do tablicy zamówione produkty
 
@@ -54,15 +52,16 @@ function Calculator() {
     }
 
     const handleQuantity = (event,el) => {
-        const exist = choseItems.find(x => x.id === el.id && x.color == el.color);
+        const exist = choseItems.find(x => x.id === el.id && x.additionalInformation == el.additionalInformation);
         // console.log(exist)
         if(exist) {
             if(event.target.value.toString().length <=4) {
-                setItems(choseItems.map((x) => x.id === el.id && x.color === el.color  ? {...exist, qty: event.target.value}: x ))
+                setItems(choseItems.map((x) => x.id === el.id && x.additionalInformation === el.additionalInformation  ? {...exist, qty: event.target.value}: x ))
             }
         }
         // console.log(event.target.value)
     }
+    // console.log(choseItems)
 
     return (
         <div className="calculator">
@@ -77,14 +76,16 @@ function Calculator() {
             {choseItems.length === 0 && <h2 className="mt-5">Nie dodałeś żadnych produktów</h2>}
             <div className="product-wrapper">
             {choseItems.map(item => {
-                console.log(item.color);
+                // console.log(item.color);
                return <>
             {item.groupName == 'Materiały' || item.groupName == 'Fronty' || item.groupName == "Uchwyty" ?
                 <div key={item.id} className='product-card'>
                 <div className ="details">
                     <h5>{item.group}</h5>
                     <h6>{item.name}</h6>
-                    <p> {item.subGroup} |{item.color} | <input placeholder={"m2"} onChange={ e => handleQuantity(e,item)} type="number" value={item.qty}></input> m2/mb </p>
+                    <p> {item.subGroup} |{item.additionalInformation} | 
+                        <input placeholder={"m2"} onChange={ e => handleQuantity(e,item)} type="number" value={item.qty}></input> m2/mb 
+                    </p>
                     </div>
                 <div className="btn-container">
                      <button className = 'btn btn-danger' onClick={()=>removeItemsFromList(item)}>Remove</button>
@@ -94,7 +95,7 @@ function Calculator() {
             <div className ="details">
                 <h5>{item.group}</h5>
                 <h6>{item.name}</h6>
-                <p> {item.productGroup} | {item.company} | {item.color} | {item.qty}</p>
+                <p> {item.productGroup} | {item.company} | {item.additionalInformation} | {item.qty}</p>
                 </div>
             <div className="btn-container">
                 <button className='btn btn-primary' onClick={()=>addItemToList(item)}>Add</button>

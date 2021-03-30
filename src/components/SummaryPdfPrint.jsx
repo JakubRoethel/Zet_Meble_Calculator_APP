@@ -4,7 +4,7 @@ import Summary from './Summary';
 import {useReactToPrint} from "react-to-print";
 import {ChosenProductContext} from './ChosenProductContext';
 import uuid from 'react-uuid';
-import SaveSummary from "./SaveSummary"
+import ValuationArchive from "./ValuationArchive"
 import firebase from "../firebase/firebase"
 import {UserContext} from "./UserContext"
 
@@ -14,6 +14,7 @@ function SummaryPdfPrint () {
   const [user, setUser] = useContext(UserContext)
 
   const date = new Date();
+
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -65,7 +66,7 @@ function SummaryPdfPrint () {
       })
     }
   }
-  console.log(error)
+  // console.log(error)
 
 
 const handleSubmit =(e) => {
@@ -105,13 +106,21 @@ const deleteData = () => {
 
 
    const btnSave = () => {
-     setOrder({...order, array:choseItems})
-
-     const saveValuationRef = firebase.database().ref('saveValuation');
-          // console.log("jestem");
-          saveValuationRef.set([...saveValuation,{...order}]);
-          // console.log(saveValuation);
+     setSaveValuation([...saveValuation, order])
+    //  console.log(order)
+    //  console.log(saveValuation)
    }
+
+   useEffect(() => {
+    setOrder({...order, array:choseItems, id:uuid(), date: date.toLocaleDateString('en-GB')})
+    const saveValuationRef = firebase.database().ref('saveValuation');
+    // console.log("jestem");
+    saveValuationRef.set(saveValuation);
+    console.log(saveValuation);
+
+   },[saveValuation])
+
+
 
   return (
     <>

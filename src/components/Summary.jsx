@@ -7,29 +7,58 @@ import logo from "../image/logo.jpg"
 
 class Summary extends React.PureComponent {
     
+    constructor (props) {
+      super(props);
+      this.state = {
+        textAreaData:{
+          additionalSpecification: "",
+          moreInformation: ""
+        }
+      }
+      this.handleAdditionalSpecification = this.handleAdditionalSpecification.bind(this);
+      this.handleMoreInformation = this.handleMoreInformation.bind(this)
+    }
 
+    handleAdditionalSpecification = (e) => {
+      const value = e.target.value
+      console.log(value)
+      this.setState({textAreaData:{ ...this.state.textAreaData, additionalSpecification:value }})
+      console.log(this.state.textAreaData)
+    }
 
+    handleMoreInformation = (e) => {
+      const value = e.target.value
+      console.log(value)
+      this.setState({textAreaData:{...this.state.textAreaData,moreInformation:value,}})
+      console.log(this.state.textAreaData)
+    }
+    
     render() {
       // console.log(this.props.order.client)
       // console.log(this.props.choseItems)
       // console.log(this.state)
       // console.log(this.props.displayQty);
-
+      
+      
       const totalMeble = this.props.choseItems.filter(el => {
         return el.displayGroup == "Meble"
       }).reduce((a,b) => a + b.price * b.qty,0).toFixed(2)
-
+  
       // console.log(totalMeble);
-
+  
       const totalOpcjeDodatkowe = this.props.choseItems.filter(el => {
         return el.displayGroup == "Opcje dodatkowe"
       }).reduce((a,b) => a + b.price * b.qty,0).toFixed(2)
-
+  
       const totalBlaty = this.props.choseItems.filter(el => {
         return el.displayGroup == "Blaty"
       }).reduce((a,b) => a + b.price * b.qty,0).toFixed(2)
-  
+      
       // console.log(totalOpcjeDodatkowe);
+
+
+
+
 
       return (
        <div className= "container-fluid my-3 w-100">
@@ -75,12 +104,12 @@ class Summary extends React.PureComponent {
                           <tr>
                                   <td>{el.group}</td>
                                   <td>{el.name}</td>
-                                  <td>{el.color}</td>
+                                  <td>{el.additionalInformation}</td>
                                   {this.props.displayQty == false ? null : <td>{el.qty}</td>}
                                   <td>{el.company}</td>
                                   <td>{el.productGroup}</td>
                                   <td>
-                                    <input></input>
+                                    <textarea onChange={this.handleAdditionalSpecification} className= "textarea-summary"></textarea>
                                   </td>
                               </tr> : null
                           }
@@ -122,9 +151,9 @@ class Summary extends React.PureComponent {
                               <td>{el.price}</td>
                               <td>{el.productGroup}</td>
                               <td>{el.company}</td>
-                              <td>{el.color}</td>
+                              <td>{el.additionalInformation}</td>
                               <td>
-                                <input></input>
+                                <textarea className= "textarea-summary"></textarea>
                               </td>
                             </tr> : null
                           }
@@ -168,7 +197,7 @@ class Summary extends React.PureComponent {
                                   <td>{el.company}</td>
                                   <td>{el.productGroup}</td>
                                   <td>
-                                    <input></input>
+                                    <textarea className= "textarea-summary"></textarea>
                                   </td>
                               </tr> : null
                           }
@@ -181,9 +210,9 @@ class Summary extends React.PureComponent {
               </div>
               </div> : null
           }
-            <div class="container-fluid my-3 w-75">
+            <div className="container-fluid my-3 w-75">
               <label for="exampleFormControlTextarea1">Dodatkowe informacje</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <textarea onChange={this.handleMoreInformation} className="form-control more-information" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
         </div>
       );
