@@ -2,7 +2,6 @@ import React, {useContext,useState} from 'react'
 import firebase from '../firebase/firebase'
 import "firebase/auth";
 import {UserContext} from "./UserContext"
-import "../css/loginPage.css"
 import Home from "./Home"
 
 function LoginPage() {
@@ -64,18 +63,22 @@ function LoginPage() {
 
     return (
         <>
-        {user === undefined ? 
+        {user === null ? 
         <>
-        <main className="form-signin w-100 m-5 d-flex justify-content-center align-items-center">
-            <form onSubmit={(e) => createUserWithEmailAndPasswordHandler(e,email,password)} className='my-form w-25'>
-                <h1 className="h3 mb-3 fw-normal">Logowanie</h1>
-                <input name="email"  onChange={handleInputs} type="email" id="inputEmail" className="form-control mb-3" placeholder="Email address" required autofocus />
-                <input name="password"  onChange={handleInputs} type="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required />
-                <div className="d-flex justify-content-center">
-                    <button className="w-50 btn btn-lg btn-primary" type="submit">Zaloguj mnie</button>
-                </div>
-            </form>
-        </main>
+        <div className='wrapper image-wrapper'> 
+            <div className="box">
+                <main className="form-signin w-100 m-5 d-flex justify-content-center align-items-center">
+                    <form onSubmit={(e) => createUserWithEmailAndPasswordHandler(e,email,password)} className='my-form w-25'>
+                        <h2 className="h3 mb-3 fw-normal">Logowanie</h2>
+                        <input name="email"  onChange={handleInputs} type="email" id="inputEmail" className="form-control mb-3" placeholder="Email address" required autofocus />
+                        <input name="password"  onChange={handleInputs} type="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required />
+                        <div className="d-flex justify-content-center">
+                            <button className="w-50 btn btn-outline-light btn-lg" type="submit">Zaloguj</button>
+                        </div>
+                    </form>
+                </main>
+            </div>
+        </div>
         </> :
             <Home/>
         }

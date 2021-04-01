@@ -9,7 +9,7 @@ import {ChosenProductContext} from './ChosenProductContext'
 
 function Product({product,groupName}) {
 
-    const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase] = useContext(ChosenProductContext);
+    const [choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase] = useContext(ChosenProductContext);
     const [additionalInformation, setAdditionalInformation] = useState(null)
     
 
@@ -17,6 +17,8 @@ function Product({product,groupName}) {
         console.log(e.target.value)
         setAdditionalInformation(e.target.value)
     }
+
+
 
     return (
     <div className="product-card">
@@ -34,7 +36,7 @@ function Product({product,groupName}) {
             </div>
         </div>
         <div className="button-container">
-            <button className="btn btn-primary" onClick = {()=>addItemToList({...product, additionalInformation: additionalInformation, groupName:groupName})}>Add</button>
+            <button className="btn btn-secondary" onClick = {()=>addItemToList({...product, additionalInformation: additionalInformation, groupName:groupName})}>Dodaj</button>
         </div>
     </div>
     )

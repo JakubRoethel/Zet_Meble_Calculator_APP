@@ -6,7 +6,7 @@ import "../css/valuationArchive.css"
 
 function ValuationArchive() {
     const [user,setUSer]= useContext(UserContext)
-    const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation] = useContext(ChosenProductContext)
+    const [choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation] = useContext(ChosenProductContext)
     console.log(saveValuation)
 
     const showValuation = (id) => {
@@ -22,8 +22,12 @@ function ValuationArchive() {
                     <h1>Zapisane wyceny</h1>
                     <ul className="d-flex justify-content-center flex-wrap mt-3" >
                        {saveValuation.map((el, id) => {
-                           return <div className="valuation-card" onClick={(e) => showValuation(id)}>{el.client} {el.date} {el.client_Investment_Place}</div>
-                       })}
+                           console.log(el.id)
+                           return <>
+                                {el === "" ? null :
+                                    <div className="valuation-card" onClick={(e) => showValuation(id)}>{el.client} {el.date} {el.client_Investment_Place}</div>}
+                           </>
+                            })}
                     </ul>
                 </div>
                 :

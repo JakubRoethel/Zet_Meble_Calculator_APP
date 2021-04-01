@@ -7,7 +7,7 @@ import logo from "../image/logo.jpg"
 function SingleValuation({match}) {
     console.log(match.params.id)
 
-    const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation] = useContext(ChosenProductContext)
+    const [choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation] = useContext(ChosenProductContext)
 
     const element = saveValuation[match.params.id]
     
@@ -50,6 +50,7 @@ function SingleValuation({match}) {
                         </thead>
                         <tbody>
                             {element.array.map(el => {
+                                console.log(el)
                                 return <>
                                 {el.displayGroup === "Meble" ?
                                 <tr>
@@ -59,9 +60,7 @@ function SingleValuation({match}) {
                                         <td>{el.qty}</td>
                                         <td>{el.company}</td>
                                         <td>{el.productGroup}</td>
-                                        <td>
-                                            <input></input>
-                                        </td>
+                                        <td>{el.additionalInformation} </td>
                                     </tr> : null
                                 }
                                 </>
@@ -101,7 +100,7 @@ function SingleValuation({match}) {
                                         <td>{el.company}</td>
                                         <td>{el.productGroup}</td>
                                         <td>
-                                            <input></input>
+                                        {el.additionalInformation}
                                         </td>
                                     </tr> : null
                                 }
@@ -111,6 +110,50 @@ function SingleValuation({match}) {
                     </table>
                 </div> : null
          }
+         {element.array.filter(el => {
+                return el.displayGroup == "Blaty"
+            }).length > 0 ?
+                <div className="container-fluid my-3 w-100"> 
+                    <h4>Blaty :</h4>
+                    <table className="table my-4 text-center">
+                        <thead>
+                            <tr>
+                            <th scope="col">Grupa produktu</th>
+                            <th scope="col">Nazwa produktu</th>
+                            <th scope="col">Dodatkowe informacje o produkcie</th>
+                            <th scope="col"> Ilość</th>
+                            <th scope="col">Cena</th>
+                            <th scope="col">Producent</th>
+                            <th scope="col">Szczegóły</th>
+                            <th scope="col">Dodatkowa specyfikacja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {element.array.map(el => {
+                                return <>
+                                {el.displayGroup === "Blaty" ?
+                                <tr>
+                                        <td>{el.group}</td>
+                                        <td>{el.name}</td>
+                                        <td>{el.additionalInformation}</td>
+                                        <td>{el.qty}</td>
+                                        <td>{el.price}</td>
+                                        <td>{el.company}</td>
+                                        <td>{el.productGroup}</td>
+                                        <td>
+                                        {el.additionalInformation}
+                                        </td>
+                                    </tr> : null
+                                }
+                                </>
+                            })}
+                        </tbody>
+                    </table>
+                </div> : null
+         }
+         <div>
+             {element.moreInformation}
+         </div>
         </div>
     )
 }

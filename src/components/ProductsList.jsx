@@ -1,15 +1,14 @@
 import React, {useContext,useState}  from 'react'
 import Product from './Product'
-import productArrayv2 from '../dataBase/productsv2'
 import '../css/productsList.css'
 import {ChosenProductContext, ChosenProductProvider} from './ChosenProductContext'
 
 
 function ProductsList() {
 
-    // console.log(productArrayv2);
+    
 
-    const [choseItems, setItems, addItemToList, removeItemsFromList, allProductList, setAllProductList] = useContext(ChosenProductContext);
+    const [, , , , allProductList, setAllProductList] = useContext(ChosenProductContext);
 
 
     // funkcja filtrująca tablice 
@@ -55,9 +54,6 @@ function ProductsList() {
 
     return (
         <div className = "list-container">
-            <div className="className='form-control form-control-lg mx-2">
-                <input  type="text" placeholder="Szukaj produkt" className="form-control form-control-lg mx-2" onChange={filter}/>
-            </div>
             <div className="filters d-flex">
                  <select onChange = {handleGroupSelect} className="form-select mx-2" aria-label="Default select example">
                     <option selected disabled="disabled">Wybierz grupę </option>
@@ -75,8 +71,8 @@ function ProductsList() {
             </div>
 
             <div className="list">
-            { typeof subGroup.subArray === "undefined" ? <h2>Nie wybrałeś podkategorii</h2> : (filtredItems.length == 0 ? <h2>Nie znaleźiono szukanego produktu</h2> : filtredItems.map(product => {
-               return <Product product = {product} key = {product.id} groupName= {group.groupName} /> 
+            { typeof subGroup.subArray === "undefined" ? <h2 style= {{marginTop:"100px"}}>Nie wybrałeś produktów</h2> : (filtredItems.length == 0 ? <h2>Nie znaleźiono szukanego produktu</h2> : filtredItems.map(product => {
+               return <Product product = {product} key = {product.id} groupName= {group.groupName} />
             }))}
             </div>
         </div>

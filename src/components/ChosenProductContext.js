@@ -1,5 +1,4 @@
 import React, {useState, createContext, useEffect} from 'react';
-import productArrayv2 from '../dataBase/productsv2';
 import firebase from "../firebase/firebase"
 
 
@@ -16,29 +15,29 @@ export const ChosenProductProvider = (props) => {
 
     // funkcje do przycisków w kalkulatorze pozwalają po ideksach sprawdzać który item juz jest na liscie i dodaja tylko qty
 
-    const [choseItems, setItems] = useState([])
+    const [choseItems, setChosenItems] = useState([])
 
     const addItemToList = (el) => {
       console.log(el.additionalInformation)
 
-        const exist = choseItems.find(x => x.id === el.id && x.additionalInformation == el.additionalInformation);
+        const exist = choseItems.find(x => x.id === el.id && x.additionalInformation === el.additionalInformation);
         // console.log(exist)
         if(exist) {
-             setItems(choseItems.map((x) => x.id === el.id && x.additionalInformation === el.additionalInformation ? {...exist, qty: exist.qty +1 }: x ))
+             setChosenItems(choseItems.map((x) => x.id === el.id && x.additionalInformation === el.additionalInformation ? {...exist, qty: exist.qty +1 }: x ))
         }
         else {
-            setItems([...choseItems, {... el, qty: 1}])
+            setChosenItems([...choseItems,{... el, qty: 1}])
         }
     }
 
     const removeItemsFromList = (el) => {
       const exist = choseItems.find((x) => x.id === el.id && x.additionalInformation === el.additionalInformation);
       console.log(exist);
-      
+
       if(exist.qty <= 1){
-        setItems(choseItems.filter((x)=> {
-          if (x.id == el.id ) {
-            if(x.additionalInformation != el.additionalInformation) {
+        setChosenItems(choseItems.filter((x)=> {
+          if (x.id === el.id ) {
+            if(x.additionalInformation !== el.additionalInformation) {
               return x
             } 
           } else {
@@ -47,7 +46,7 @@ export const ChosenProductProvider = (props) => {
         }
         ))
       } else {
-        setItems(choseItems.map((x) => x.id === el.id && x.additionalInformation === el.additionalInformation ? {...exist, qty: exist.qty -1 }: x ))
+        setChosenItems(choseItems.map((x) => x.id === el.id && x.additionalInformation === el.additionalInformation ? {...exist, qty: exist.qty -1 }: x ))
       }
 
     }
@@ -121,15 +120,13 @@ export const ChosenProductProvider = (props) => {
 
 console.log(saveValuation)
 
-
-
-
+const [markup, setMarkup] = useState(750)
 
   // console.log(saveValuation)
 
 
     return (
-        <ChosenProductContext.Provider value = {[choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation]}>
+        <ChosenProductContext.Provider value = {[choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation,markup, setMarkup]}>
             {props.children}
         </ChosenProductContext.Provider>
 

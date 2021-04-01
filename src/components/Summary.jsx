@@ -7,42 +7,48 @@ import logo from "../image/logo.jpg"
 
 class Summary extends React.PureComponent {
     
-    constructor (props) {
-      super(props);
-      this.state = {
-        textAreaData:{
-          additionalSpecification: "",
-          moreInformation: ""
-        }
-      }
-      this.handleAdditionalSpecification = this.handleAdditionalSpecification.bind(this);
-      this.handleMoreInformation = this.handleMoreInformation.bind(this)
-    }
+    // constructor (props) {
+    //   super(props);
+    //   this.state = {
+    //     textAreaData:{
+    //       additionalSpecification: "",
+    //       moreInformation: ""
+    //     }
+    //   }
+    //   this.handleAdditionalSpecification = this.handleAdditionalSpecification.bind(this);
+    //   this.handleMoreInformation = this.handleMoreInformation.bind(this)
+    // }
 
-    handleAdditionalSpecification = (e) => {
-      const value = e.target.value
-      console.log(value)
-      this.setState({textAreaData:{ ...this.state.textAreaData, additionalSpecification:value }})
-      console.log(this.state.textAreaData)
-    }
+    // handleAdditionalSpecification = (e) => {
+    //   const value = e.target.value
+    //   console.log(value)
+    //   this.setState({textAreaData:{ ...this.state.textAreaData, additionalSpecification:value }})
+    //   console.log(this.state.textAreaData)
+    // }
 
-    handleMoreInformation = (e) => {
-      const value = e.target.value
-      console.log(value)
-      this.setState({textAreaData:{...this.state.textAreaData,moreInformation:value,}})
-      console.log(this.state.textAreaData)
-    }
+    // handleMoreInformation = (e) => {
+    //   const value = e.target.value
+    //   console.log(value)
+    //   this.setState({textAreaData:{...this.state.textAreaData,moreInformation:value,}})
+    //   console.log(this.state.textAreaData)
+    // }
     
     render() {
       // console.log(this.props.order.client)
       // console.log(this.props.choseItems)
       // console.log(this.state)
       // console.log(this.props.displayQty);
-      
-      
+      // console.log(this.props.handleAdditionalSpecification)
+
       const totalMeble = this.props.choseItems.filter(el => {
         return el.displayGroup == "Meble"
-      }).reduce((a,b) => a + b.price * b.qty,0).toFixed(2)
+      }).reduce((a,b) => {
+        if(b.subGroup == "Płyta"){
+          return a + (b.price * b.qty * this.props.markup)
+        } else {
+          return a + b.price * b.qty
+        }
+      },0).toFixed(2)
   
       // console.log(totalMeble);
   
@@ -89,7 +95,7 @@ class Summary extends React.PureComponent {
                       <th scope="col">Grupa produktu</th>
                       <th scope="col">Nazwa produktu</th>
                       <th scope="col">Dodatkowe informacje o produkcie</th>
-                      {this.props.displayQty == false ? null : 
+                      {this.props.displayQty == false ? null :
                       <th> Ilość</th>}
                       <th scope="col">Producent</th>
                       <th scope="col">Szczegóły</th>
@@ -97,7 +103,7 @@ class Summary extends React.PureComponent {
                       </tr>
                   </thead>
                   <tbody>
-                  {this.props.choseItems.map(el => {
+                  {this.props.choseItems.map((el,key) => {
                             // console.log(el)
                             return <>
                             {el.displayGroup === "Meble" ?
@@ -109,7 +115,7 @@ class Summary extends React.PureComponent {
                                   <td>{el.company}</td>
                                   <td>{el.productGroup}</td>
                                   <td>
-                                    <textarea onChange={this.handleAdditionalSpecification} className= "textarea-summary"></textarea>
+                                    <textarea onBlur={(e) => this.props.handleAdditionalSpecification(e,key)} className= "textarea-summary"></textarea>
                                   </td>
                               </tr> : null
                           }
@@ -141,7 +147,7 @@ class Summary extends React.PureComponent {
                         </tr>
                     </thead>
                      <tbody>
-                        {this.props.choseItems.map(el => {
+                        {this.props.choseItems.map((el,key) => {
                             return <>
                             {el.displayGroup === "Opcje dodatkowe" ?
                             <tr>
@@ -153,7 +159,7 @@ class Summary extends React.PureComponent {
                               <td>{el.company}</td>
                               <td>{el.additionalInformation}</td>
                               <td>
-                                <textarea className= "textarea-summary"></textarea>
+                                <textarea onBlur={(e) => this.props.handleAdditionalSpecification(e,key)}  className= "textarea-summary"></textarea>
                               </td>
                             </tr> : null
                           }
@@ -185,7 +191,7 @@ class Summary extends React.PureComponent {
                       </tr>
                   </thead>
                   <tbody>
-                  {this.props.choseItems.map(el => {
+                  {this.props.choseItems.map((el,key) => {
                             // console.log(el)
                             return <>
                             {el.displayGroup === "Blaty" ?
@@ -197,7 +203,7 @@ class Summary extends React.PureComponent {
                                   <td>{el.company}</td>
                                   <td>{el.productGroup}</td>
                                   <td>
-                                    <textarea className= "textarea-summary"></textarea>
+                                    <textarea onBlur={(e) => this.props.handleAdditionalSpecification(e,key)}  className= "textarea-summary"></textarea>
                                   </td>
                               </tr> : null
                           }
@@ -212,7 +218,7 @@ class Summary extends React.PureComponent {
           }
             <div className="container-fluid my-3 w-75">
               <label for="exampleFormControlTextarea1">Dodatkowe informacje</label>
-              <textarea onChange={this.handleMoreInformation} className="form-control more-information" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <textarea onBlur={this.props.handleMoreInformation} className="form-control more-information" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
         </div>
       );

@@ -6,7 +6,7 @@ import { UserContext } from './UserContext';
 
 function AddItemsCard() {
 
-    const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase] = useContext(ChosenProductContext);
+    const [choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation,markup, setMarkup] = useContext(ChosenProductContext);
 
     const [user,setUSer] = useContext(UserContext)
 
@@ -208,6 +208,13 @@ function AddItemsCard() {
         priceError: ""
     })
 
+
+   const handleMarkup = (e) => {
+       setMarkup(e.target.value)
+
+   }
+   console.log(markup)
+
     useEffect(() => {
         const productRef = firebase.database().ref('products');
             //  console.log(allProductList);
@@ -222,6 +229,12 @@ function AddItemsCard() {
         if(e.target.value == "Meble" || e.target.value == "Opcje dodatkowe") {
             setItemObj({...itemObj, displayGroup: e.target.value})
         }
+    }
+
+    const [displayMarkup,setDisplayMarkup] = useState(false)
+
+    const handleChangeDisplayMarkup = () => {
+        setDisplayMarkup(true)
     }
 
 
@@ -271,9 +284,20 @@ function AddItemsCard() {
                             }) : "" }
                         </select>
                     </div>
-                        
-                        <button type="submit" className="btn btn-primary mt-3">{buttonText}</button>
+                        <button type="submit" className="btn btn-secondary mt-3">{buttonText}</button>
                     </form>
+                    {displayMarkup == false ? 
+                        <div className='col-lg-6 d-flex flex-column m-5'>
+                            <button onClick={handleChangeDisplayMarkup} className="btn btn-secondary mt-2">Marża</button> 
+                        </div>
+                        :
+                        <div className='col-lg-6 d-flex flex-column m-5'>
+                            <h5>Marża</h5>
+                            <input className="form-control" onBlur={handleMarkup} type="number" defaultValue={markup}></input>
+                        </div>
+
+                    }
+
                 </div>
                 <div className='col-lg-6'>
                     <h1 className='my-5 text-center'>Lista dostepnych produktów</h1>
@@ -292,14 +316,15 @@ function AddItemsCard() {
                                                 <p>{product.price} | {product.productGroup} | {product.displayGroup} | {product.company}</p>
                                             </div>
                                         <div className='button-container'>
-                                            <button onClick={() => removeItemFromDataBase(product)} className='btn btn-danger'>Remove</button>
-                                            <button onClick={() => handleUpdata(product,group,subGroup)} className='btn btn-warning'>Edytuj</button>
+                                            <button onClick={() => handleUpdata(product,group,subGroup)} className='btn btn-secondary'>Edytuj</button>
+                                            <button onClick={() => removeItemFromDataBase(product)} className='btn btn-danger'>Usuń</button>
                                         </div>
                                     </div>
                             })
                         })})}
                         </div>
                     </div>
+
                 </div>
                 :
                 <h3 className='container-fluid mt-5 text-center'>Zaloguj się</h3>

@@ -7,11 +7,13 @@ import uuid from 'react-uuid';
 import ValuationArchive from "./ValuationArchive"
 import firebase from "../firebase/firebase"
 import {UserContext} from "./UserContext"
+import {Link} from 'react-router-dom';
 
 
 function SummaryPdfPrint () {
-  const [choseItems, setItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation]= useContext(ChosenProductContext);
+  const [choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation,markup, setMarkup]= useContext(ChosenProductContext);
   const [user, setUser] = useContext(UserContext)
+
 
   const date = new Date();
 
@@ -66,16 +68,17 @@ function SummaryPdfPrint () {
       })
     }
   }
-  // console.log(error)
+  console.log(error)
 
 
 const handleSubmit =(e) => {
   e.preventDefault()
 
   if(!error.nameError.isError && !error.priceError.isError&& !error.groupError.isError && !error.qtnError.isError && itemObj.name != ""  ){
-    setItems([...choseItems,{...itemObj, id: uuid()}])
+    setChosenItems([...choseItems,{...itemObj, id: uuid()}])
   }
-  // console.log(choseItems)
+  console.log("Submit")
+  console.log(choseItems)
     deleteData()
 }
 // useEffect(()=>{
@@ -104,36 +107,75 @@ const deleteData = () => {
      setDisplayQty(!displayQty)
    }
 
+   console.log(choseItems)
 
-   const btnSave = () => {
-     setSaveValuation([...saveValuation, order])
-    //  console.log(order)
-    //  console.log(saveValuation)
-   }
+   const [moreInformation, setMoreInformation] = useState({})
+
+   const handleAdditionalSpecification = (e,key) => {
+    console.log(key)
+
+    choseItems.forEach((el,i) => {
+      if(i=== key){
+        el = {
+          ...el,
+          additionalSpecification:e.target.value
+        }
+        console.log(el)
+      }
+    })
+
+    }
+
+   const handleMoreInformation = (e) => {
+     console.log(e.target.value)
+     console.log(order)
+     setOrder({
+       ...order,
+       moreInformation: e.target.value
+     })
+    }
+    console.log(order)
+
+    const btnSave = () => {
+
+      setSaveValuation([...saveValuation, order])
+     //  console.log(order)
+
+      console.log(saveValuation)
+    }
 
    useEffect(() => {
+     console.log("ChosenItems USeEf")
+     console.log(choseItems)
     setOrder({...order, array:choseItems, id:uuid(), date: date.toLocaleDateString('en-GB')})
-    const saveValuationRef = firebase.database().ref('saveValuation');
-    // console.log("jestem");
-    saveValuationRef.set(saveValuation);
+    if(saveValuation.length > 0){
+        const saveValuationRef = firebase.database().ref('saveValuation');
+        // console.log("jestem");
+        saveValuationRef.set(saveValuation);
+    } else {
+      console.log("tablica = 0")
+    }
+
+
     console.log(saveValuation);
 
-   },[saveValuation])
+   },[saveValuation,choseItems])
 
+   console.log(moreInformation)
 
 
   return (
     <>
       {user != undefined ?
     <div className= "container-fluid my-3 w-100">
-      <Summary ref ={componentRef} order={order} date={date} choseItems={choseItems} displayQty={displayQty} />
+      <Summary ref ={componentRef} order={order} date={date} choseItems={choseItems} displayQty={displayQty} handleAdditionalSpecification= {handleAdditionalSpecification} handleMoreInformation={handleMoreInformation} markup={markup} />
       <div className="button-container d-flex justify-content-end">
-        <button onClick={handlePrint} className="btn btn-primary" >Drukuj
+        <button onClick={handlePrint} className="btn btn-secondary" >Drukuj
         <i class="bi bi-printer ms-2"></i>
         </button>
-        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Dodaj produkt ręcznie</button>
-        <button onClick={changeDisplayQty} className="btn btn-primary">Szczegóły</button>
-        <button onClick={btnSave} className="btn btn-primary">Zapisz</button>
+        <button type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Dodaj produkt ręcznie</button>
+        <button onClick={changeDisplayQty} className="btn btn-secondary">Szczegóły</button>
+        <button onClick={btnSave} className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#saveValuation">Zapisz</button>
       </div>
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog">
@@ -199,14 +241,28 @@ const deleteData = () => {
           </div>
         </div>
       </div>
+      <div class="modal fade" id="saveValuation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="statisaveValuation">Dodano wycenę</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+         <div class="modal-body">
+          Twoja wycena została dodana
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
     :
     <h3 className='container-fluid mt-5 text-center'>Zaloguj się</h3>
       }
     </>
-      
   )
-    
 }
 
 export default SummaryPdfPrint

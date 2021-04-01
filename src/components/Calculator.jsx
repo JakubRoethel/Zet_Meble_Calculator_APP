@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import "../css/calculator.css";
 import {ChosenProductContext} from './ChosenProductContext';
 import {Link} from 'react-router-dom';
@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom';
 
 function Calculator() {
 
-    const [choseItems, setItems, addItemToList, removeItemsFromList,,, order,setOrder]= useContext(ChosenProductContext);
+    const [choseItems, setChosenItems, addItemToList, removeItemsFromList,,, order,setOrder]= useContext(ChosenProductContext);
 
     const itemsPrice = choseItems.reduce((a,c) => a + c.price * c.qty, 0)
 
@@ -52,33 +52,38 @@ function Calculator() {
     }
 
     const handleQuantity = (event,el) => {
-        const exist = choseItems.find(x => x.id === el.id && x.additionalInformation == el.additionalInformation);
+        const exist = choseItems.find(x => x.id === el.id && x.additionalInformation === el.additionalInformation);
         // console.log(exist)
         if(exist) {
             if(event.target.value.toString().length <=4) {
-                setItems(choseItems.map((x) => x.id === el.id && x.additionalInformation === el.additionalInformation  ? {...exist, qty: event.target.value}: x ))
+                setChosenItems(choseItems.map((x) => x.id === el.id && x.additionalInformation === el.additionalInformation  ? {...exist, qty: event.target.value}: x ))
             }
         }
         // console.log(event.target.value)
     }
     // console.log(choseItems)
 
+    console.log(order.client)
+    console.log(choseItems)
+
     return (
         <div className="calculator">
-            <form className="form-inline">
-                <div className="d-flex flex-row form-group">
+            <form className="form-inline client-details">
+                <div className="d-flex flex-row form-group flex-wrap justify-content-center ">
                     <input className="form-control form-control-lg mx-4" defaultValue={order.client == null ? '' : order.client} type="text" placeholder="Imię i nazwisko"  onChange={handleClientData}></input>
                     <input className="form-control form-control-lg mx-4" defaultValue={order.client_number == null ? '' : order.client_number}type="text" placeholder="Numer Telefonu" onChange={handleClientNumber}></input>
                     <input className="form-control form-control-lg mx-4" defaultValue={order.client_email == null ? '' : order.client_email} type="text" placeholder="Adres e-mail" onChange={handleClientEmail}></input>
                     <input className="form-control form-control-lg mx-4" defaultValue={order.client_Investment_Place == null ? '' : order.Investment_Place} type="text" placeholder="Adres inwestycji" onChange={handleClientInvestmentPlace}></input>
                 </div>
             </form>
+            {order.client === '' || choseItems.length <= 0 ? null :
+            <Link to="/podsumowanie" className="summary-link" onClick={handleSummary} >{`Podsumowanie >`}</Link>}
             {choseItems.length === 0 && <h2 className="mt-5">Nie dodałeś żadnych produktów</h2>}
             <div className="product-wrapper">
             {choseItems.map(item => {
                 // console.log(item.color);
                return <>
-            {item.groupName == 'Materiały' || item.groupName == 'Fronty' || item.groupName == "Uchwyty" ?
+            {item.groupName === 'Materiały' || item.groupName === 'Fronty' || item.groupName === "Uchwyty" ?
                 <div key={item.id} className='product-card'>
                 <div className ="details">
                     <h5>{item.group}</h5>
@@ -87,8 +92,8 @@ function Calculator() {
                         <input placeholder={"m2"} onChange={ e => handleQuantity(e,item)} type="number" value={item.qty}></input> m2/mb 
                     </p>
                     </div>
-                <div className="btn-container">
-                     <button className = 'btn btn-danger' onClick={()=>removeItemsFromList(item)}>Remove</button>
+                <div className="btn-container d-flex align-items-center">
+                     <button className = 'btn btn-danger' onClick={()=>removeItemsFromList(item)}>-</button>
                  </div>
             </div> :
          <div key={item.id} className='product-card'>
@@ -97,17 +102,14 @@ function Calculator() {
                 <h6>{item.name}</h6>
                 <p> {item.productGroup} | {item.company} | {item.additionalInformation} | {item.qty}</p>
                 </div>
-            <div className="btn-container">
-                <button className='btn btn-primary' onClick={()=>addItemToList(item)}>Add</button>
-                 <button className = 'btn btn-danger' onClick={()=>removeItemsFromList(item)}>Remove</button>
+            <div className="btn-container d-flex align-items-center">
+                <button className='btn btn btn-secondary' onClick={()=>addItemToList(item)}>+</button>
+                 <button className = 'btn btn-danger' onClick={()=>removeItemsFromList(item)}>-</button>
              </div>
         </div>
             }
             </>
         })}
-                <div className="summary-container">
-                    {order.client.length == "" ? null :<Link to="/podsumowanie" className="summary-link" onClick={handleSummary} >{`Podsumowanie >`}</Link>}
-                </div>
             </div>
 
         </div>

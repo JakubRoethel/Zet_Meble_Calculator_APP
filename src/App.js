@@ -41,6 +41,7 @@ function App() {
           </ChosenProductProvider>
           </div>
     </UserContextProvider>
+    <Footer />
     </div>
         </Router>
 
