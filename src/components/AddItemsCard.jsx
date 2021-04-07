@@ -305,7 +305,7 @@ function AddItemsCard() {
                         {allProductList.length == 0 ? <h2 className='text-center'>Nie dodałeś żadnych produktów</h2> : allProductList.map(group => {
 
                             return group.array.map(subGroup => {
-                                // console.log(subGroup.subArray)
+                                console.log(subGroup.subArray)
                                 return  subGroup.subArray.map(product => {
 
                                     return <div className='product-card'>
