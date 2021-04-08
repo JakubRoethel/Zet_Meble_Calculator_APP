@@ -2,11 +2,12 @@ import React, {useContext} from 'react';
 import "../css/calculator.css";
 import {ChosenProductContext} from './ChosenProductContext';
 import {Link} from 'react-router-dom';
+import history from "./history";
 
 
 // tutaj wykorzystujemy dwie funkcje na guzikach add i remove plus mapujemy po choseItems i przekazujemy kartę produkty z lewej strony na prawa w apce w cześniej masz dlugosc tablicy 0 wyswietla tobie informacje o braku
 
-function Calculator() {
+function Calculator({matchId}) {
 
     const [choseItems, setChosenItems, addItemToList, removeItemsFromList,,, order,setOrder]= useContext(ChosenProductContext);
 
@@ -64,7 +65,9 @@ function Calculator() {
     // console.log(choseItems)
 
     console.log(order.client)
+    console.log("edycja wycen")
     console.log(choseItems)
+
 
     return (
         <div className="calculator">
@@ -77,7 +80,10 @@ function Calculator() {
                 </div>
             </form>
             {order.client === '' || choseItems.length <= 0 ? null :
-            <Link to="/podsumowanie" className="summary-link" onClick={handleSummary} >{`Podsumowanie >`}</Link>}
+            matchId != undefined ? 
+                <Link to={`/podsumowanie/${matchId}`} className="summary-link" onClick={handleSummary} >{`Podsumowanie >`}</Link> :
+                <Link to="/podsumowanie" className="summary-link" onClick={handleSummary} >{`Podsumowanie >`}</Link>
+            }
             {choseItems.length === 0 && <h2 className="mt-5">Nie dodałeś żadnych produktów</h2>}
             <div className="product-wrapper">
             {choseItems.map(item => {

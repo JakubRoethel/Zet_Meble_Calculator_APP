@@ -118,7 +118,7 @@ export const ChosenProductProvider = (props) => {
  })
 },[])
 
-console.log(saveValuation)
+// console.log(saveValuation)
 
 const [markup, setMarkup] = useState(750)
 

@@ -8,9 +8,10 @@ import ValuationArchive from "./ValuationArchive"
 import firebase from "../firebase/firebase"
 import {UserContext} from "./UserContext"
 import {Link} from 'react-router-dom';
+import history from "./history";
 
 
-function SummaryPdfPrint () {
+function SummaryPdfPrint ({match}) {
   const [choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation,markup, setMarkup]= useContext(ChosenProductContext);
   const [user, setUser] = useContext(UserContext)
 
@@ -68,7 +69,7 @@ function SummaryPdfPrint () {
       })
     }
   }
-  console.log(error)
+  // console.log(error)
 
 
 const handleSubmit =(e) => {
@@ -77,8 +78,8 @@ const handleSubmit =(e) => {
   if(!error.nameError.isError && !error.priceError.isError&& !error.groupError.isError && !error.qtnError.isError && itemObj.name != ""  ){
     setChosenItems([...choseItems,{...itemObj, id: uuid()}])
   }
-  console.log("Submit")
-  console.log(choseItems)
+  // console.log("Submit")
+  // console.log(choseItems)
     deleteData()
 }
 // useEffect(()=>{
@@ -107,7 +108,7 @@ const deleteData = () => {
      setDisplayQty(!displayQty)
    }
 
-   console.log(choseItems)
+  //  console.log(choseItems)
 
    const [moreInformation, setMoreInformation] = useState({})
 
@@ -120,7 +121,7 @@ const deleteData = () => {
           ...el,
           additionalSpecification:e.target.value
         }
-        console.log(el)
+        // console.log(el)
       }
     })
 
@@ -134,19 +135,41 @@ const deleteData = () => {
        moreInformation: e.target.value
      })
     }
-    console.log(order)
+    // console.log(order)
 
     const btnSave = () => {
 
-      setSaveValuation([...saveValuation, order])
-     //  console.log(order)
+      let matchId = match.params.id
 
-      console.log(saveValuation)
+      if(match.params.id != undefined) {
+        console.log("jestem")
+        setSaveValuation(saveValuation.filter((el,i) => {
+          if(matchId == match.params.id) {
+            console.log("XXXX")
+            console.log(order)
+            return [...saveValuation, order]
+          } else {
+            return el
+          }
+        }))
+            console.log("saveValuation")
+            console.log(saveValuation)
+      } else {
+        console.log("jestem w else")
+        setSaveValuation([...saveValuation, order])
+        console.log("saveValuation")
+        console.log(saveValuation)
+        console.log("order")
+        console.log(order)
+      }
+
+
+      // console.log(saveValuation)
     }
 
    useEffect(() => {
-     console.log("ChosenItems USeEf")
-     console.log(choseItems)
+    //  console.log("ChosenItems USeEf")
+    //  console.log(choseItems)
     setOrder({...order, array:choseItems, id:uuid(), date: date.toLocaleDateString('en-GB')})
     if(saveValuation.length > 0){
         const saveValuationRef = firebase.database().ref('saveValuation');
@@ -157,11 +180,11 @@ const deleteData = () => {
     }
 
 
-    console.log(saveValuation);
+    // console.log(saveValuation);
 
    },[saveValuation,choseItems])
 
-   console.log(moreInformation)
+  //  console.log(moreInformation)
 
 
   return (

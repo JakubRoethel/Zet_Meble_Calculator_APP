@@ -13,6 +13,7 @@ import Home from './components/Home';
 import Footer from './components/Footer';
 import SingleValuation from './components/SingleValuation';
 import ValuationArchive from "./components/ValuationArchive";
+import SingleValuationPdfPrint from "./components/SingleValuationPdfPrint";
 
 
 
@@ -31,12 +32,14 @@ function App() {
               exact usuwa błąd z "/" i pozwala nie zaijąc wszystkiego w switcha*/}
             <Switch>
               <Route path= "/" exact component={Home}/>
-              <Route path= "/wyceń"  component={Compose}/>
+              <Route path= "/wyceń" exact component={Compose}/>
+              <Route path= "/wyceń/:id" component={Compose}/>
               <Route path = "/dodaj" component={AddItemsCard}/>
-              <Route path ="/podsumowanie" component={SummaryPdfPrint}/>
+              <Route path ="/podsumowanie" exact component={SummaryPdfPrint}/>
+              <Route path ="/podsumowanie/:id" component={SummaryPdfPrint}/>
               <Route path='/zaloguj' component={LoginPage}/>
               <Route path='/wyceny' exact component={ValuationArchive}/>
-              <Route path= "/wyceny/singleValuation/:id" component={SingleValuation}/>
+              <Route path= "/wyceny/singleValuationPdfPrint/:id" component={SingleValuationPdfPrint}/>
             </Switch>
           </ChosenProductProvider>
           </div>

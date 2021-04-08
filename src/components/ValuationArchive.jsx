@@ -10,25 +10,41 @@ function ValuationArchive() {
     console.log(saveValuation)
 
     const showValuation = (id) => {
-        history.push(`/wyceny/singleValuation/${id}`)
+        history.push(`/wyceny/singleValuationPdfPrint/${id}`)
         console.log(id)
     }
 
 
     return (
         <>
+        
             {user != undefined ?
                 <div className='container-fluid-add-product text-center w-100 mt-5'>
-                    <h1>Zapisane wyceny</h1>
-                    <ul className="d-flex justify-content-center flex-wrap mt-3" >
-                       {saveValuation.map((el, id) => {
-                           console.log(el.id)
-                           return <>
-                                {el === "" ? null :
-                                    <div className="valuation-card" onClick={(e) => showValuation(id)}>{el.client} {el.date} {el.client_Investment_Place}</div>}
-                           </>
-                            })}
-                    </ul>
+                    <table class="table table-striped mt-3">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Dane klienta</th>
+                            <th scope="col">Miejsce inwestycji</th>
+                            <th scope="col">Data</th>
+                            </tr>
+                        </thead>
+                        {saveValuation.map((el, id) => {
+                            
+                            return <>
+                                        {el === "" ? null :
+                                             <tbody className="valuation-table" onClick={(e) => showValuation(id)}>
+                                                <tr>
+                                                <th scope="row">{id}</th>
+                                                <td>{el.client}</td>
+                                                <td className=".bg-white">{el.client_Investment_Place}</td>
+                                                <td>{el.date}</td>
+                                                </tr>
+                                                </tbody>
+                                        }
+                                   </>
+                        })}
+                    </table>
                 </div>
                 :
                 <h3 className='container-fluid mt-5 text-center'>Zaloguj się</h3>
