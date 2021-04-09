@@ -139,15 +139,14 @@ const deleteData = () => {
 
     const btnSave = () => {
 
-      let matchId = match.params.id
-
       if(match.params.id != undefined) {
         console.log("jestem")
-        setSaveValuation(saveValuation.filter((el,i) => {
-          if(matchId == match.params.id) {
+        setSaveValuation(saveValuation.map((el,i) => {
+          if(i == match.params.id) {
+            console.log(el.id)
             console.log("XXXX")
             console.log(order)
-            return [...saveValuation, order]
+            return  order
           } else {
             return el
           }
