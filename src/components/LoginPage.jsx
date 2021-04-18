@@ -3,9 +3,11 @@ import firebase from '../firebase/firebase'
 import "firebase/auth";
 import {UserContext} from "./UserContext"
 import Home from "./Home"
+import { ChosenProductContext } from './ChosenProductContext';
 
 function LoginPage() {
 
+    const [choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation,markup, setMarkup] = useContext(ChosenProductContext)
 
     const [user, setUser] = useContext(UserContext)
     const [email,setEmail] = useState("")
@@ -24,6 +26,8 @@ function LoginPage() {
     const createUserWithEmailAndPasswordHandler = (e,email,password) => {
         e.preventDefault();
 
+        // zapytać grześka
+
         firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     // Signed in
@@ -32,7 +36,24 @@ function LoginPage() {
                     // console.log("w trakcie autoryzacji")
                     // console.log(user);
                     // ...
+                    // console.log("jestem")
+                    const productRef = firebase.database().ref('products');
+                    // console.log(productRef.toString())
+                    // console.log(firebase.database())
+                    productRef.on('value', (snapshot) => {
+                        // console.log(snapshot.val());
+                        setAllProductList(snapshot.val());
                 })
+                const saveValuationRef = firebase.database().ref('saveValuation');
+                // console.log(firebase.database())
+                console.log(saveValuationRef)
+                saveValuationRef.on('value', (snapshot) => {
+                    console.log(snapshot.val());
+                    setSaveValuation(snapshot.val());
+ })
+                })
+
+
                 .catch((error) => {
                     var errorCode = error.code;
                     var errorMessage = error.message;

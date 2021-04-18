@@ -78,17 +78,32 @@ export const ChosenProductProvider = (props) => {
         })}
         }))
 
-      }else {
+      } else {
         console.log("no product")
       }
     }
 
+   
 
+    const removeValuation = (valuation) => {
+      let exist;
+      console.log(valuation.id)
+      console.log(saveValuation)
+      // saveValuation.find( el => { return el.id == valuation.id
+      //     // console.log(el)
+      //     // console.log(el.id)
+      //     // if(el.id === valuation.id) {
+      //     //     exist = el
+      //     // }
+      // })
+      setSaveValuation(saveValuation.filter((x)=> x.id !== valuation.id))
+        // console.log(saveValuation.filter((x)=> x.id !== valuation.id))
+    }
 
     // ustawienie tablicy do której będzę puszował się nowy item z addItemsCard
     const [allProductList, setAllProductList] = useState([]);
-
-
+    
+    
     // dane których potrzebuje w kalkulatorze i w podsumowaniu(narazie pusta tablica moze warto przypisac na stałe produkty ??? )
     
     const[order,setOrder] = useState({
@@ -96,39 +111,41 @@ export const ChosenProductProvider = (props) => {
       total:0,
       client:"",
       client_number:""
-  })
+    })
 
-  const [saveValuation, setSaveValuation] = useState([])
-  
-  useEffect(() => {
-    // console.log("jestem")
-    const productRef = firebase.database().ref('products');
-    // console.log(productRef.toString())
-    // console.log(firebase.database())
-    productRef.on('value', (snapshot) => {
+    const [saveValuation, setSaveValuation] = useState([])
+
+    // zapytać grześka
+    
+    useEffect(() => {
+      // console.log("jestem")
+      const productRef = firebase.database().ref('products');
+      // console.log(productRef.toString())
+      // console.log(firebase.database())
+      productRef.on('value', (snapshot) => {
         // console.log(snapshot.val());
         setAllProductList(snapshot.val());
-  })
-  const saveValuationRef = firebase.database().ref('saveValuation');
-  // console.log(firebase.database())
-  console.log(saveValuationRef)
-  saveValuationRef.on('value', (snapshot) => {
-       console.log(snapshot.val());
-       setSaveValuation(snapshot.val());
- })
-},[])
+      })
+      const saveValuationRef = firebase.database().ref('saveValuation');
+      // console.log(firebase.database())
+      console.log(saveValuationRef)
+      saveValuationRef.on('value', (snapshot) => {
+        console.log(snapshot.val());
+        setSaveValuation(snapshot.val());
+      })
+    },[])
 
-// console.log(saveValuation)
-
-const [markup, setMarkup] = useState(750)
-
-  // console.log(saveValuation)
-
-
+    // console.log(saveValuation)
+    
+    const [markup, setMarkup] = useState(750)
+    
+    // console.log(saveValuation)
+    
+    
     return (
-        <ChosenProductContext.Provider value = {[choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation,markup, setMarkup]}>
+      <ChosenProductContext.Provider value = {[choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation,markup, setMarkup, removeValuation]}>
             {props.children}
         </ChosenProductContext.Provider>
 
-    );
+);
 }
