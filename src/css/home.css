@@ -21,9 +21,33 @@
     height: 91vh;
   }
   
-  .box h2{
+  .login-title{
     font-size: 60px;
   }
   .box p{
     font-size: 30px;
   }
+
+  .my-form {
+    width: 25%;
+  }
+  @media (max-width:1100px) {
+    .box h2, .login-title {
+      font-size: 40px;
+    }
+    .my-form {
+      width: 40%;
+    }
+  }
+
+
+@media (max-width:750px) {
+  .box h2, .login-title {
+    font-size: 30px;
+  }
+
+  .my-form {
+    width: 50%;
+  }
+  
+}

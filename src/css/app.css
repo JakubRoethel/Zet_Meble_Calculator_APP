@@ -41,9 +41,7 @@
     .app-wrapper {
       height: 100%;
     }
-  
-    
-  
+
     .main-container {
       display: flex;
       height: 100%;
@@ -52,7 +50,7 @@
     .image-wrapper {
       height: 100vh;
     }
-  
+
     .list-container {
       display: flex;
       width: 100%;
@@ -60,7 +58,7 @@
       align-items: center;
       height: 70vh;
   }
-  
+
   .calculator {
     display: flex;
     flex-direction: column;
@@ -69,24 +67,23 @@
     height: 84vh;
     /* justify-content: center; */
   }
-  
-  
+
   .footer {
     height: 4vh;
-    
   }
-  
+
   select{
     height: 60px;
   }
-  
+
   .product-card {
     height: 90px;
     padding: 10px 0 10px 10px;
-    
+
   }
-  
+
   .product-card .details {
     padding-bottom: 15px;
   }
-  }
+
+}

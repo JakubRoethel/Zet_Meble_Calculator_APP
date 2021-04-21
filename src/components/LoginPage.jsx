@@ -89,8 +89,8 @@ function LoginPage() {
         <div className='wrapper image-wrapper'> 
             <div className="box">
                 <main className="form-signin w-100 m-5 d-flex justify-content-center align-items-center">
-                    <form onSubmit={(e) => createUserWithEmailAndPasswordHandler(e,email,password)} className='my-form w-25'>
-                        <h2 className="h3 mb-3 fw-normal">Logowanie</h2>
+                    <form onSubmit={(e) => createUserWithEmailAndPasswordHandler(e,email,password)} className='my-form '>
+                        <h2 className=" login-title h3 mb-3 fw-normal">Logowanie</h2>
                         <input name="email"  onChange={handleInputs} type="email" id="inputEmail" className="form-control mb-3" placeholder="Email address" required autofocus />
                         <input name="password"  onChange={handleInputs} type="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required />
                         <div className="d-flex justify-content-center">

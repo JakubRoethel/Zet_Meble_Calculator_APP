@@ -18,15 +18,15 @@ function ValuationArchive() {
     
     const [filteredValuation,setFilteredValuation] = useState([])
     
-    useEffect(() => {
-        // console.log("SaveValuation")
-        // console.log(saveValuation)
-        setFilteredValuation(saveValuation)
-        const valuationRef = firebase.database().ref('saveValuation');
-             if(saveValuation != 0) {
-                valuationRef.set([...saveValuation]);
-             }
-    },[saveValuation])
+    // useEffect(() => {
+    //     // console.log("SaveValuation")
+    //     // console.log(saveValuation)
+    //     setFilteredValuation(saveValuation)
+    //     const valuationRef = firebase.database().ref('saveValuation');
+    //          if(saveValuation != 0) {
+    //             valuationRef.set([...saveValuation]);
+    //          }
+    // },[saveValuation])
 
 
     console.log("filtered")
