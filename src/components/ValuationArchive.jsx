@@ -15,12 +15,12 @@ function ValuationArchive() {
         history.push(`/wyceny/singleValuationPdfPrint/${id}`)
         console.log(id)
     }
-    console.log("SaveValuation")
-    console.log(saveValuation)
-
+    
     const [filteredValuation,setFilteredValuation] = useState([])
-
+    
     useEffect(() => {
+        // console.log("SaveValuation")
+        // console.log(saveValuation)
         setFilteredValuation(saveValuation)
         const valuationRef = firebase.database().ref('saveValuation');
              if(saveValuation != 0) {
@@ -44,7 +44,6 @@ function ValuationArchive() {
         }
     }
 
-   
 
 
     return (
