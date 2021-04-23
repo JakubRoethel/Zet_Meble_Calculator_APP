@@ -15,18 +15,19 @@ function ValuationArchive() {
         history.push(`/wyceny/singleValuationPdfPrint/${id}`)
         console.log(id)
     }
-    
+
     const [filteredValuation,setFilteredValuation] = useState([])
-    
-    // useEffect(() => {
-    //     // console.log("SaveValuation")
-    //     // console.log(saveValuation)
-    //     setFilteredValuation(saveValuation)
-    //     const valuationRef = firebase.database().ref('saveValuation');
-    //          if(saveValuation != 0) {
-    //             valuationRef.set([...saveValuation]);
-    //          }
-    // },[saveValuation])
+
+    useEffect(() => {
+        // console.log("SaveValuation")
+        // console.log(saveValuation)
+        setFilteredValuation(saveValuation);
+        const valuationRef = firebase.database().ref('saveValuation');
+             if(saveValuation != 0) {
+                valuationRef.set([...saveValuation]);
+             }
+             console.log(saveValuation);
+    },[saveValuation])
 
 
     console.log("filtered")
@@ -57,7 +58,7 @@ function ValuationArchive() {
                     <table class="table table-striped mt-3">
                         <thead>
                             <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Nr</th>
                             <th scope="col">Dane klienta</th>
                             <th scope="col">Miejsce inwestycji</th>
                             <th scope="col">Data</th>
@@ -70,7 +71,7 @@ function ValuationArchive() {
                                         {el === "" ? null :
                                              <tbody className="valuation-table" >
                                                 <tr>
-                                                <th onClick={(e) => showValuation(id)} scope="row">{id}</th>
+                                                <th onClick={(e) => showValuation(id)} scope="row">{id+1}</th>
                                                 <td onClick={(e) => showValuation(id)}>{el.client}</td>
                                                 <td onClick={(e) => showValuation(id)} className=".bg-white">{el.client_Investment_Place}</td>
                                                 <td onClick={(e) => showValuation(id)}>{el.date}</td>
@@ -88,7 +89,7 @@ function ValuationArchive() {
                                         {el === "" ? null :
                                              <tbody className="valuation-table" >
                                                 <tr>
-                                                <th onClick={(e) => showValuation(id)} scope="row">{id}</th>
+                                                <th onClick={(e) => showValuation(id)} scope="row">{id+1}</th>
                                                 <td onClick={(e) => showValuation(id)}>{el.client}</td>
                                                 <td onClick={(e) => showValuation(id)} className=".bg-white">{el.client_Investment_Place}</td>
                                                 <td onClick={(e) => showValuation(id)}>{el.date}</td>
