@@ -38,10 +38,8 @@
     .my-form {
       width: 40%;
     }
-    .app-wrapper {
-      height: 100%;
-    }
   }
+
 
 @media (max-width:750px) {
   .box h2, .login-title {

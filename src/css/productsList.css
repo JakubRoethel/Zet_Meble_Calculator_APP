@@ -43,3 +43,50 @@
     }
 }
 
+@media (max-width:650px) {
+    .product-card {
+        flex-wrap: wrap;
+        font-size: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .info-container {
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+    }
+
+    .list-container {
+        height: 90vh;
+    }
+    .add-items-container {
+        width: 40%;
+        align-items: unset!important;
+    }
+
+    .details {
+        height: 40%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .details h5 {
+        font-size: 15px;
+        margin-right: 4px;
+    }
+
+    .btn {
+        height: 30px;
+        width: 50px;
+        font-size: 15px;
+        text-align: center;
+        padding: 0;
+    }
+
+
+}
+

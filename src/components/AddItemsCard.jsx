@@ -8,9 +8,9 @@ function AddItemsCard() {
 
     const [choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation,markup, setMarkup] = useContext(ChosenProductContext);
 
-    const [user,setUSer] = useContext(UserContext)
+    const [user,setUSer] = useContext(UserContext);
 
-    console.log(allProductList)
+    console.log(allProductList);
 
     // moja pusta jeszcze tablica obiektów do której dodamy obiekt prodykty a później ustawie
     // tablicę allProd.. za pomoca setAll..
@@ -23,7 +23,7 @@ function AddItemsCard() {
     });
     const [group,setGroup] = useState(allProductList.map(x=>x.groupName));
 
-    const [subGroup, setSubGroup] = useState([])
+    const [subGroup, setSubGroup] = useState([]);
 
 
     const handleAdd = (e) => {
@@ -37,7 +37,7 @@ function AddItemsCard() {
                     nameErrMessage: 'Wypełnij obowiązkowe pole',
                     isError: true
                 }
-            })
+            });
         } else if(itemObj.price == '') {
             setError({
                 ...error,
@@ -45,13 +45,13 @@ function AddItemsCard() {
                     priceErrMessage: 'Wypełnij obowiązkowe pole',
                     isError: true
                 }
-            })
+            });
         }
 
         if(!error.nameError.isError && !error.priceError.isError){
             console.log(itemObj)
             if(itemObj.id != '') {
-                console.log("jestem")
+                console.log("jestem");
                 // console.log(itemObj.id)
                 setAllProductList(
                     allProductList.map(groupEl => {
@@ -61,7 +61,7 @@ function AddItemsCard() {
                             })} : subGroupEl
                         })}
                     })
-                )
+                );
                 setTitle("Dodaj nowy Produkt")
                 setItemObj({
                     name: "",
@@ -69,9 +69,9 @@ function AddItemsCard() {
                     color: "",
                     company: "",
                     id: ""
-                })
-                setGroup([])
-                setSubGroup([])
+                });
+                setGroup([]);
+                setSubGroup([]);
             } else {
                 setAllProductList(
                     allProductList.map(groupEl => {
@@ -83,9 +83,9 @@ function AddItemsCard() {
                             : subGroupEl
                         })}
                     })
-                )
+                );
             }
-        }
+        };
         // console.log(allProductList)
 
         //czyszczenie formularza
@@ -94,7 +94,7 @@ function AddItemsCard() {
 
 
         setButtonText("Dodaj")
-    }
+    };
 
 
     // funkcje na inputach dodawanie poszczególnych właściwości do obiektów 
@@ -242,7 +242,7 @@ function AddItemsCard() {
         <>
             {user != undefined ?
                 <div className='container-fluid d-flex'>
-                <div className='col-lg-6 d-flex flex-column align-items-center'>
+                <div className='col-lg-6 d-flex flex-column align-items-center add-items-container'>
                     <h1 className='my-5 text-center'>{title} </h1>
                     <form onSubmit={handleAdd} className='col-lg-6 d-flex flex-column'>
                         <div class="mb-3">
@@ -287,7 +287,7 @@ function AddItemsCard() {
                         <button type="submit" className="btn btn-secondary mt-3">{buttonText}</button>
                     </form>
                     {displayMarkup == false ? 
-                        <div className='col-lg-6 d-flex flex-column m-5'>
+                        <div className='col-lg-6 mb-2'>
                             <button onClick={handleChangeDisplayMarkup} className="btn btn-secondary mt-2">Marża</button> 
                         </div>
                         :
@@ -299,7 +299,7 @@ function AddItemsCard() {
                     }
 
                 </div>
-                <div className='col-lg-6'>
+                <div className='col-lg-6 list-container'>
                     <h1 className='my-5 text-center'>Lista dostepnych produktów</h1>
                     <div className='list'>
                         {allProductList.length == 0 ? <h2 className='text-center'>Nie dodałeś żadnych produktów</h2> : allProductList.map(group => {

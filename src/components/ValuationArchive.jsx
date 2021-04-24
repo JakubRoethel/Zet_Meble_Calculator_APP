@@ -1,9 +1,8 @@
-import React, {useContext, useState } from 'react';
+import React, {useContext, useState,useEffect } from 'react';
 import {UserContext} from "./UserContext"
 import {ChosenProductContext} from './ChosenProductContext';
 import history from "./history";
 import "../css/valuationArchive.css"
-import { useEffect } from 'react/cjs/react.development';
 import firebase from "../firebase/firebase"
 
 function ValuationArchive() {
@@ -18,31 +17,24 @@ function ValuationArchive() {
 
     const [filteredValuation,setFilteredValuation] = useState([])
 
-    // useEffect(() => {
-    //     // console.log("SaveValuation")
-    //     // console.log(saveValuation)
-    //     setFilteredValuation(saveValuation);
-    //     const valuationRef = firebase.database().ref('saveValuation');
-    //          if(saveValuation != 0) {
-    //             valuationRef.set([...saveValuation]);
-    //          }
-    //          console.log(saveValuation);
-    // },[saveValuation])
+    useEffect(() => {
+        // console.log("SaveValuation")
+        // console.log(saveValuation)
+        setFilteredValuation(saveValuation);
+        const valuationRef = firebase.database().ref('saveValuation');
+             if(saveValuation != 0) {
+                valuationRef.set([...saveValuation]);
+             }
+    },[saveValuation])
 
-    useEffect(()=> {
-        console.log("SaveValuation")
-        console.log(saveValuation)
-        // setFilteredValuation(saveValuation);
-        console.log(filteredValuation)
-    }, [saveValuation])
-
-
-    console.log("filtered")
+    
+    
+    console.log("filtered zmiana dodadana")
     console.log(filteredValuation)
-
+    
     const filterInput= (e) => {
         let txt = e.target.value.toLowerCase();
-
+        
         if (txt.length == 0) {
             setFilteredValuation(saveValuation)
         } else {
@@ -51,9 +43,6 @@ function ValuationArchive() {
             }))
         }
     }
-
-
-
     return (
         <>
 

@@ -10,13 +10,12 @@ import {ChosenProductContext} from './ChosenProductContext'
 function Product({product,groupName}) {
 
     const [choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase] = useContext(ChosenProductContext);
-    const [additionalInformation, setAdditionalInformation] = useState(null)
-    
+    const [additionalInformation, setAdditionalInformation] = useState(null);
 
     const handleAdditionalInformation = (e) => {
         console.log(e.target.value)
         setAdditionalInformation(e.target.value)
-    }
+    };
 
 
 
@@ -25,7 +24,7 @@ function Product({product,groupName}) {
         <div className="details w-100">
             <h5>{product.group}</h5>
             <h6>{product.name}</h6>
-            <div className="d-flex ">
+            <div className="info-container d-flex ">
                 {product.group === "Materiały" ? <p>{product.productGroup}</p>: null}
                 {product.group === "Fronty" ? <p>{product.subGroup}</p>: null}
                 {product.group === "Uchwyty" ? <p>{product.subGroup} | {product.productGroup}</p>: null}

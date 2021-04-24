@@ -39,7 +39,7 @@ export const ChosenProductProvider = (props) => {
           if (x.id === el.id ) {
             if(x.additionalInformation !== el.additionalInformation) {
               return x
-            } 
+            }
           } else {
             return x
           }
@@ -66,11 +66,6 @@ export const ChosenProductProvider = (props) => {
         })
       })
       console.log(exist);
-    //   if (exist) {
-    //     setAllProductList(allProductList.filter((x) => x.id !== el.id))
-    //   } else {
-    //     console.log('no product')
-    //   }
       if (exist) {
         setAllProductList(allProductList.map(group => {
           return {...group, array: group.array.map(subGroup => {
@@ -83,40 +78,30 @@ export const ChosenProductProvider = (props) => {
       }
     }
 
-   
-
     const removeValuation = (valuation) => {
       let exist;
       console.log(valuation.id)
       console.log(saveValuation)
-      // saveValuation.find( el => { return el.id == valuation.id
-      //     // console.log(el)
-      //     // console.log(el.id)
-      //     // if(el.id === valuation.id) {
-      //     //     exist = el
-      //     // }
-      // })
       setSaveValuation(saveValuation.filter((x)=> x.id !== valuation.id))
-        // console.log(saveValuation.filter((x)=> x.id !== valuation.id))
     }
 
     // ustawienie tablicy do której będzę puszował się nowy item z addItemsCard
     const [allProductList, setAllProductList] = useState([]);
-    
-    
+
+
     // dane których potrzebuje w kalkulatorze i w podsumowaniu(narazie pusta tablica moze warto przypisac na stałe produkty ??? )
-    
+
     const[order,setOrder] = useState({
       array:[],
       total:0,
       client:"",
       client_number:""
-    })
+    });
 
     const [saveValuation, setSaveValuation] = useState([])
 
     // zapytać grześka
-    
+
     useEffect(() => {
       // console.log("jestem")
       const productRef = firebase.database().ref('products');
@@ -136,12 +121,11 @@ export const ChosenProductProvider = (props) => {
     },[])
 
     // console.log(saveValuation)
-    
+
     const [markup, setMarkup] = useState(750)
-    
+
     // console.log(saveValuation)
-    
-    
+
     return (
       <ChosenProductContext.Provider value = {[choseItems, setChosenItems, addItemToList, removeItemsFromList,allProductList, setAllProductList, order,setOrder,removeItemFromDataBase,saveValuation, setSaveValuation,markup, setMarkup, removeValuation]}>
             {props.children}
