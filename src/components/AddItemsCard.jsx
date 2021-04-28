@@ -264,10 +264,24 @@ function AddItemsCard() {
                             <input onChange={handleProductDetails}  type="text" className="form-control" value={itemObj.productGroup} ></input>
                         </div>
                         <div className="filters d-flex">
-                            <select onChange={handleDisplayOption} className="form-select mx-2">
-                                <option value= "default" selected disabled="disabled">Wybierz opcje wyświetlania</option>
-                                <option value= "Meble"> Meble</option>
-                                <option value= "Opcje dodatkowe">Opcje dodatkowe</option>
+                            <select 
+                                onChange={handleDisplayOption} className="form-select mx-2"
+                            >
+                                <option 
+                                    selected
+                                    value= "default" 
+                                    disabled="disabled"
+                                >
+                                    Wybierz opcje wyświetlania
+                                </option>
+                                <option value= "Meble"> 
+                                    Meble
+                                </option>
+                                <option 
+                                    value= "Opcje dodatkowe"
+                                >
+                                    Opcje dodatkowe
+                                </option>
                             </select>
                         </div>
                         <div className="filters d-flex">
@@ -300,7 +314,9 @@ function AddItemsCard() {
 
                 </div>
                 <div className='col-lg-6 list-container'>
-                    <h1 className='my-5 text-center'>Lista dostepnych produktów</h1>
+                    <h1 className='my-5 text-center'>
+                        Lista dostepnych produktów
+                    </h1>
                     <div className='list'>
                         {allProductList.length == 0 ? <h2 className='text-center'>Nie dodałeś żadnych produktów</h2> : allProductList.map(group => {
 

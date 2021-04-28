@@ -49,17 +49,17 @@ class Summary extends React.PureComponent {
           return a + b.price * b.qty
         }
       },0).toFixed(2)
-  
+
       // console.log(totalMeble);
-  
+
       const totalOpcjeDodatkowe = this.props.choseItems.filter(el => {
         return el.displayGroup == "Opcje dodatkowe"
       }).reduce((a,b) => a + b.price * b.qty,0).toFixed(2)
-  
+
       const totalBlaty = this.props.choseItems.filter(el => {
         return el.displayGroup == "Blaty"
       }).reduce((a,b) => a + b.price * b.qty,0).toFixed(2)
-      
+
       // console.log(totalOpcjeDodatkowe);
 
 

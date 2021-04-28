@@ -24,10 +24,10 @@ function App() {
     <div className="app-wrapper">
     {/*Router wszystko w środku pozwala nam uzwać Route w którym podajem sciezki do komponentów randeruje jako url */}
     <UserContextProvider>
+          <ChosenProductProvider>
           <Header />
           <div className="wrapper">
             {/*ChosenProductProvider daje nam dostęp do wszystkiego z useContextu*/}
-          <ChosenProductProvider>
             {/*Switch zatrzymuje proces routowania zawsze moesz zajrzeć do DEV Ed
               exact usuwa błąd z "/" i pozwala nie zaijąc wszystkiego w switcha*/}
             <Switch>
@@ -41,8 +41,8 @@ function App() {
               <Route path='/wyceny' exact component={ValuationArchive}/>
               <Route path= "/wyceny/singleValuationPdfPrint/:id" component={SingleValuationPdfPrint}/>
             </Switch>
-          </ChosenProductProvider>
           </div>
+          </ChosenProductProvider>
     </UserContextProvider>
     <Footer />
     </div>

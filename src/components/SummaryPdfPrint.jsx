@@ -185,6 +185,14 @@ const deleteData = () => {
 
   //  console.log(moreInformation)
 
+  const backToCalculator = (id) => {
+    if (match.params.id != undefined){
+      history.push(`/wyceń/${id}`)
+    } else {
+      history.push('/wyceń')
+    }
+  }
+
 
   return (
     <>
@@ -198,7 +206,7 @@ const deleteData = () => {
         <button type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Dodaj produkt ręcznie</button>
         <button onClick={changeDisplayQty} className="btn btn-secondary">Szczegóły</button>
         <button onClick={btnSave} className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#saveValuation">Zapisz</button>
-        <button className="btn btn-secondary">Wróc</button>
+        <button onClick={el => backToCalculator(match.params.id)} className="btn btn-secondary">Wróc</button>
       </div>
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog">

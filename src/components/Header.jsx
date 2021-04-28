@@ -4,13 +4,15 @@ import { UserContext } from './UserContext';
 import firebase from '../firebase/firebase'
 import "../css/header.css";
 import logo from "../image/logo.jpg";
+import {ChosenProductContext} from './ChosenProductContext'
 
 
 //Linki potrzebne do Routera w App
 
 function Header() {
 
-  const [user,setUser] = useContext(UserContext)
+  const [user,setUser] = useContext(UserContext);
+  const [choseItems, setChosenItems, addItemToList, removeItemsFromList,,, order,setOrder]= useContext(ChosenProductContext);
 
 
   const userLogOut = () => {
@@ -23,6 +25,17 @@ function Header() {
     });
     setUser(undefined)
   }
+
+  const clearArrayChosenItems = () => {
+    setChosenItems([])
+    setOrder({
+      array:[],
+      total:0,
+      client:"",
+      client_number:""
+    })
+  }
+
 
     // console.log(user)
 
@@ -44,7 +57,7 @@ function Header() {
                  <Link className="nav-link link" to='/'>Home</Link>
                  </li>
                 <li className="nav-item active">
-                  <Link className="nav-link" to='/wyceń'>Wyceń</Link>
+                  <Link onClick={clearArrayChosenItems} className="nav-link" to='/wyceń'>Wyceń</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to={'/dodaj'}>Dodaj produkt</Link>
